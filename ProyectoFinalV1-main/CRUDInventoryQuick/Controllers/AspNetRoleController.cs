@@ -8,36 +8,37 @@ using Microsoft.EntityFrameworkCore;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using Microsoft.AspNetCore.Identity;
+using CRUDInventoryQuick.Contracts;
+using NuGet.Protocol.Core.Types;
 
 namespace CRUDInventoryQuick.Controllers
 {
     public class AspNetRoleController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        public AspNetRoleController(ApplicationDbContext context)
+        private readonly IRepository<ASPNETUSERROLE> _Rolrepository;
+        public AspNetRoleController(IRepository<ASPNETUSERROLE> Rolrepository)
         {
-            _context = context;
+            _Rolrepository = Rolrepository;
             
         }
 
         // GET: AspNetRole
         public async Task<IActionResult> Index()
         {
-              return _context.ASPNETUSERROLEs != null ? 
-                          View(await _context.ASPNETUSERROLEs.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.ASPNETUSERROLEs'  is null.");
+            return _Rolrepository.GetAll() != null ?
+                        View(await _Rolrepository.GetAll()) :
+                        Problem("Entity set 'ApplicationDbContext.ASPNETUSERROLEs'  is null.");
         }
 
         // GET: AspNetRole/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.ASPNETUSERROLEs == null)
+            if (id == null || _Rolrepository.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var aSPNETUSERROLE = await _context.ASPNETUSERROLEs
-                .FirstOrDefaultAsync(m => m.AspNetRoleId == id);
+            var aSPNETUSERROLE = await _Rolrepository.GetById(id);
             if (aSPNETUSERROLE == null)
             {
                 return NotFound();
@@ -46,38 +47,38 @@ namespace CRUDInventoryQuick.Controllers
             return View(aSPNETUSERROLE);
         }
 
-        // GET: AspNetRole/Create
+        //// GET: AspNetRole/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: AspNetRole/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //// POST: AspNetRole/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to.
+        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AspNetRoleId,Nombre")] ASPNETUSERROLE aSPNETUSERROLE)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(aSPNETUSERROLE);
-                await _context.SaveChangesAsync();
+                await _Rolrepository.Add(aSPNETUSERROLE);
+                await _Rolrepository.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(aSPNETUSERROLE);
         }
 
         // GET: AspNetRole/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-           
-            if (id == null || _context.ASPNETUSERROLEs == null)
+
+            if (id == null || _Rolrepository.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var aSPNETUSERROLE = await _context.ASPNETUSERROLEs.FindAsync(id);
+            var aSPNETUSERROLE = await _Rolrepository.GetById(id);
             if (aSPNETUSERROLE == null)
             {
                 return NotFound();
@@ -99,37 +100,28 @@ namespace CRUDInventoryQuick.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                var result = await _Rolrepository.Update(aSPNETUSERROLE);
+                if (result <= 0)
                 {
-                    _context.Update(aSPNETUSERROLE);
-                    await _context.SaveChangesAsync();
+
+                    ViewBag.ErrorMessage = "Error al guardar los datos";
+                    return View(aSPNETUSERROLE);
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ASPNETUSERROLEExists(aSPNETUSERROLE.AspNetRoleId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
                 return RedirectToAction(nameof(Index));
             }
             return View(aSPNETUSERROLE);
         }
 
-        // GET: AspNetRole/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        //// GET: AspNetRole/Delete/5
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.ASPNETUSERROLEs == null)
+            if (id == null || _Rolrepository.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var aSPNETUSERROLE = await _context.ASPNETUSERROLEs
-                .FirstOrDefaultAsync(m => m.AspNetRoleId == id);
+            var aSPNETUSERROLE = await _Rolrepository.GetById(id);
             if (aSPNETUSERROLE == null)
             {
                 return NotFound();
@@ -143,23 +135,23 @@ namespace CRUDInventoryQuick.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.ASPNETUSERROLEs == null)
+            if (_Rolrepository.GetAll() == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.ASPNETUSERROLEs'  is null.");
             }
-            var aSPNETUSERROLE = await _context.ASPNETUSERROLEs.FindAsync(id);
+            var aSPNETUSERROLE = await _Rolrepository.GetById(id);
             if (aSPNETUSERROLE != null)
             {
-                _context.ASPNETUSERROLEs.Remove(aSPNETUSERROLE);
+                await _Rolrepository.Delete(aSPNETUSERROLE);
             }
-            
-            await _context.SaveChangesAsync();
+
+            await _Rolrepository.Save();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ASPNETUSERROLEExists(int id)
-        {
-          return (_context.ASPNETUSERROLEs?.Any(e => e.AspNetRoleId == id)).GetValueOrDefault();
-        }
+        //private bool ASPNETUSERROLEExists(int id)
+        //{
+        //  return (_context.ASPNETUSERROLEs?.Any(e => e.AspNetRoleId == id)).GetValueOrDefault();
+        //}
     }
 }
