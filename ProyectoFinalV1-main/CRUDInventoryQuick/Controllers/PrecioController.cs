@@ -7,36 +7,39 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
+using CRUDInventoryQuick.Contracts;
 
 namespace CRUDInventoryQuick.Controllers
 {
     public class PrecioController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IRepository<PRECIO>_repository;
 
-        public PrecioController(ApplicationDbContext context)
+        public PrecioController(IRepository<PRECIO> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: Precio
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.PRECIOs.Include(p => p.PRODUCTO_Producto);
-            return View(await applicationDbContext.ToListAsync());
+            return _repository.GetAll() != null ?
+                        View(await _repository.GetAll()) :
+                        Problem("Entity set 'ApplicationDbContext.CATEGORIAs'  is null.");
         }
 
+
+
+
         // GET: Precio/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.PRECIOs == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var pRECIO = await _context.PRECIOs
-                .Include(p => p.PRODUCTO_Producto)
-                .FirstOrDefaultAsync(m => m.PrecioId == id);
+            var pRECIO = await _repository.GetById(id);
             if (pRECIO == null)
             {
                 return NotFound();
@@ -48,7 +51,6 @@ namespace CRUDInventoryQuick.Controllers
         // GET: Precio/Create
         public IActionResult Create()
         {
-            ViewData["PRODUCTO_ProductoId"] = new SelectList(_context.PRODUCTOs, "ProductoId", "ProductoId");
             return View();
         }
 
@@ -57,32 +59,30 @@ namespace CRUDInventoryQuick.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal,PRODUCTO_ProductoId")] PRECIO pRECIO)
+        public async Task<IActionResult> Create([Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal")]PRECIO pRECIO)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pRECIO);
-                await _context.SaveChangesAsync();
+                await _repository.Add(pRECIO);
+                await _repository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PRODUCTO_ProductoId"] = new SelectList(_context.PRODUCTOs, "ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
             return View(pRECIO);
         }
 
         // GET: Precio/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.PRECIOs == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var pRECIO = await _context.PRECIOs.FindAsync(id);
+            var pRECIO = await _repository.GetById(id);
             if (pRECIO == null)
             {
                 return NotFound();
             }
-            ViewData["PRODUCTO_ProductoId"] = new SelectList(_context.PRODUCTOs, "ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
             return View(pRECIO);
         }
 
@@ -91,7 +91,7 @@ namespace CRUDInventoryQuick.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal,PRODUCTO_ProductoId")] PRECIO pRECIO)
+        public async Task<IActionResult> Edit(int id, [Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal")] PRECIO pRECIO)
         {
             if (id != pRECIO.PrecioId)
             {
@@ -100,39 +100,28 @@ namespace CRUDInventoryQuick.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                var result = await _repository.Update(pRECIO);
+                if (result <= 0)
                 {
-                    _context.Update(pRECIO);
-                    await _context.SaveChangesAsync();
+
+                    ViewBag.ErrorMessage = "Error al guardar los datos";
+                    return View(pRECIO);
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PRECIOExists(pRECIO.PrecioId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PRODUCTO_ProductoId"] = new SelectList(_context.PRODUCTOs, "ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
             return View(pRECIO);
         }
 
-        // GET: Precio/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        //GET: Precio/Delete/5
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.PRECIOs == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var pRECIO = await _context.PRECIOs
-                .Include(p => p.PRODUCTO_Producto)
-                .FirstOrDefaultAsync(m => m.PrecioId == id);
+            var pRECIO = await _repository.GetById(id);
             if (pRECIO == null)
             {
                 return NotFound();
@@ -146,23 +135,23 @@ namespace CRUDInventoryQuick.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.PRECIOs == null)
+            if (_repository.GetAll() == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.PRECIOs'  is null.");
             }
-            var pRECIO = await _context.PRECIOs.FindAsync(id);
+            var pRECIO = await _repository.GetById(id);
             if (pRECIO != null)
             {
-                _context.PRECIOs.Remove(pRECIO);
+                await _repository.Delete(pRECIO);
             }
-            
-            await _context.SaveChangesAsync();
+
+            await _repository.Save();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PRECIOExists(int id)
-        {
-          return (_context.PRECIOs?.Any(e => e.PrecioId == id)).GetValueOrDefault();
-        }
+        //private bool CATEGORIumExists(int id)
+        //{
+        //    return (_repository.GetAll().Any(e => e.CategoriaId == id)).GetValueOrDefault();
+        //}
     }
 }
