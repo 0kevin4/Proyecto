@@ -13,7 +13,7 @@ namespace CRUDInventoryQuick.Repositorio
 
         public MarcaRepository(ApplicationDbContext context)
         {
-                this._context = context;
+            this._context = context;
         }
 
         public async Task<IEnumerable<MARCA>> GetAll()
@@ -26,7 +26,7 @@ namespace CRUDInventoryQuick.Repositorio
             return _context.MARCAs.SingleOrDefault(m => m.MarcaId.Equals(id));
         }
 
-        public  Task Add(MARCA mARCA)
+        public Task Add(MARCA mARCA)
         {
             _context.AddAsync(mARCA);
             _context.SaveChanges();
@@ -36,7 +36,7 @@ namespace CRUDInventoryQuick.Repositorio
         public Task Delete(MARCA mARCA)
         {
             _context.Remove(mARCA);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
             return Task.CompletedTask;
         }
 
@@ -44,7 +44,7 @@ namespace CRUDInventoryQuick.Repositorio
         {
             _context.Update(mARCA);
             return await _context.SaveChangesAsync();
-            
+
         }
 
         public Task Save()
