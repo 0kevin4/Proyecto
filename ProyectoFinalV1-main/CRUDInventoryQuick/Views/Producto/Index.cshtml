@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CRUDInventoryQuick.Models.PRODUCTO>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-info" ><i class="bi bi-bookmark-plus"></i>Agregar Producto</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MARCA_Marca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SUBCATEGORIA_Subcategoria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MARCA_Marca.MarcaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SUBCATEGORIA_Subcategoria.SubcategoriaId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProductoId"  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i>Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductoId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i>Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductoId" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i>Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

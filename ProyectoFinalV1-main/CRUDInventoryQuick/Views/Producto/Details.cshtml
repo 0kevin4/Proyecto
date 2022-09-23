@@ -1,0 +1,49 @@
+﻿@model CRUDInventoryQuick.Models.PRODUCTO
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detalles</h1>
+
+<div>
+   
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MARCA_Marca)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MARCA_Marca.MarcaId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SUBCATEGORIA_Subcategoria)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SUBCATEGORIA_Subcategoria.SubcategoriaId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ProductoId"  class="btn btn-sm btn-success">Editar</a> |
+    <a asp-action="Index">Volver a la lista</a>
+</div>
