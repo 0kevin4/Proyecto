@@ -26,7 +26,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 builder.Services.AddScoped<IRepository<CATEGORIum>, CategoriaRepository>();
 builder.Services.AddScoped<IRepository<MARCA>, MarcaRepository>();
 builder.Services.AddScoped<IRepository<PRODUCTO>, ProductoRepository>();
+builder.Services.AddScoped<IRepository<ASPNETUSERROLE>, RolRepository>();
 builder.Services.AddScoped<IRepository<PRECIO>, PrecioRepository>();
+
+
 
 //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
