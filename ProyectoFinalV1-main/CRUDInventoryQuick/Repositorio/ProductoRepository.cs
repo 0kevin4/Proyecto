@@ -1,14 +1,14 @@
 ﻿using CRUDInventoryQuick.Contracts;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRUDInventoryQuick.Repositorio
 {
     public class ProductoRepository : IRepository<PRODUCTO>
     {
         private readonly ApplicationDbContext _context;
-        private IRepository<PRODUCTO> _repository;
-
+        
         public ProductoRepository(ApplicationDbContext context)
         {
             this._context = context;
@@ -16,12 +16,18 @@ namespace CRUDInventoryQuick.Repositorio
 
         public async Task<IEnumerable<PRODUCTO>> GetAll()
         {
-            return _context.PRODUCTOs.ToList();
+            var applicationDbContext = _context.PRODUCTOs
+                .Include(p => p.MARCA_Marca)
+                .Include(p => p.SUBCATEGORIA_Subcategoria);
+            return applicationDbContext.ToList();
         }
 
         public async Task<PRODUCTO> GetById(int id)
         {
-            return _context.PRODUCTOs.SingleOrDefault(c => c.ProductoId.Equals(id));
+           return _context.PRODUCTOs
+                .Include(p => p.MARCA_Marca)
+                .Include(p => p.SUBCATEGORIA_Subcategoria)
+                .FirstOrDefault(m => m.ProductoId == id);
         }
 
         public  Task Add(PRODUCTO pRODUCTO)
@@ -31,19 +37,23 @@ namespace CRUDInventoryQuick.Repositorio
              return Task.CompletedTask;
         }
 
-        public Task Delete(PRODUCTO? t)
+        public Task Delete(PRODUCTO pRODUCTO)
         {
-            throw new NotImplementedException();
+            _context.Remove(pRODUCTO);
+            _context.SaveChanges();
+            return Task.CompletedTask;
         }
 
-        public Task<int> Update(PRODUCTO? t)
+        public async Task<int> Update(PRODUCTO pRODUCTO)
         {
-            throw new NotImplementedException();
+            _context.Update(pRODUCTO);
+            return await _context.SaveChangesAsync();
+
         }
 
         public Task Save()
         {
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
             return Task.CompletedTask;
         }
     }

@@ -10,7 +10,7 @@ namespace CRUDInventoryQuick.Repositorio
     public class PrecioRepository : IRepository<PRECIO>
     {
         private readonly ApplicationDbContext _context;
-        private IRepository<PRECIO> _repositoryImplementation;
+        
 
         public PrecioRepository(ApplicationDbContext context)
         {
@@ -25,7 +25,7 @@ namespace CRUDInventoryQuick.Repositorio
 
         public async Task<PRECIO> GetById(int id)
         {
-            return _context.PRECIOs.SingleOrDefault(c => c.PrecioId.Equals(id));
+            return _context.PRECIOs.Include(p => p.PRODUCTO_Producto).SingleOrDefault(c => c.PrecioId.Equals(id));
         }
 
         public Task Add(PRECIO pRECIO)
