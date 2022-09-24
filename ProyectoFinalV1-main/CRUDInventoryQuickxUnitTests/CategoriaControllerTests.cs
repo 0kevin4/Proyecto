@@ -3,6 +3,7 @@ using CRUDInventoryQuick.Controllers;
 using CRUDInventoryQuick.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using ViewResult = Microsoft.AspNetCore.Mvc.ViewResult;
 
 namespace CRUDInventoryQuickxUnitTests
 {
@@ -19,22 +20,24 @@ namespace CRUDInventoryQuickxUnitTests
 
 
         [Fact]
-        public void Index_ActionExecutes_ReturnsViewForIndex()
+        public async Task Index_ActionExecutes_ReturnsViewForIndex()
         {
             var result = _controller.Index();
-            Assert.IsType<Task<IActionResult>>(result);
+            await Assert.IsType<Task<IActionResult>>(result);
         }
 
         [Fact]
-        public void Index_ActionExecutes_ReturnsExactNumberOfCategories()
-        {
-            _mockRepository.Setup(m => m.GetAll())
-                .ReturnsAsync(new List<CATEGORIum>() { new CATEGORIum(), new CATEGORIum(), new CATEGORIum() });
+        public async Task Index_ActionExecutes_ReturnsExactNumberOfCategories()
+        { 
+            _mockRepository.Setup(r => r.GetAll())
+                .ReturnsAsync(new List<CATEGORIum>() { new CATEGORIum(), new CATEGORIum(), new CATEGORIum(), new CATEGORIum() });
 
-            var result = _controller.Index();
-            var iActionResult = Assert.IsType<Task<IActionResult>>(result);
-            var categories = Assert.IsType<List<CATEGORIum>>(iActionResult.Result).Count; // Revisar
-            Assert.Equal(3, categories);
+            var result =  await _controller.Index();
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var categories = Assert.IsType<List<CATEGORIum>>(viewResult.Model);
+            Assert.Equal(4, categories.Count);
+           
         }
     }
 }
