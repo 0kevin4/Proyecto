@@ -86,7 +86,7 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
-            //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
+             //ViewData["CATEGORIA_CategoriaId"] = await _Subcategoriarepository.GetById(id);
             return View(sUBCATEGORIum);
         }
 
@@ -112,7 +112,7 @@ namespace CRUDInventoryQuick.Controllers
                     return View(sUBCATEGORIum);
                 }
 
-                //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
+                //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_Subcategoriarepository., "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
                 return RedirectToAction(nameof(Index));
             }
             return View(sUBCATEGORIum);
