@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using CRUDInventoryQuick.Contracts;
+using SendGrid.Helpers.Mail;
 
 namespace CRUDInventoryQuick.Controllers
 {
@@ -51,6 +52,7 @@ namespace CRUDInventoryQuick.Controllers
         // GET: Precio/Create
         public IActionResult Create()
         {
+           
             return View();
         }
 
@@ -67,6 +69,8 @@ namespace CRUDInventoryQuick.Controllers
                 await _repository.Save();
                 return RedirectToAction(nameof(Index));
             }
+            //ViewData["PRODUCTO_ProductoId"] = new SelectList(_repository.GetById(),"ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
+
             return View(pRECIO);
         }
 
@@ -83,6 +87,7 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
+            //ViewData["PRODUCTO_ProductoId"] = new SelectList(_repository.GetById(id), "ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
             return View(pRECIO);
         }
 

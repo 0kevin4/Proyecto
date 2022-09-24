@@ -28,6 +28,7 @@ builder.Services.AddScoped<IRepository<MARCA>, MarcaRepository>();
 builder.Services.AddScoped<IRepository<PRODUCTO>, ProductoRepository>();
 builder.Services.AddScoped<IRepository<ASPNETUSERROLE>, RolRepository>();
 builder.Services.AddScoped<IRepository<PRECIO>, PrecioRepository>();
+builder.Services.AddScoped<IRepository<SUBCATEGORIum>, SubcategoriaRepository>();
 
 
 

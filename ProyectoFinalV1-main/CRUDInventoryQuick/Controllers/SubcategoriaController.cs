@@ -7,36 +7,40 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
+using CRUDInventoryQuick.Contracts;
+using NuGet.Protocol.Core.Types;
+using SendGrid.Helpers.Mail;
 
 namespace CRUDInventoryQuick.Controllers
 {
     public class SubcategoriaController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IRepository<SUBCATEGORIum> _Subcategoriarepository;
 
-        public SubcategoriaController(ApplicationDbContext context)
+
+        public SubcategoriaController(IRepository<SUBCATEGORIum> Subcategoriarepository)
         {
-            _context = context;
+            _Subcategoriarepository = Subcategoriarepository;
         }
 
         // GET: Subcategoria
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.SUBCATEGORIAs.Include(s => s.CATEGORIA_Categoria);
-            return View(await applicationDbContext.ToListAsync());
+
+            return _Subcategoriarepository.GetAll() != null ?
+            View(await _Subcategoriarepository.GetAll()) :
+            Problem("Entity set 'ApplicationDbContext.CATEGORIAs'  is null.");
         }
 
         // GET: Subcategoria/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.SUBCATEGORIAs == null)
+            if (id == null || _Subcategoriarepository.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var sUBCATEGORIum = await _context.SUBCATEGORIAs
-                .Include(s => s.CATEGORIA_Categoria)
-                .FirstOrDefaultAsync(m => m.SubcategoriaId == id);
+            var sUBCATEGORIum = await _Subcategoriarepository.GetById(id);
             if (sUBCATEGORIum == null)
             {
                 return NotFound();
@@ -48,7 +52,7 @@ namespace CRUDInventoryQuick.Controllers
         // GET: Subcategoria/Create
         public IActionResult Create()
         {
-            ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId");
+            //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId");
             return View();
         }
 
@@ -61,28 +65,28 @@ namespace CRUDInventoryQuick.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(sUBCATEGORIum);
-                await _context.SaveChangesAsync();
+                await _Subcategoriarepository.Add(sUBCATEGORIum);
+                await _Subcategoriarepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
+            //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
             return View(sUBCATEGORIum);
         }
 
         // GET: Subcategoria/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.SUBCATEGORIAs == null)
+            if (id == null || _Subcategoriarepository.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var sUBCATEGORIum = await _context.SUBCATEGORIAs.FindAsync(id);
+            var sUBCATEGORIum = await _Subcategoriarepository.GetById(id);
             if (sUBCATEGORIum == null)
             {
                 return NotFound();
             }
-            ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
+            //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
             return View(sUBCATEGORIum);
         }
 
@@ -100,39 +104,29 @@ namespace CRUDInventoryQuick.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                var result = await _Subcategoriarepository.Update(sUBCATEGORIum);
+                if (result <= 0)
                 {
-                    _context.Update(sUBCATEGORIum);
-                    await _context.SaveChangesAsync();
+
+                    ViewBag.ErrorMessage = "Error al guardar los datos";
+                    return View(sUBCATEGORIum);
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SUBCATEGORIumExists(sUBCATEGORIum.SubcategoriaId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
+                //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
             return View(sUBCATEGORIum);
         }
 
         // GET: Subcategoria/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.SUBCATEGORIAs == null)
+            if (id == null || _Subcategoriarepository.GetAll() == null)
             {
                 return NotFound();
             }
 
-            var sUBCATEGORIum = await _context.SUBCATEGORIAs
-                .Include(s => s.CATEGORIA_Categoria)
-                .FirstOrDefaultAsync(m => m.SubcategoriaId == id);
+            var sUBCATEGORIum = await _Subcategoriarepository.GetById(id);
             if (sUBCATEGORIum == null)
             {
                 return NotFound();
@@ -146,23 +140,18 @@ namespace CRUDInventoryQuick.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.SUBCATEGORIAs == null)
+            if (_Subcategoriarepository.GetAll() == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.SUBCATEGORIAs'  is null.");
             }
-            var sUBCATEGORIum = await _context.SUBCATEGORIAs.FindAsync(id);
+            var sUBCATEGORIum = await _Subcategoriarepository.GetById(id);
             if (sUBCATEGORIum != null)
             {
-                _context.SUBCATEGORIAs.Remove(sUBCATEGORIum);
+                await _Subcategoriarepository.Delete(sUBCATEGORIum);
             }
             
-            await _context.SaveChangesAsync();
+            await _Subcategoriarepository.Save();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool SUBCATEGORIumExists(int id)
-        {
-          return (_context.SUBCATEGORIAs?.Any(e => e.SubcategoriaId == id)).GetValueOrDefault();
         }
     }
 }
