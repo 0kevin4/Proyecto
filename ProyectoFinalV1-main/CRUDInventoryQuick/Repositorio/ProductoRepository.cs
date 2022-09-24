@@ -7,8 +7,7 @@ namespace CRUDInventoryQuick.Repositorio
     public class ProductoRepository : IRepository<PRODUCTO>
     {
         private readonly ApplicationDbContext _context;
-        private IRepository<PRODUCTO> _repository;
-
+        
         public ProductoRepository(ApplicationDbContext context)
         {
             this._context = context;

@@ -9,7 +9,7 @@ namespace CRUDInventoryQuick.Repositorio
     public class MarcaRepository : IRepository<MARCA>
     {
         private readonly ApplicationDbContext _context;
-        private IRepository<MARCA> _repository;
+        
 
         public MarcaRepository(ApplicationDbContext context)
         {

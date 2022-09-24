@@ -9,7 +9,7 @@ namespace CRUDInventoryQuick.Repositorio
     public class CategoriaRepository : IRepository<CATEGORIum>
     {
         private readonly ApplicationDbContext _context;
-        private IRepository<CATEGORIum> _repositoryImplementation;
+      
 
         public CategoriaRepository(ApplicationDbContext context)
         {

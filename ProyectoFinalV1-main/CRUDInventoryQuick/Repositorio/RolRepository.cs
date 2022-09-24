@@ -8,7 +8,7 @@ namespace CRUDInventoryQuick.Repositorio
     {
 
         private readonly ApplicationDbContext _context;
-        private IRepository<ASPNETUSERROLE> _repository;
+        
 
         public RolRepository(ApplicationDbContext context)
         {
