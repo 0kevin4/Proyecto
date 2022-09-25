@@ -2,8 +2,13 @@ using CRUDInventoryQuick.Contracts;
 using CRUDInventoryQuick.Controllers;
 using CRUDInventoryQuick.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Differencing;
+using Microsoft.Win32;
 using Moq;
+using System.Xml.Linq;
+using Twilio.Rest.Api.V2010;
 using Twilio.TwiML.Voice;
+using Task = System.Threading.Tasks.Task;
 using ViewResult = Microsoft.AspNetCore.Mvc.ViewResult;
 
 namespace CRUDInventoryQuickxUnitTests
@@ -19,7 +24,7 @@ namespace CRUDInventoryQuickxUnitTests
             _controller = new CategoriaController(_mockRepository.Object);
         }
 
-
+        //Retornar todos los objetos
         [Fact]
         public async void Index_ActionExecutes_ReturnsViewForIndex()
         {
@@ -27,6 +32,7 @@ namespace CRUDInventoryQuickxUnitTests
             Assert.IsType<ViewResult>(result);
         }
 
+        //Retornar un numero exacto de objetos
         [Fact]
         public async void Index_ActionExecutes_ReturnsExactNumberOfCategories()
         {
@@ -41,43 +47,47 @@ namespace CRUDInventoryQuickxUnitTests
 
         }
 
+        //Retornar Vista
         [Fact]
-        public void Create_ActionExecutes_ReturnsViewCreate()
+        public void CreateGET_ActionExecutes_ReturnsViewCreate()
         {
 
             var result = _controller.Create();
             Assert.IsType<ViewResult>(result);
         }
 
+        //Campo Requerido
+        //[Fact]
+        //public async void Create_invalidModelState_ReturnsView()
+        //{
+        //    _controller.ModelState.AddModelError("Nombre", "El nombre es Requerido");
+        //    var Categoria = new CATEGORIum { CategoriaId = 100, Estado = true };
+
+        //    var result = await _controller.Create(Categoria);
+
+        //    var viewResult = Assert.IsType<ViewResult>(result);
+        //    var testCategoria = Assert.IsType<CATEGORIum>(viewResult.Model);
+
+        //    Assert.Equal(Categoria.CategoriaId, testCategoria.CategoriaId);
+        //    Assert.Equal(Categoria.Estado, testCategoria.Estado);
+        //}
+
+        //Modelo no valido
+        //[Fact]
+        //public async void Create_InvalidModelState_CreateCategoriaNeverExecutes()
+        //{
+        //    _controller.ModelState.AddModelError("Name", "Name is required");
+        //    var employee = new CATEGORIum { CategoriaId = 34 };
+
+        //    await _controller.Create(employee);
+
+        //    _mockRepository.Verify(x => x.Add(It.IsAny<CATEGORIum>()), Times.Never);
+
+        //}
+
+        //Crear Objeto
         [Fact]
-        public async void Create_invalidModelState_ReturnsView()
-        {
-            _controller.ModelState.AddModelError("Nombre", "El nombre es Requerido");
-            var Categoria = new CATEGORIum { CategoriaId = 100, Estado = true };
-
-            var result = await _controller.Create(Categoria);
-
-            var viewResult = Assert.IsType<ViewResult>(result);
-            var testCategoria = Assert.IsType<CATEGORIum>(viewResult.Model);
-
-            Assert.Equal(Categoria.CategoriaId, testCategoria.CategoriaId);
-            Assert.Equal(Categoria.Estado, testCategoria.Estado);
-        }
-
-        [Fact]
-        public async void Create_InvalidModelState_CreateEmployeeNeverExecutes()
-        {
-            _controller.ModelState.AddModelError("Name", "Name is required");
-            var employee = new CATEGORIum { CategoriaId = 34 };
-
-            await _controller.Create(employee);
-
-            _mockRepository.Verify(x => x.Add(It.IsAny<CATEGORIum>()), Times.Never);
-
-        }
-
-        [Fact]
-        public async void Create_ModelStateValid_CreateEmployeeCalledOnce()
+        public async void CreatePOST_ModelStateValid_CreateCategoriaCalledOnce()
         {
             CATEGORIum cat = null;
             _mockRepository.Setup(r => r.Add(It.IsAny<CATEGORIum>()))
@@ -96,8 +106,9 @@ namespace CRUDInventoryQuickxUnitTests
             Assert.Equal(cat.Nombre, categoria.Nombre);
         }
 
+        //Retornar Index-Despues de Creacion
         [Fact]
-        public async void Create_ActionExecuted_RedirectsToIndexAction()
+        public async void CreatePOST_ActionExecuted_RedirectsToIndexAction()
         {
             var categoria = new CATEGORIum
             {
@@ -108,8 +119,66 @@ namespace CRUDInventoryQuickxUnitTests
             var result = await _controller.Create(categoria);
 
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
+        //Retornar vista
+        [Fact]
+        public async void Update_ActionExecuted_ReturnsViewEdit()
+        {
+            int CategoriaId = 2;
+            bool Estado = true;
+            string Nombre = "Kevin";
+
+            var mockRepo = new Mock<IRepository<CATEGORIum>>();
+            _mockRepository.Setup(repo => repo.GetById(CategoriaId)).ReturnsAsync(GetTestCategoriaRecord());
+            var controller = new CategoriaController(mockRepo.Object);
+
+            // Act
+            var result = await _controller.Edit(CategoriaId);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<CATEGORIum>(viewResult.ViewData.Model);
+            Assert.Equal(CategoriaId, model.CategoriaId);
+            Assert.Equal(Estado, model.Estado);
+            Assert.Equal(Nombre, model.Nombre);
+        }
+        //Metodo devolver un registro
+        private CATEGORIum GetTestCategoriaRecord()
+        {
+            var r = new CATEGORIum
+            {
+                CategoriaId = 2,
+                Estado = true,
+                Nombre = "Kevin"
+            };
+            return r;
+        }
+
+        [Fact]
+        public async void Delete_POST_ReturnsViewResult_InValidModelState()
+        {
+            // Arrange
+            int testId = 2;
+
+            var mockRepo = new Mock<IRepository<CATEGORIum>>();
+            _mockRepository.Setup(r => r.Delete(It.IsAny<CATEGORIum>()))
+                   .Returns(Task.CompletedTask)
+                   .Verifiable();
+
+            var controller = new CategoriaController(mockRepo.Object);
+
+            // Act
+            var result = await _controller.DeleteConfirmed(testId);
+
+            // Assert
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+            mockRepo.Verify();
+        }
 
     }
+
 }
