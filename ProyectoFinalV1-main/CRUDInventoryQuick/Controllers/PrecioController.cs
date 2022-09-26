@@ -101,7 +101,17 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
-            //ViewData["PRODUCTO_ProductoId"] = new SelectList(_repository.GetById(id), "ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
+            var products = await _productosRepository.GetAll();
+            _productos = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _productos.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.ProductoId.ToString()
+                });
+            }
+            ViewBag.productos = _productos;
             return View(pRECIO);
         }
 
