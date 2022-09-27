@@ -40,17 +40,16 @@
             <div class="form-group">
                 <label asp-for="MARCA_MarcaId" class="control-label"></label>
                 <select asp-for="MARCA_MarcaId" class ="form-control" asp-items="ViewBag.Marca"></select>
-            </div>
+            </div><br>
             <div class="form-group">
-                <input type="submit" value="Agregar" class="btn btn-info" />
+                <input type="submit" value="Agregar" class="btn btn-sm btn-success" />
+                <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Volver a la lista</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

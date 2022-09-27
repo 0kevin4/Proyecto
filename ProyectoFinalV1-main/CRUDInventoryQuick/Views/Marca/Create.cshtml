@@ -27,17 +27,15 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
                 </label>
-            </div>
+            </div><br />
             <div class="form-group">
-                <input type="submit" value="Agregar" class="btn btn-info" />
+                <input type="submit" value="Agregar" class="btn btn-sm btn-success" />
+                <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Volver a la lista</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

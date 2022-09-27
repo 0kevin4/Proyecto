@@ -32,14 +32,11 @@
                 <select asp-for="CATEGORIA_CategoriaId" class ="form-control" asp-items="ViewBag.Categorias"></select>
             </div> <br >
             <div class="form-group">
-                <input type="submit" value="Agregar" class="btn btn-info" />
+                <input type="submit" value="Agregar" class="btn btn-sm btn-success" />
+                <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Volver a la lista</a>
 </div>
 
 @section Scripts {
