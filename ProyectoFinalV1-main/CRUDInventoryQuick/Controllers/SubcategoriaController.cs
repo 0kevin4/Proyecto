@@ -10,17 +10,20 @@ using CRUDInventoryQuick.Models;
 using CRUDInventoryQuick.Contracts;
 using NuGet.Protocol.Core.Types;
 using SendGrid.Helpers.Mail;
+using CRUDInventoryQuick.Repositorio;
 
 namespace CRUDInventoryQuick.Controllers
 {
     public class SubcategoriaController : Controller
     {
         private readonly IRepository<SUBCATEGORIum> _Subcategoriarepository;
+        private readonly IRepository<CATEGORIum> _CategoriaRepository;
+        private List<SelectListItem> _Categoria;
 
-
-        public SubcategoriaController(IRepository<SUBCATEGORIum> Subcategoriarepository)
+        public SubcategoriaController(IRepository<SUBCATEGORIum> Subcategoriarepository, IRepository<CATEGORIum> CategoriaRepository)
         {
             _Subcategoriarepository = Subcategoriarepository;
+            _CategoriaRepository = CategoriaRepository;
         }
 
         // GET: Subcategoria
@@ -50,9 +53,20 @@ namespace CRUDInventoryQuick.Controllers
         }
 
         // GET: Subcategoria/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId");
+            var Categoria = await _CategoriaRepository.GetAll();
+            _Categoria = new List<SelectListItem>();
+            foreach (var sub in Categoria)
+            {
+                _Categoria.Add(new SelectListItem
+                {
+                    Text = sub.Nombre,
+                    Value = sub.CategoriaId.ToString()
+                });
+            }
+            ViewBag.categorias = _Categoria;
+
             return View();
         }
 
@@ -86,7 +100,17 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
-             //ViewData["CATEGORIA_CategoriaId"] = await _Subcategoriarepository.GetById(id);
+            var Categoria = await _CategoriaRepository.GetAll();
+            _Categoria = new List<SelectListItem>();
+            foreach (var sub in Categoria)
+            {
+                _Categoria.Add(new SelectListItem
+                {
+                    Text = sub.Nombre,
+                    Value = sub.CategoriaId.ToString()
+                });
+            }
+            ViewBag.categorias = _Categoria;
             return View(sUBCATEGORIum);
         }
 
