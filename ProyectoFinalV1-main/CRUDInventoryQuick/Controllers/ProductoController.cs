@@ -16,12 +16,15 @@ namespace CRUDInventoryQuick.Controllers
     {
         private readonly IRepository<PRODUCTO> _Productorepository;
         private readonly IRepository<SUBCATEGORIum> _subcategoriaRepository;
-        private List<SelectListItem> _categoria;
+        private readonly IRepository<MARCA> _MarcaRepository;
+        private List<SelectListItem> _subcategoria;
+        private List<SelectListItem> _marca;
 
-        public ProductoController(IRepository<PRODUCTO> Productorepository, IRepository<SUBCATEGORIum> subcategoriaRepository )
+        public ProductoController(IRepository<PRODUCTO> Productorepository, IRepository<SUBCATEGORIum> subcategoriaRepository, IRepository<MARCA> MarcaRepository  )
         {
             _Productorepository = Productorepository;
             _subcategoriaRepository = subcategoriaRepository;
+            _MarcaRepository = MarcaRepository;
         }
 
         //GET: Producto
@@ -54,16 +57,28 @@ namespace CRUDInventoryQuick.Controllers
         {
 
             var products = await _subcategoriaRepository.GetAll();
-            _categoria= new List<SelectListItem>();
-            foreach (var product in products)
+            _subcategoria= new List<SelectListItem>();
+            foreach (var sub in products)
             {
-                _categoria.Add(new SelectListItem
+                _subcategoria.Add(new SelectListItem
                 {
-                    Text = product.Nombre,
-                    Value = product.SubcategoriaId.ToString()
+                    Text = sub.Nombre,
+                    Value = sub.SubcategoriaId.ToString()
                 });
             }
-            ViewBag.categorias = _categoria;
+            ViewBag.subcategorias = _subcategoria;
+
+            var product = await _MarcaRepository.GetAll();
+            _marca = new List<SelectListItem>();
+            foreach (var mar in product)
+            {
+                _marca.Add(new SelectListItem
+                {
+                    Text = mar.Nombre,
+                    Value = mar.MarcaId.ToString()
+                });
+            }
+            ViewBag.Marca = _subcategoria;
             return View();
         }
 
@@ -80,8 +95,6 @@ namespace CRUDInventoryQuick.Controllers
                 await _Productorepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["MARCA_MarcaId"] = new SelectList(_Productorepository.GetAll(), "MarcaId", "MarcaId", pRODUCTO.MARCA_MarcaId);
-            //ViewData["SUBCATEGORIA_SubcategoriaId"] = new SelectList(_Productorepository.GetAll(), "SubcategoriaId", "SubcategoriaId", pRODUCTO.SUBCATEGORIA_SubcategoriaId);
             return View(pRODUCTO);
         }
 
@@ -98,8 +111,29 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
-            //ViewData["MARCA_MarcaId"] = new SelectList((System.Collections.IEnumerable)_Productorepository.GetAll(), "MarcaId", "MarcaId", pRODUCTO.MARCA_MarcaId);
-            //ViewData["SUBCATEGORIA_SubcategoriaId"] = new SelectList((System.Collections.IEnumerable)_Productorepository.GetAll(), "SubcategoriaId", "SubcategoriaId", pRODUCTO.SUBCATEGORIA_SubcategoriaId);
+            var products = await _subcategoriaRepository.GetAll();
+            _subcategoria = new List<SelectListItem>();
+            foreach (var produc in products)
+            {
+                _subcategoria.Add(new SelectListItem
+                {
+                    Text = produc.Nombre,
+                    Value = produc.SubcategoriaId.ToString()
+                });
+            }
+            ViewBag.subcategorias = _subcategoria;
+
+            var product = await _MarcaRepository.GetAll();
+            _marca = new List<SelectListItem>();
+            foreach (var mar in product)
+            {
+                _marca.Add(new SelectListItem
+                {
+                    Text = mar.Nombre,
+                    Value = mar.MarcaId.ToString()
+                });
+            }
+            ViewBag.Marca = _subcategoria;
             return View(pRODUCTO);
         }
 
@@ -160,7 +194,7 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return Problem("Entity set 'ApplicationDbContext.PRODUCTOs'  is null.");
             }
-            var pRODUCTO = await _Productorepository.GetById((int)id);
+            var pRODUCTO = await _Productorepository.GetById(id);
             if (pRODUCTO != null)
             {
                 await _Productorepository.Delete(pRODUCTO);
