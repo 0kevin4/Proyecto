@@ -15,11 +15,12 @@ namespace CRUDInventoryQuickxUnitTests
     {
         private readonly Mock<IRepository<SUBCATEGORIum>> _mockRepository;
         private readonly SubcategoriaController _controller;
+        private readonly IRepository<CATEGORIum> _CategoriaRepository;
 
         public SubcategoriaControllerTests()
         {
             _mockRepository = new Mock<IRepository<SUBCATEGORIum>>();
-            _controller = new SubcategoriaController(_mockRepository.Object);
+            _controller = new SubcategoriaController(_mockRepository.Object,_CategoriaRepository);
         }
 
 
