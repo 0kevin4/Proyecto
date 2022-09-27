@@ -15,10 +15,13 @@ namespace CRUDInventoryQuick.Controllers
     public class PrecioController : Controller
     {
         private readonly IRepository<PRECIO>_repository;
+        private readonly IRepository<PRODUCTO> _productosRepository;
+        private List<SelectListItem> _productos;
 
-        public PrecioController(IRepository<PRECIO> repository)
+        public PrecioController(IRepository<PRECIO> repository, IRepository<PRODUCTO> productosRepository)
         {
             _repository = repository;
+            _productosRepository = productosRepository;
         }
 
         // GET: Precio
@@ -50,9 +53,20 @@ namespace CRUDInventoryQuick.Controllers
         }
 
         // GET: Precio/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-           
+           var products = await _productosRepository.GetAll();
+            _productos = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _productos.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.ProductoId.ToString()
+                });
+            }
+            ViewBag.productos = _productos;
+
             return View();
         }
 
@@ -69,7 +83,7 @@ namespace CRUDInventoryQuick.Controllers
                 await _repository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["PRODUCTO_ProductoId"] = new SelectList(_repository.GetById(),"ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
+            //ViewData["PRODUCTO_ProductoId"] = new SelectList(_repository.GetAll(),"ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
 
             return View(pRECIO);
         }
@@ -87,7 +101,17 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
-            //ViewData["PRODUCTO_ProductoId"] = new SelectList(_repository.GetById(id), "ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
+            var products = await _productosRepository.GetAll();
+            _productos = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _productos.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.ProductoId.ToString()
+                });
+            }
+            ViewBag.productos = _productos;
             return View(pRECIO);
         }
 

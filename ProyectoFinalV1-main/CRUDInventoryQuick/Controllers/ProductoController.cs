@@ -15,11 +15,13 @@ namespace CRUDInventoryQuick.Controllers
     public class ProductoController : Controller
     {
         private readonly IRepository<PRODUCTO> _Productorepository;
+        private readonly IRepository<SUBCATEGORIum> _subcategoriaRepository;
+        private List<SelectListItem> _categoria;
 
-
-        public ProductoController(IRepository<PRODUCTO> Productorepository)
+        public ProductoController(IRepository<PRODUCTO> Productorepository, IRepository<SUBCATEGORIum> subcategoriaRepository )
         {
             _Productorepository = Productorepository;
+            _subcategoriaRepository = subcategoriaRepository;
         }
 
         //GET: Producto
@@ -48,9 +50,20 @@ namespace CRUDInventoryQuick.Controllers
         }
 
         // GET: Producto/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            //ViewData["MARCA_MarcaId"] =  new SelectList(_Productorepository.GetAll(), "SubcategoriaId", "SubcategoriaId", pRODUCTO.SUBCATEGORIA_SubcategoriaId);
+
+            var products = await _subcategoriaRepository.GetAll();
+            _categoria= new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _categoria.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.SubcategoriaId.ToString()
+                });
+            }
+            ViewBag.categorias = _categoria;
             return View();
         }
 
