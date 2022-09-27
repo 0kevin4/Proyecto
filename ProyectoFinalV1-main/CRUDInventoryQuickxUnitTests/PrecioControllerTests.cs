@@ -14,12 +14,13 @@ namespace CRUDInventoryQuickxUnitTests
     public class PrecioControllerTests
     {
         private readonly Mock<IRepository<PRECIO>> _mockRepository;
+        private readonly IRepository<PRODUCTO> _productosRepository;
         private readonly PrecioController _controller;
 
         public PrecioControllerTests()
         {
             _mockRepository = new Mock<IRepository<PRECIO>>();
-            _controller = new PrecioController(_mockRepository.Object);
+            _controller = new PrecioController(_mockRepository.Object, _productosRepository);
         }
 
 

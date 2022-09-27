@@ -18,6 +18,7 @@ namespace CRUDInventoryQuickxUnitTests
         private readonly Mock<IRepository<CATEGORIum>> _mockRepository;
         private readonly CategoriaController _controller;
 
+
         public CategoriaControllerTests()
         {
             _mockRepository = new Mock<IRepository<CATEGORIum>>();
