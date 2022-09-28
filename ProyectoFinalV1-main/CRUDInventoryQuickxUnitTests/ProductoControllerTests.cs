@@ -16,13 +16,12 @@ namespace CRUDInventoryQuickxUnitTests
 
         private readonly Mock<IRepository<PRODUCTO>> _mockRepository;
         private readonly ProductoController _controller;
-        private readonly IRepository<SUBCATEGORIum> _subcategoriaRepository;
-        private readonly IRepository<MARCA> _MarcaRepository;
+       
 
         public   ProductoControllerTests()
         {
             _mockRepository = new Mock<IRepository<PRODUCTO>>();
-            _controller = new ProductoController(_mockRepository.Object, _subcategoriaRepository,_MarcaRepository);
+            _controller = new ProductoController(_mockRepository.Object);
         }
 
 
