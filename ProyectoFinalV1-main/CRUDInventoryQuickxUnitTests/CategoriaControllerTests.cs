@@ -57,34 +57,7 @@ namespace CRUDInventoryQuickxUnitTests
             Assert.IsType<ViewResult>(result);
         }
 
-        //Campo Requerido
-        //[Fact]
-        //public async void Create_invalidModelState_ReturnsView()
-        //{
-        //    _controller.ModelState.AddModelError("Nombre", "El nombre es Requerido");
-        //    var Categoria = new CATEGORIum { CategoriaId = 100, Estado = true };
-
-        //    var result = await _controller.Create(Categoria);
-
-        //    var viewResult = Assert.IsType<ViewResult>(result);
-        //    var testCategoria = Assert.IsType<CATEGORIum>(viewResult.Model);
-
-        //    Assert.Equal(Categoria.CategoriaId, testCategoria.CategoriaId);
-        //    Assert.Equal(Categoria.Estado, testCategoria.Estado);
-        //}
-
-        //Modelo no valido
-        //[Fact]
-        //public async void Create_InvalidModelState_CreateCategoriaNeverExecutes()
-        //{
-        //    _controller.ModelState.AddModelError("Name", "Name is required");
-        //    var employee = new CATEGORIum { CategoriaId = 34 };
-
-        //    await _controller.Create(employee);
-
-        //    _mockRepository.Verify(x => x.Add(It.IsAny<CATEGORIum>()), Times.Never);
-
-        //}
+        
 
         //Crear Objeto
         [Fact]
@@ -157,29 +130,7 @@ namespace CRUDInventoryQuickxUnitTests
             return r;
         }
 
-        [Fact]
-        public async void Delete_POST_ReturnsViewResult_InValidModelState()
-        {
-            // Arrange
-            int testId = 2;
-
-            var mockRepo = new Mock<IRepository<CATEGORIum>>();
-            _mockRepository.Setup(r => r.Delete(It.IsAny<CATEGORIum>()))
-                   .Returns(Task.CompletedTask)
-                   .Verifiable();
-
-            var controller = new CategoriaController(mockRepo.Object);
-
-            // Act
-            var result = await _controller.DeleteConfirmed(testId);
-
-            // Assert
-            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Null(redirectToActionResult.ControllerName);
-            Assert.Equal("Index", redirectToActionResult.ActionName);
-            mockRepo.Verify();
-        }
-
+        
     }
 
 }
