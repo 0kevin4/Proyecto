@@ -15,19 +15,12 @@ namespace CRUDInventoryQuick.Controllers
     public class ProductoController : Controller
     {
         private readonly IRepository<PRODUCTO> _Productorepository;
-        private readonly IRepository<SUBCATEGORIum> _subcategoriaRepository;
-        private List<SelectListItem> _categoria;
-        private IRepository<PRODUCTO> @object;
-
-        public ProductoController(IRepository<PRODUCTO> Productorepository, IRepository<SUBCATEGORIum> subcategoriaRepository )
+        //private readonly IRepository<SUBCATEGORIum> _subcategoriaRepository;
+        //private List<SelectListItem> _categoria;
+        public ProductoController(IRepository<PRODUCTO> Productorepository /*IRepository<SUBCATEGORIum> subcategoriaRepository*/ )
         {
             _Productorepository = Productorepository;
-            _subcategoriaRepository = subcategoriaRepository;
-        }
-
-        public ProductoController(IRepository<PRODUCTO> @object)
-        {
-            this.@object = @object;
+            //_subcategoriaRepository = subcategoriaRepository;
         }
 
         //GET: Producto
@@ -59,17 +52,17 @@ namespace CRUDInventoryQuick.Controllers
         public async Task<IActionResult> Create()
         {
 
-            var products = await _subcategoriaRepository.GetAll();
-            _categoria= new List<SelectListItem>();
-            foreach (var product in products)
-            {
-                _categoria.Add(new SelectListItem
-                {
-                    Text = product.Nombre,
-                    Value = product.SubcategoriaId.ToString()
-                });
-            }
-            ViewBag.categorias = _categoria;
+            //var products = await _subcategoriaRepository.GetAll();
+            //_categoria= new List<SelectListItem>();
+            //foreach (var product in products)
+            //{
+            //    _categoria.Add(new SelectListItem
+            //    {
+            //        Text = product.Nombre,
+            //        Value = product.SubcategoriaId.ToString()
+            //    });
+            //}
+            //ViewBag.categorias = _categoria;
             return View();
         }
 
