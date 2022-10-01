@@ -1,13 +1,14 @@
 ﻿@model CRUDInventoryQuick.Models.PRECIO
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Precio";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Agregar Precio</h1>
 
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -19,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="FechaIngreso" class="control-label"></label>
-                <input asp-for="FechaIngreso" class="form-control" />
+                <input asp-for="FechaIngreso" class="form-control"  />
                 <span asp-validation-for="FechaIngreso" class="text-danger"></span>
             </div>
             <div class="form-group">

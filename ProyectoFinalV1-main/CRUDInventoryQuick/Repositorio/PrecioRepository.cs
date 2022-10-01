@@ -19,13 +19,13 @@ namespace CRUDInventoryQuick.Repositorio
 
         public async Task<IEnumerable<PRECIO>> GetAll()
         {
-            var applicationDbContext = _context.PRECIOs.Include(p => p.PRODUCTO_Producto);
+            var applicationDbContext = _context.PRECIOs.Include(p => p.Producto);
             return applicationDbContext.ToList();
         }
 
         public async Task<PRECIO> GetById(int id)
         {
-            return _context.PRECIOs.Include(p => p.PRODUCTO_Producto).SingleOrDefault(c => c.PrecioId.Equals(id));
+            return _context.PRECIOs.Include(p => p.Producto).SingleOrDefault(c => c.PrecioId.Equals(id));
         }
 
         public Task Add(PRECIO pRECIO)

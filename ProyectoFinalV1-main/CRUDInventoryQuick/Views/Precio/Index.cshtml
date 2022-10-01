@@ -8,9 +8,9 @@
 
 
 <p>
-    <a asp-action="Create"  class="btn btn-info"><i class="bi bi-bookmark-plus"></i>Agregar nuevo precio</a>
+    <a asp-action="Create"  class="btn btn-info"><i class="bi bi-bookmark-plus"></i>Agregar Precio</a>
 </p>
-<table class="table">
+<table id="Tablas" class="table table-striped nowrap" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -29,7 +29,7 @@
                 @Html.DisplayNameFor(model => model.PrecioVentaFinal)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PRODUCTO_Producto)
+                @Html.DisplayNameFor(model => model.Producto)
             </th>
             <th></th>
         </tr>
@@ -53,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.PrecioVentaFinal)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PRODUCTO_Producto.ProductoId)
+                @Html.DisplayFor(modelItem => item.Producto.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PrecioId" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i>Editar</a> |
