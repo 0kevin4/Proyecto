@@ -83,7 +83,17 @@ namespace CRUDInventoryQuick.Controllers
                 await _repository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["PRODUCTO_ProductoId"] = new SelectList(_repository.GetAll(),"ProductoId", "ProductoId", pRECIO.PRODUCTO_ProductoId);
+            var products = await _productosRepository.GetAll();
+            _productos = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _productos.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.ProductoId.ToString()
+                });
+            }
+            ViewBag.productos = _productos;
 
             return View(pRECIO);
         }
@@ -136,7 +146,17 @@ namespace CRUDInventoryQuick.Controllers
                     ViewBag.ErrorMessage = "Error al guardar los datos";
                     return View(pRECIO);
                 }
-
+                var products = await _productosRepository.GetAll();
+                _productos = new List<SelectListItem>();
+                foreach (var product in products)
+                {
+                    _productos.Add(new SelectListItem
+                    {
+                        Text = product.Nombre,
+                        Value = product.ProductoId.ToString()
+                    });
+                }
+                ViewBag.productos = _productos;
                 return RedirectToAction(nameof(Index));
             }
             return View(pRECIO);

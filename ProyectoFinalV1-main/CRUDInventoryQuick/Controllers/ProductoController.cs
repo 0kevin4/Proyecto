@@ -15,12 +15,15 @@ namespace CRUDInventoryQuick.Controllers
     public class ProductoController : Controller
     {
         private readonly IRepository<PRODUCTO> _Productorepository;
-        //private readonly IRepository<SUBCATEGORIum> _subcategoriaRepository;
-        //private List<SelectListItem> _categoria;
-        public ProductoController(IRepository<PRODUCTO> Productorepository /*IRepository<SUBCATEGORIum> subcategoriaRepository*/ )
+        private readonly IRepository<SUBCATEGORIum> _subcategoriaRepository;
+        private readonly IRepository<MARCA> _MarcaRepository;
+        private List<SelectListItem> _Subcategoria;
+        private List<SelectListItem> _Marca;
+        public ProductoController(IRepository<PRODUCTO> Productorepository, IRepository<SUBCATEGORIum> subcategoriaRepository, IRepository<MARCA> MarcaRepository)
         {
             _Productorepository = Productorepository;
-            //_subcategoriaRepository = subcategoriaRepository;
+            _subcategoriaRepository = subcategoriaRepository;
+            _MarcaRepository = MarcaRepository;
         }
 
         //GET: Producto
@@ -52,17 +55,30 @@ namespace CRUDInventoryQuick.Controllers
         public async Task<IActionResult> Create()
         {
 
-            //var products = await _subcategoriaRepository.GetAll();
-            //_categoria= new List<SelectListItem>();
-            //foreach (var product in products)
-            //{
-            //    _categoria.Add(new SelectListItem
-            //    {
-            //        Text = product.Nombre,
-            //        Value = product.SubcategoriaId.ToString()
-            //    });
-            //}
-            //ViewBag.categorias = _categoria;
+            var products = await _subcategoriaRepository.GetAll();
+            _Subcategoria = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _Subcategoria.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.SubcategoriaId.ToString()
+                });
+            }
+            ViewBag.Subcategoria = _Subcategoria;
+
+            var Marcas = await _MarcaRepository.GetAll();
+            _Marca = new List<SelectListItem>();
+            foreach (var Marca in Marcas)
+            {
+                _Marca.Add(new SelectListItem
+                {
+                    Text = Marca.Nombre,
+                    Value = Marca.MarcaId.ToString()
+                });
+            }
+            ViewBag.Marca = _Marca; 
+
             return View();
         }
 
@@ -79,8 +95,29 @@ namespace CRUDInventoryQuick.Controllers
                 await _Productorepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["MARCA_MarcaId"] = new SelectList(_Productorepository.GetAll(), "MarcaId", "MarcaId", pRODUCTO.MARCA_MarcaId);
-            //ViewData["SUBCATEGORIA_SubcategoriaId"] = new SelectList(_Productorepository.GetAll(), "SubcategoriaId", "SubcategoriaId", pRODUCTO.SUBCATEGORIA_SubcategoriaId);
+            var products = await _subcategoriaRepository.GetAll();
+            _Subcategoria = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _Subcategoria.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.SubcategoriaId.ToString()
+                });
+            }
+            ViewBag.Subcategoria = _Subcategoria;
+
+            var Marcas = await _MarcaRepository.GetAll();
+            _Marca = new List<SelectListItem>();
+            foreach (var Marca in Marcas)
+            {
+                _Marca.Add(new SelectListItem
+                {
+                    Text = Marca.Nombre,
+                    Value = Marca.MarcaId.ToString()
+                });
+            }
+            ViewBag.Marca = _Marca;
             return View(pRODUCTO);
         }
 
@@ -97,8 +134,29 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
-            //ViewData["MARCA_MarcaId"] = new SelectList((System.Collections.IEnumerable)_Productorepository.GetAll(), "MarcaId", "MarcaId", pRODUCTO.MARCA_MarcaId);
-            //ViewData["SUBCATEGORIA_SubcategoriaId"] = new SelectList((System.Collections.IEnumerable)_Productorepository.GetAll(), "SubcategoriaId", "SubcategoriaId", pRODUCTO.SUBCATEGORIA_SubcategoriaId);
+            var products = await _subcategoriaRepository.GetAll();
+            _Subcategoria = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _Subcategoria.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.SubcategoriaId.ToString()
+                });
+            }
+            ViewBag.Subcategoria = _Subcategoria;
+
+            var Marcas = await _MarcaRepository.GetAll();
+            _Marca = new List<SelectListItem>();
+            foreach (var Marca in Marcas)
+            {
+                _Marca.Add(new SelectListItem
+                {
+                    Text = Marca.Nombre,
+                    Value = Marca.MarcaId.ToString()
+                });
+            }
+            ViewBag.Marca = _Marca;
             return View(pRODUCTO);
         }
 
@@ -107,7 +165,7 @@ namespace CRUDInventoryQuick.Controllers
         //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductoId,Nombre,Descripción,Estado,SUBCATEGORIA_SubcategoriaId,MARCA_MarcaId")] PRODUCTO pRODUCTO)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductoId,Nombre,Descripcion,Estado,SUBCATEGORIA_SubcategoriaId,MARCA_MarcaId")] PRODUCTO pRODUCTO)
         {
 
             if (id != pRODUCTO.ProductoId)
@@ -124,11 +182,32 @@ namespace CRUDInventoryQuick.Controllers
                     ViewBag.ErrorMessage = "Error al guardar los datos";
                     return View(pRODUCTO);
                 }
+                var products = await _subcategoriaRepository.GetAll();
+                _Subcategoria = new List<SelectListItem>();
+                foreach (var product in products)
+                {
+                    _Subcategoria.Add(new SelectListItem
+                    {
+                        Text = product.Nombre,
+                        Value = product.SubcategoriaId.ToString()
+                    });
+                }
+                ViewBag.Subcategoria = _Subcategoria;
 
+                var Marcas = await _MarcaRepository.GetAll();
+                _Marca = new List<SelectListItem>();
+                foreach (var Marca in Marcas)
+                {
+                    _Marca.Add(new SelectListItem
+                    {
+                        Text = Marca.Nombre,
+                        Value = Marca.MarcaId.ToString()
+                    });
+                }
+                ViewBag.Marca = _Marca;
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["MARCA_MarcaId"] = new SelectList((System.Collections.IEnumerable)_Productorepository.GetAll(), "MarcaId", "MarcaId", pRODUCTO.MARCA_MarcaId);
-            //ViewData["SUBCATEGORIA_SubcategoriaId"] = new SelectList((System.Collections.IEnumerable)_Productorepository.GetAll(), "SubcategoriaId", "SubcategoriaId", pRODUCTO.SUBCATEGORIA_SubcategoriaId);
+            
             return View(pRODUCTO);
         }
             
