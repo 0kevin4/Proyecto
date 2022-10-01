@@ -361,7 +361,7 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.Property(e => e.PrecioVentaInicial).HasComment("Indica el precio venta incial ");
 
-                entity.HasOne(d => d.PRODUCTO_Producto)
+                entity.HasOne(d => d.Producto)
                     .WithMany(p => p.PRECIOs)
                     .HasForeignKey(d => d.PRODUCTO_ProductoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)

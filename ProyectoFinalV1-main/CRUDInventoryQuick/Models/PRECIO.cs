@@ -46,6 +46,6 @@ namespace CRUDInventoryQuick.Models
 
         [ForeignKey("PRODUCTO_ProductoId")]
         [InverseProperty("PRECIOs")]
-        public virtual PRODUCTO? PRODUCTO_Producto { get; set; } = null!;
+        public virtual PRODUCTO? Producto { get; set; } = null!;
     }
 }

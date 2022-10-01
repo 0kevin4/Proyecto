@@ -57,7 +57,7 @@ namespace CRUDInventoryQuick.Models
         public virtual ICollection<DETALLEPEDIDO> DETALLEPEDIDOs { get; set; }
         [InverseProperty("PRODUCTO_Producto")]
         public virtual ICollection<IMAGENPRODUCTO> IMAGENPRODUCTOs { get; set; }
-        [InverseProperty("PRODUCTO_Producto")]
+        [InverseProperty("Producto")]
         public virtual ICollection<PRECIO> PRECIOs { get; set; }
         [InverseProperty("PRODUCTO_Producto")]
         public virtual ICollection<STOCK> STOCKs { get; set; }
