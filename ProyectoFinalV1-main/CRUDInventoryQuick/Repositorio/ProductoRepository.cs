@@ -17,16 +17,16 @@ namespace CRUDInventoryQuick.Repositorio
         public async Task<IEnumerable<PRODUCTO>> GetAll()
         {
             var applicationDbContext = _context.PRODUCTOs
-                .Include(p => p.MARCA_Marca)
-                .Include(p => p.SUBCATEGORIA_Subcategoria);
+                .Include(p => p.Marca)
+                .Include(p => p.Subcategoria);
             return applicationDbContext.ToList();
         }
 
         public async Task<PRODUCTO> GetById(int id)
         {
            return _context.PRODUCTOs
-                .Include(p => p.MARCA_Marca)
-                .Include(p => p.SUBCATEGORIA_Subcategoria)
+                .Include(p => p.Marca)
+                .Include(p => p.Subcategoria)
                 .FirstOrDefault(m => m.ProductoId == id);
         }
 

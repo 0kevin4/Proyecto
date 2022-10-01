@@ -384,13 +384,13 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.Property(e => e.SUBCATEGORIA_SubcategoriaId).HasComment("Identificador unico de la subcategoria");
 
-                entity.HasOne(d => d.MARCA_Marca)
+                entity.HasOne(d => d.Marca)
                     .WithMany(p => p.PRODUCTOs)
                     .HasForeignKey(d => d.MARCA_MarcaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("PRODUCTO_MARCA_FK");
 
-                entity.HasOne(d => d.SUBCATEGORIA_Subcategoria)
+                entity.HasOne(d => d.Subcategoria)
                     .WithMany(p => p.PRODUCTOs)
                     .HasForeignKey(d => d.SUBCATEGORIA_SubcategoriaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)

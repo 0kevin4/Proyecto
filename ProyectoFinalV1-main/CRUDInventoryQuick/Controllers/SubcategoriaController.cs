@@ -83,7 +83,17 @@ namespace CRUDInventoryQuick.Controllers
                 await _Subcategoriarepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_context.CATEGORIAs, "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
+            var Categoria = await _CategoriaRepository.GetAll();
+            _Categoria = new List<SelectListItem>();
+            foreach (var sub in Categoria)
+            {
+                _Categoria.Add(new SelectListItem
+                {
+                    Text = sub.Nombre,
+                    Value = sub.CategoriaId.ToString()
+                });
+            }
+            ViewBag.categorias = _Categoria;
             return View(sUBCATEGORIum);
         }
 
@@ -135,8 +145,17 @@ namespace CRUDInventoryQuick.Controllers
                     ViewBag.ErrorMessage = "Error al guardar los datos";
                     return View(sUBCATEGORIum);
                 }
-
-                //ViewData["CATEGORIA_CategoriaId"] = new SelectList(_Subcategoriarepository., "CategoriaId", "CategoriaId", sUBCATEGORIum.CATEGORIA_CategoriaId);
+                var Categoria = await _CategoriaRepository.GetAll();
+                _Categoria = new List<SelectListItem>();
+                foreach (var sub in Categoria)
+                {
+                    _Categoria.Add(new SelectListItem
+                    {
+                        Text = sub.Nombre,
+                        Value = sub.CategoriaId.ToString()
+                    });
+                }
+                ViewBag.categorias = _Categoria;
                 return RedirectToAction(nameof(Index));
             }
             return View(sUBCATEGORIum);

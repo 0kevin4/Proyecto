@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create" class="btn btn-sm btn-info" ><i class="bi bi-bookmark-plus"></i>Agregar Producto</a>
 </p>
-<table class="table">
+<table id="example" class="table table-striped nowrap" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -22,10 +22,10 @@
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MARCA_Marca)
+                @Html.DisplayNameFor(model => model.Marca)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SUBCATEGORIA_Subcategoria)
+                @Html.DisplayNameFor(model => model.Subcategoria)
             </th>
             <th></th>
         </tr>
@@ -43,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MARCA_Marca.MarcaId)
+                @Html.DisplayFor(modelItem => item.Marca.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SUBCATEGORIA_Subcategoria.SubcategoriaId)
+                @Html.DisplayFor(modelItem => item.Subcategoria.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProductoId"  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i>Editar</a> |
