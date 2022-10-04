@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRUDInventoryQuick.Models
@@ -17,6 +18,7 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Indica la fecha ingreso del precio
         /// </summary>
+        [BindProperty, DataType(DataType.Date)]
         [Column(TypeName = "datetime")]
         public DateTime FechaIngreso { get; set; }
         /// <summary>

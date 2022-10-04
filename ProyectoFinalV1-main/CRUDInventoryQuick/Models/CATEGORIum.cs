@@ -29,7 +29,7 @@ namespace CRUDInventoryQuick.Models
         [StringLength(64)]
         public string Nombre { get; set; } = null!;
 
-        [InverseProperty("CATEGORIA_Categoria")]
+        [InverseProperty("Categoria")]
         public virtual ICollection<SUBCATEGORIum> SUBCATEGORIa { get; set; }
     }
 }

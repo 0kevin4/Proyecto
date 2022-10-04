@@ -443,7 +443,7 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.Property(e => e.Nombre).HasComment("Indica el nombre de la categoria");
 
-                entity.HasOne(d => d.CATEGORIA_Categoria)
+                entity.HasOne(d => d.Categoria)
                     .WithMany(p => p.SUBCATEGORIa)
                     .HasForeignKey(d => d.CATEGORIA_CategoriaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
