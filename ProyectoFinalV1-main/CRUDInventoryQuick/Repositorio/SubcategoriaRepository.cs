@@ -18,14 +18,14 @@ namespace CRUDInventoryQuick.Repositorio
 
             public async Task<IEnumerable<SUBCATEGORIum>> GetAll()
             {
-                var applicationDbContext = _context.SUBCATEGORIAs.Include(s => s.CATEGORIA_Categoria);
+                var applicationDbContext = _context.SUBCATEGORIAs.Include(s => s.Categoria);
                 return applicationDbContext.ToList();
             }
 
             public async Task<SUBCATEGORIum> GetById(int id)
             {
                 return _context.SUBCATEGORIAs
-                 .Include(s => s.CATEGORIA_Categoria)
+                 .Include(s => s.Categoria)
                  .FirstOrDefault(m => m.SubcategoriaId == id);
             }
 

@@ -9,7 +9,7 @@ using CRUDInventoryQuick.Contracts;
 
 var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
-var connectionString = "server=inventory-quick-db.mysql.database.azure.com; port=3306; database=inventory; user=Inventory_Quick; password=Elmejorproyectodelmundo@; Persist Security Info=False; Connect Timeout=300";
+var connectionString = "server=inventory-quick-db.mysql.database.azure.com; port=3306; database=inventory; user=Inventory_Quick; password=Elmejorproyectodelmundo@; Persist Security Info=False; Connect Timeout=30";
 
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 
