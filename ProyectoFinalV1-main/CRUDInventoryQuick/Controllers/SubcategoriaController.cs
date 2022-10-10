@@ -32,7 +32,7 @@ namespace CRUDInventoryQuick.Controllers
 
             return _Subcategoriarepository.GetAll() != null ?
             View(await _Subcategoriarepository.GetAll()) :
-            Problem("Entity set 'ApplicationDbContext.CATEGORIAs'  is null.");
+            Problem("Entity set 'ApplicationDbContext.SUBCATEGORIAs'  is null.");
         }
 
         // GET: Subcategoria/Details/5

@@ -29,7 +29,7 @@ namespace CRUDInventoryQuick.Controllers
         {
             return _repository.GetAll() != null ?
                         View(await _repository.GetAll()) :
-                        Problem("Entity set 'ApplicationDbContext.CATEGORIAs'  is null.");
+                        Problem("Entity set 'ApplicationDbContext.PRECIOs'  is null.");
         }
 
 
@@ -75,7 +75,7 @@ namespace CRUDInventoryQuick.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal")]PRECIO pRECIO)
+        public async Task<IActionResult> Create([Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal,PRODUCTO_ProductoId")]PRECIO pRECIO)
         {
             if (ModelState.IsValid)
             {
@@ -130,7 +130,7 @@ namespace CRUDInventoryQuick.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal")] PRECIO pRECIO)
+        public async Task<IActionResult> Edit(int id, [Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal,PRODUCTO_ProductoId")] PRECIO pRECIO)
         {
             if (id != pRECIO.PrecioId)
             {
