@@ -31,7 +31,7 @@ namespace CRUDInventoryQuick.Controllers
         {
             return _Productorepository.GetAll() != null ?
                        View(await _Productorepository.GetAll()) :
-                       Problem("Entity set 'ApplicationDbContext.CATEGORIAs'  is null.");
+                       Problem("Entity set 'ApplicationDbContext.PRODUCTOs'  is null.");
         }
 
         // GET: Producto/Details/5
