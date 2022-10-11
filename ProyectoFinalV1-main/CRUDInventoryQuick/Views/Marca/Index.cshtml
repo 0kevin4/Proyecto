@@ -12,8 +12,10 @@
 </p>
 <table id="Tablas" class="table table-hover table-bordered" style="width:100%">
     <thead class="table-primary">
-
         <tr>
+            <th width="50">
+                @Html.DisplayNameFor(model => model.MarcaId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
@@ -27,15 +29,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.MarcaId)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td align="right">
-                <a asp-action="Edit" asp-route-id="@item.MarcaId"  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i>Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.MarcaId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i>Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.MarcaId" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i>Eliminar</a>
+                <a asp-action="Edit" asp-route-id="@item.MarcaId"  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.MarcaId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.MarcaId" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
 }
