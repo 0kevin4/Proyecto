@@ -39,3 +39,10 @@ input.form-check-input{
     height: 17px;
 }
 
+a.nav-link:hover {
+    color: #1e0fdb  !important;
+}
+
+a.navbar-brand:hover{
+    color: #ff0000 !important;
+}
