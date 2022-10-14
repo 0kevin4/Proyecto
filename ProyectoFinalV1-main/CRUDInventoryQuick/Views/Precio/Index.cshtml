@@ -14,28 +14,28 @@
     <thead class="table-primary">
 
         <tr>
-            <th width="50">
-                @Html.DisplayNameFor(model => model.PrecioId)
+            <th width="30">
+                Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaIngreso)
+                Fecha Ingreso
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioCompra)
+            <th width="110">
+                Precio Compra
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Descuento)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioVentaInicial)
+            <th width="110">
+                Precio Inicial
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioVentaFinal)
+            <th width="110">
+               Precio Final
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Producto)
             </th>
-            <th></th>
+            <th width="100"></th>
         </tr>
     </thead>
     <tbody>
@@ -62,7 +62,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Producto.Nombre)
             </td>
-            <td>
+            <td align="right" width="110">
                 <a asp-action="Edit" asp-route-id="@item.PrecioId" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> 
                 <a asp-action="Details" asp-route-id="@item.PrecioId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> 
                 <a asp-action="Delete" asp-route-id="@item.PrecioId"  class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
