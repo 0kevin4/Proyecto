@@ -6,40 +6,40 @@
 }
 
 <h1>Editar</h1>
+<br />
 
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PrecioId" />
             <div class="form-group">
-                <label asp-for="FechaIngreso" class="control-label"></label>
+                <label>Fecha de Ingreso</label>
                 <input asp-for="FechaIngreso" class="form-control" />
                 <span asp-validation-for="FechaIngreso" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="PrecioCompra" class="control-label"></label>
+                <label >Precio Compra</label>
                 <input type="number" asp-for="PrecioCompra" class="form-control" />
                 <span asp-validation-for="PrecioCompra" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
                 <label asp-for="Descuento" class="control-label"></label>
                 <input type="number" asp-for="Descuento" class="form-control" />
                 <span asp-validation-for="Descuento" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="PrecioVentaInicial" class="control-label"></label>
+                <label>Precio Venta Inicial</label>
                 <input type="number" asp-for="PrecioVentaInicial" class="form-control" />
                 <span asp-validation-for="PrecioVentaInicial" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="PrecioVentaFinal" class="control-label"></label>
+                <label>Producto</label>
                 <input type="number" asp-for="PrecioVentaFinal" class="form-control" />
                 <span asp-validation-for="PrecioVentaFinal" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="PRODUCTO_ProductoId" class="control-label"></label>
+                <label>Producto</label>
                 <select asp-for="PRODUCTO_ProductoId" class="form-control" asp-items="ViewBag.productos"></select>
                 <span asp-validation-for="PRODUCTO_ProductoId" class="text-danger"></span>
             </div><br>

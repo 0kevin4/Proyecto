@@ -6,8 +6,7 @@
 }
 
 <h1>Agregar Precio</h1>
-
-<hr />
+<br />
 
 <div class="row">
     <div class="col-md-4">
@@ -19,32 +18,31 @@
                 <span asp-validation-for="PrecioId" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <label asp-for="FechaIngreso" class="control-label"></label>
+                
                 <input asp-for="FechaIngreso" class="form-control"  />
                 <span asp-validation-for="FechaIngreso" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="PrecioCompra" class="control-label"></label>
-                <input asp-for="PrecioCompra" class="form-control" />
+                <input asp-for="PrecioCompra" class="form-control" placeholder="Precio de Compra*" />
                 <span asp-validation-for="PrecioCompra" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="Descuento" class="control-label"></label>
-                <input asp-for="Descuento" class="form-control" />
+                
+                <input asp-for="Descuento" class="form-control" placeholder="Descuento" />
                 <span asp-validation-for="Descuento" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="PrecioVentaInicial" class="control-label"></label>
-                <input asp-for="PrecioVentaInicial" class="form-control" />
+                
+                <input asp-for="PrecioVentaInicial" class="form-control" placeholder="Precion Venta Inicial*"/>
                 <span asp-validation-for="PrecioVentaInicial" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="PrecioVentaFinal" class="control-label"></label>
-                <input asp-for="PrecioVentaFinal" class="form-control" />
+                
+                <input asp-for="PrecioVentaFinal" class="form-control" placeholder="Precio Venta Final*"/>
                 <span asp-validation-for="PrecioVentaFinal" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="PRODUCTO_ProductoId" class="control-label"></label>
+                <label>Producto</label>
                 <select asp-for="PRODUCTO_ProductoId" class ="form-control" asp-items="ViewBag.productos"></select>
             </div><br >
 
