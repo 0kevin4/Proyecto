@@ -5,23 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Eliminar</h1>
 
-<h3>¿Estás seguro que deseas eliminar esta categoria?</h3>
+
+<h3>¿Estás seguro que deseas eliminar esta categoria?</h3><br />
 <div>
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-1">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-11">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
         <dt class = "col-sm-1">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
         <dd class = "col-sm-11">
             @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-1">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class="col-sm-11">
+            @Html.DisplayFor(model => model.Estado)
         </dd>
     </dl>
     

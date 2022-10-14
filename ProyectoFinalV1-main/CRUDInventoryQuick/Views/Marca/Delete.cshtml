@@ -5,12 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Eliminar</h1>
 
-<h3>¿Estas seguro que deseas eliminar esta marca?</h3>
+<h3>¿Estas seguro que deseas eliminar esta marca?</h3><br />
 <div>
- 
-    <hr />
     <dl class="row">
         <dt class = "col-sm-1">
             @Html.DisplayNameFor(model => model.Nombre)
@@ -28,7 +25,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="MarcaId" />
-        <input type="submit" value="Delete" class="btn btn-sm btn-danger" />
+        <input type="submit" value="Eliminar" class="btn btn-sm btn-danger" />
         <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
     </form>
 </div>
