@@ -8,7 +8,7 @@ using CRUDInventoryQuick.Contracts;
 
 var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
-var connectionString = "server=inventory-quick-db.mysql.database.azure.com; port=3306; database=inventory/; user=Inventory_Quick; password=Elmejorproyectodelmundo@; Persist Security Info=False; Connect Timeout=30";
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 
@@ -31,7 +31,7 @@ builder.Services.AddScoped<IRepository<SUBCATEGORIum>, SubcategoriaRepository>()
 
 
 
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
 
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    options.UseSqlServer(connectionString));
