@@ -15,8 +15,8 @@ namespace CRUDInventoryQuick.Controllers
 {
     public class AspNetRoleController : Controller
     {
-        private readonly IRepository<ASPNETUSERROLE> _Rolrepository;
-        public AspNetRoleController(IRepository<ASPNETUSERROLE> Rolrepository)
+        private readonly IRepository<ASPNETROLES> _Rolrepository;
+        public AspNetRoleController(IRepository<ASPNETROLES> Rolrepository)
         {
             _Rolrepository = Rolrepository;
             
@@ -27,7 +27,7 @@ namespace CRUDInventoryQuick.Controllers
         {
             return _Rolrepository.GetAll() != null ?
                         View(await _Rolrepository.GetAll()) :
-                        Problem("Entity set 'ApplicationDbContext.ASPNETUSERROLEs'  is null.");
+                        Problem("Entity set 'ApplicationDbContext.ASPNETROLEs'  is null.");
         }
 
         // GET: AspNetRole/Details/5
@@ -58,7 +58,7 @@ namespace CRUDInventoryQuick.Controllers
         //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AspNetRoleId,Nombre")] ASPNETUSERROLE aSPNETUSERROLE)
+        public async Task<IActionResult> Create([Bind("Id,Name")] ASPNETROLES aSPNETUSERROLE)
         {
             if (ModelState.IsValid)
             {
@@ -91,9 +91,9 @@ namespace CRUDInventoryQuick.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AspNetRoleId,Nombre")] ASPNETUSERROLE aSPNETUSERROLE)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] ASPNETROLES aSPNETUSERROLE)
         {
-            if (id != aSPNETUSERROLE.AspNetRoleId)
+            if (id != aSPNETUSERROLE.Id)
             {
                 return NotFound();
             }
@@ -137,7 +137,7 @@ namespace CRUDInventoryQuick.Controllers
         {
             if (_Rolrepository.GetAll() == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.ASPNETUSERROLEs'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.ASPNETROLEs'  is null.");
             }
             var aSPNETUSERROLE = await _Rolrepository.GetById(id);
             if (aSPNETUSERROLE != null)

@@ -14,12 +14,12 @@ namespace CRUDInventoryQuickxUnitTests
     public class RolControllerTests
     {
 
-        private readonly Mock<IRepository<ASPNETUSERROLE>> _mockRepository;
+        private readonly Mock<IRepository<ASPNETROLES>> _mockRepository;
         private readonly AspNetRoleController _controller;
 
         public RolControllerTests()
         {
-            _mockRepository = new Mock<IRepository<ASPNETUSERROLE>>();
+            _mockRepository = new Mock<IRepository<ASPNETROLES>>();
             _controller = new AspNetRoleController(_mockRepository.Object);
         }
 
@@ -35,12 +35,12 @@ namespace CRUDInventoryQuickxUnitTests
         public async Task Index_ActionExecutes_ReturnsExactNumberOfCategories()
         {
             _mockRepository.Setup(r => r.GetAll())
-                .ReturnsAsync(new List<ASPNETUSERROLE>() { new ASPNETUSERROLE(), new ASPNETUSERROLE(), new ASPNETUSERROLE() });
+                .ReturnsAsync(new List<ASPNETROLES>() { new ASPNETROLES(), new ASPNETROLES(), new ASPNETROLES() });
 
             var result = await _controller.Index();
 
             var viewResult = Assert.IsType<ViewResult>(result);
-            var Rol = Assert.IsType<List<ASPNETUSERROLE>>(viewResult.Model);
+            var Rol = Assert.IsType<List<ASPNETROLES>>(viewResult.Model);
             Assert.Equal(3, Rol.Count);
 
         }

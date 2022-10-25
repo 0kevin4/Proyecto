@@ -27,11 +27,11 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Identificador unico de usuario
         /// </summary>
-        [Column(TypeName = "numeric(28, 0)")]
-        public decimal ASPNETUSER_ASPNETUSER_ID { get; set; }
+        [StringLength(225)]
+        public string UserId { get; set; }
 
-        [ForeignKey("ASPNETUSER_ASPNETUSER_ID")]
+        [ForeignKey("UserId")]
         [InverseProperty("ASPNETUSERLOGINs")]
-        public virtual ASPNETUSER ASPNETUSER_ASPNETUSER { get; set; } = null!;
+        public virtual ASPNETUSERS ASPNETUSER_ASPNETUSER { get; set; } = null!;
     }
 }

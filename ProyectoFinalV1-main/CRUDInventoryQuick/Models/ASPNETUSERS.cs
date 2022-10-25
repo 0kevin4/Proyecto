@@ -6,95 +6,87 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRUDInventoryQuick.Models
 {
-    [Table("ASPNETUSER")]
-    public partial class ASPNETUSER
+    [Table("ASPNETUSERS")]
+    public partial class ASPNETUSERS
     {
-        public ASPNETUSER()
+        public ASPNETUSERS()
         {
-            ASPNETUSERCLAIMs = new HashSet<ASPNETUSERCLAIM>();
+            ASPNETUSERCLAIMs = new HashSet<ASPNETUSERCLAIMS>();
             ASPNETUSERLOGINs = new HashSet<ASPNETUSERLOGIN>();
-            ASPNETUSERROLE_AspNetRoles = new HashSet<ASPNETUSERROLE>();
+            ASPNETUSERROLEs = new HashSet<ASPNETUSERROLES>();
         }
 
         /// <summary>
         /// Identificador unico de usuario
         /// </summary>
         [Key]
-        [Column(TypeName = "numeric(28, 0)")]
-        public decimal ASPNETUSER_ID { get; set; }
+        [StringLength(225)]
+        public string Id { get; set; }
         /// <summary>
         /// Indica el nombre del usuario
         /// </summary>
-        public int NombreNetUserId { get; set; }
+        [StringLength(225)]
+        public string NormalizedUserName { get; set; }
         /// <summary>
         /// Indica nombre de la persona
         /// </summary>
-        [StringLength(64)]
-        public string Nombres { get; set; } = null!;
+        [StringLength(225)]
+        public string UserName { get; set; } = null!;
         /// <summary>
         /// Indica apellidos de la persona
         /// </summary>
-        [StringLength(64)]
-        public string Apellidos { get; set; } = null!;
+        [StringLength(100)]
+        public string PhoneNumber { get; set; } = null!;
         /// <summary>
         /// Indica fecha de nacimiento de usuario
         /// </summary>
-        [Column(TypeName = "date")]
-        public DateTime FechaNacimiento { get; set; }
-        /// <summary>
-        /// Indica dirección de usuario
-        /// </summary>
-        [StringLength(64)]
-        public string Direccion { get; set; } = null!;
+        [StringLength(100)]
+        public string Email { get; set; } = null!;
         /// <summary>
         /// Indica telefono de usuario
         /// </summary>
-        [StringLength(64)]
-        public string Telefono { get; set; } = null!;
+        public bool EmailConfirmed { get; set; } 
         /// <summary>
         /// Indica el correo del usuario
         /// </summary>
-        [StringLength(64)]
-        public string Correo { get; set; } = null!;
+        [StringLength(225)]
+        public string NormalizedEmail { get; set; } = null!;
         /// <summary>
         /// Indica si el correo ha sido confirmado
         /// </summary>
-        public bool CorreoConfirmado { get; set; }
+        [StringLength(100)]
+        public string PasswordHash { get; set; }
         /// <summary>
         /// Indica la contraseña de usuario
         /// </summary>
-        [StringLength(64)]
-        public string Contrasena { get; set; } = null!;
+        [StringLength(225)]
+        public string ConcurrencyStamp { get; set; } = null!;
         /// <summary>
         /// Indica el sello de seguridad del usuario
         /// </summary>
-        [StringLength(64)]
-        public string SelloDeSeguridad { get; set; } = null!;
+        [StringLength(225)]
+        public string SecurityStamp { get; set; } = null!;
         /// <summary>
         /// Indica el reclamo de telefono usuario
         /// </summary>
-        [StringLength(64)]
-        public string ReclamarTelefono { get; set; } = null!;
+        public int AccessFailedCount { get; set; }
         /// <summary>
         /// Indica factores disponibles
         /// </summary>
-        [StringLength(64)]
-        public string DosFactoresDisponibles { get; set; } = null!;
+        public bool LockoutEnabled { get; set; }
         /// <summary>
         /// Indica fecha cierre usuario
         /// </summary>
-        [Column(TypeName = "date")]
-        public DateTime FechaCierre { get; set; }
+        [StringLength(225)]
+        public string LockoutEnd { get; set; }
         /// <summary>
         /// Indica fecha abierta usuario
         /// </summary>
-        [Column(TypeName = "date")]
-        public DateTime FechaAbierta { get; set; }
+        public bool PhoneNumberConfirmed { get; set; } 
         /// <summary>
         /// Indica si el aceeso ha sido denegado
         /// </summary>
-        [StringLength(64)]
-        public string AccesoDenegado { get; set; } = null!;
+        public bool TwoFactorEnabled { get; set; } 
 
         [InverseProperty("ASPNETUSER_ASPNETUSER")]
         public virtual ADMINISTRADOR ADMINISTRADOR { get; set; } = null!;
@@ -105,12 +97,10 @@ namespace CRUDInventoryQuick.Models
         [InverseProperty("ASPNETUSER_ASPNETUSER")]
         public virtual EMPLEADO EMPLEADO { get; set; } = null!;
         [InverseProperty("ASPNETUSER_ASPNETUSER")]
-        public virtual ICollection<ASPNETUSERCLAIM> ASPNETUSERCLAIMs { get; set; }
+        public virtual ICollection<ASPNETUSERCLAIMS> ASPNETUSERCLAIMs { get; set; }
         [InverseProperty("ASPNETUSER_ASPNETUSER")]
         public virtual ICollection<ASPNETUSERLOGIN> ASPNETUSERLOGINs { get; set; }
-
-        [ForeignKey("ASPNETUSER_ASPNETUSER_ID")]
-        [InverseProperty("ASPNETUSER_ASPNETUSERs")]
-        public virtual ICollection<ASPNETUSERROLE> ASPNETUSERROLE_AspNetRoles { get; set; }
+        [InverseProperty("ASPNETUSER_ASPNETUSER")]
+        public virtual ICollection<ASPNETUSERROLES> ASPNETUSERROLEs { get; set; }
     }
 }
