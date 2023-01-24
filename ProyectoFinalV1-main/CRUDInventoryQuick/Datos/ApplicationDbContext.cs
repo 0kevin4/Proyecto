@@ -72,7 +72,6 @@ namespace CRUDInventoryQuick.Datos
 
             modelBuilder.Entity<ASPNETUSERS>(entity =>
             {
-
                 entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd()
                     .HasComment("Identificador unico de usuario");
@@ -151,11 +150,8 @@ namespace CRUDInventoryQuick.Datos
 
             modelBuilder.Entity<ASPNETUSERROLES>(entity =>
             {
-                entity.HasKey(e => e.UserId)
-                    .HasName("ASPNETUSERROLES_PK");
-
-                entity.HasKey(e => e.RoleId)
-                    .HasName("ASPNETUSERROLES_PK");
+                entity.HasKey(e => e.Id)
+                    .HasName("Identificador");
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
