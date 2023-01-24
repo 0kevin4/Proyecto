@@ -12,7 +12,6 @@ using CRUDInventoryQuick.Contracts;
 using NuGet.Protocol.Core.Types;
 
 
-//esto es un comentario de prueba.
 namespace CRUDInventoryQuick.Controllers
 {
     public class AspNetRoleController : Controller
