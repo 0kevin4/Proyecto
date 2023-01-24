@@ -36,7 +36,7 @@ namespace CRUDInventoryQuick.Models
         /// Indica apellidos de la persona
         /// </summary>
         [StringLength(100)]
-        public string PhoneNumber { get; set; } = null!;
+        public string? PhoneNumber { get; set; } = null!;
         /// <summary>
         /// Indica fecha de nacimiento de usuario
         /// </summary>
@@ -78,11 +78,11 @@ namespace CRUDInventoryQuick.Models
         /// Indica fecha cierre usuario
         /// </summary>
         [StringLength(225)]
-        public string LockoutEnd { get; set; }
+        public string? LockoutEnd { get; set; } = null!;
         /// <summary>
         /// Indica fecha abierta usuario
         /// </summary>
-        public bool PhoneNumberConfirmed { get; set; } 
+        public bool PhoneNumberConfirmed { get; set; }
         /// <summary>
         /// Indica si el aceeso ha sido denegado
         /// </summary>

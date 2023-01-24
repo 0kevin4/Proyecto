@@ -24,10 +24,11 @@ namespace CRUDInventoryQuick.Repositorio
 
         public async Task<PRODUCTO> GetById(int id)
         {
-           return _context.PRODUCTOs
+           return await _context.PRODUCTOs
                 .Include(p => p.Marca)
                 .Include(p => p.Subcategoria)
-                .FirstOrDefault(m => m.ProductoId == id);
+                .FirstOrDefaultAsync(m => m.ProductoId == id);
+
         }
 
         public  Task Add(PRODUCTO pRODUCTO)

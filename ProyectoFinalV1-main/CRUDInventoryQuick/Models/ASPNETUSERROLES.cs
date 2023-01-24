@@ -18,16 +18,16 @@ namespace CRUDInventoryQuick.Models
         /// </summary>
         [Key]
         public int RoleId { get; set; }
-        [Key]
         [StringLength(225)]
+        [Key]
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]
         [InverseProperty("ASPNETUSERROLEs")]
-        public virtual ASPNETUSERS ASPNETUSER_ASPNETUSER { get; set; } = null!;
+        public virtual ASPNETUSERS? ASPNETUSER_ASPNETUSER { get; set; } = null!;
 
         [ForeignKey("RoleId")]
         [InverseProperty("ASPNETUSERROLEs")]
-        public virtual ASPNETROLES ASPNETROLES_ASPNETROLES { get; set; } = null!;
+        public virtual ASPNETROLES? ASPNETROLES_ASPNETROLES { get; set; } = null!;
     }
 }
