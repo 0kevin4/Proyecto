@@ -35,8 +35,8 @@ namespace CRUDInventoryQuick.Models
 
         [ForeignKey("CATEGORIA_CategoriaId")]
         [InverseProperty("SUBCATEGORIa")]
-        public virtual CATEGORIum? CATEGORIA_Categoria { get; set; } = null!;
-        [InverseProperty("SUBCATEGORIA_Subcategoria")]
+        public virtual CATEGORIum? Categoria { get; set; } = null!;
+        [InverseProperty("Subcategoria")]
         public virtual ICollection<PRODUCTO> PRODUCTOs { get; set; }
     }
 }

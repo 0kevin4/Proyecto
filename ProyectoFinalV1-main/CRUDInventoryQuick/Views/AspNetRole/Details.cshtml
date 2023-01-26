@@ -1,25 +1,23 @@
-﻿@model CRUDInventoryQuick.Models.ASPNETUSERROLE
+﻿@model CRUDInventoryQuick.Models.ASPNETROLES
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Detalles</h1>
+<h1>Detalles</h1><br />
 
 <div>
-   
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
+        <dt class = "col-sm-1">
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
+        <dd class = "col-sm-5">
+            @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.AspNetRoleId"  class="btn btn-sm btn-primary">Editar</a> |
-    <a asp-action="Index">Volver a la lista</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id"  class="btn btn-sm btn-success">Editar</a> 
+    <a asp-action="Index"   class="btn btn-sm btn-primary">Volver a la lista</a>
 </div>

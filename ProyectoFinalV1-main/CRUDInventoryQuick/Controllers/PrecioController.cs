@@ -8,16 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using CRUDInventoryQuick.Contracts;
+using SendGrid.Helpers.Mail;
 
 namespace CRUDInventoryQuick.Controllers
 {
     public class PrecioController : Controller
     {
         private readonly IRepository<PRECIO>_repository;
+        private readonly IRepository<PRODUCTO> _productosRepository;
+        private List<SelectListItem> _productos;
 
-        public PrecioController(IRepository<PRECIO> repository)
+        public PrecioController(IRepository<PRECIO> repository, IRepository<PRODUCTO> productosRepository)
         {
             _repository = repository;
+            _productosRepository = productosRepository;
         }
 
         // GET: Precio
@@ -25,7 +29,7 @@ namespace CRUDInventoryQuick.Controllers
         {
             return _repository.GetAll() != null ?
                         View(await _repository.GetAll()) :
-                        Problem("Entity set 'ApplicationDbContext.CATEGORIAs'  is null.");
+                        Problem("Entity set 'ApplicationDbContext.PRECIOs'  is null.");
         }
 
 
@@ -49,8 +53,20 @@ namespace CRUDInventoryQuick.Controllers
         }
 
         // GET: Precio/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+           var products = await _productosRepository.GetAll();
+            _productos = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _productos.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.ProductoId.ToString()
+                });
+            }
+            ViewBag.productos = _productos;
+
             return View();
         }
 
@@ -59,7 +75,7 @@ namespace CRUDInventoryQuick.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal")]PRECIO pRECIO)
+        public async Task<IActionResult> Create([Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal,PRODUCTO_ProductoId")]PRECIO pRECIO)
         {
             if (ModelState.IsValid)
             {
@@ -67,6 +83,18 @@ namespace CRUDInventoryQuick.Controllers
                 await _repository.Save();
                 return RedirectToAction(nameof(Index));
             }
+            var products = await _productosRepository.GetAll();
+            _productos = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _productos.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.ProductoId.ToString()
+                });
+            }
+            ViewBag.productos = _productos;
+
             return View(pRECIO);
         }
 
@@ -83,6 +111,17 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
+            var products = await _productosRepository.GetAll();
+            _productos = new List<SelectListItem>();
+            foreach (var product in products)
+            {
+                _productos.Add(new SelectListItem
+                {
+                    Text = product.Nombre,
+                    Value = product.ProductoId.ToString()
+                });
+            }
+            ViewBag.productos = _productos;
             return View(pRECIO);
         }
 
@@ -91,7 +130,7 @@ namespace CRUDInventoryQuick.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal")] PRECIO pRECIO)
+        public async Task<IActionResult> Edit(int id, [Bind("PrecioId,FechaIngreso,PrecioCompra,Descuento,PrecioVentaInicial,PrecioVentaFinal,PRODUCTO_ProductoId")] PRECIO pRECIO)
         {
             if (id != pRECIO.PrecioId)
             {
@@ -107,7 +146,17 @@ namespace CRUDInventoryQuick.Controllers
                     ViewBag.ErrorMessage = "Error al guardar los datos";
                     return View(pRECIO);
                 }
-
+                var products = await _productosRepository.GetAll();
+                _productos = new List<SelectListItem>();
+                foreach (var product in products)
+                {
+                    _productos.Add(new SelectListItem
+                    {
+                        Text = product.Nombre,
+                        Value = product.ProductoId.ToString()
+                    });
+                }
+                ViewBag.productos = _productos;
                 return RedirectToAction(nameof(Index));
             }
             return View(pRECIO);

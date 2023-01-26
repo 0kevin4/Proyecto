@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using CRUDInventoryQuick.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CRUDInventoryQuick.Datos
 {
-    public partial class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext()
         {
@@ -18,10 +19,11 @@ namespace CRUDInventoryQuick.Datos
         }
 
         public virtual DbSet<ADMINISTRADOR> ADMINISTRADORs { get; set; } = null!;
-        public virtual DbSet<ASPNETUSER> ASPNETUSERs { get; set; } = null!;
-        public virtual DbSet<ASPNETUSERCLAIM> ASPNETUSERCLAIMs { get; set; } = null!;
+        public virtual DbSet<ASPNETUSERS> ASPNETUSERs { get; set; } = null!;
+        public virtual DbSet<ASPNETUSERCLAIMS> ASPNETUSERCLAIMs { get; set; } = null!;
         public virtual DbSet<ASPNETUSERLOGIN> ASPNETUSERLOGINs { get; set; } = null!;
-        public virtual DbSet<ASPNETUSERROLE> ASPNETUSERROLEs { get; set; } = null!;
+        public virtual DbSet<ASPNETROLES> ASPNETROLEs { get; set; } = null!;
+        public virtual DbSet<ASPNETUSERROLES> ASPNETUSERROLEs { get; set; } = null!;
         public virtual DbSet<CAJERO> CAJEROs { get; set; } = null!;
         public virtual DbSet<CATEGORIum> CATEGORIAs { get; set; } = null!;
         public virtual DbSet<CIUDAD> CIUDADs { get; set; } = null!;
@@ -68,74 +70,53 @@ namespace CRUDInventoryQuick.Datos
                     .HasConstraintName("ADMINISTRADOR_ASPNETUSER_FK");
             });
 
-            modelBuilder.Entity<ASPNETUSER>(entity =>
+            modelBuilder.Entity<ASPNETUSERS>(entity =>
             {
-                entity.HasKey(e => e.ASPNETUSER_ID)
-                    .HasName("ASPNETUSER_PK");
-
-                entity.Property(e => e.ASPNETUSER_ID)
+                entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd()
                     .HasComment("Identificador unico de usuario");
 
-                entity.Property(e => e.AccesoDenegado).HasComment("Indica si el aceeso ha sido denegado");
+                entity.Property(e => e.NormalizedUserName).HasComment("Indica si el aceeso ha sido denegado");
 
-                entity.Property(e => e.Apellidos).HasComment("Indica apellidos de la persona");
+                entity.Property(e => e.UserName).HasComment("Indica apellidos de la persona");
 
-                entity.Property(e => e.Contrasena).HasComment("Indica la contraseña de usuario");
+                entity.Property(e => e.PhoneNumber).HasComment("Indica la contraseña de usuario");
 
-                entity.Property(e => e.Correo).HasComment("Indica el correo del usuario");
+                entity.Property(e => e.Email).HasComment("Indica el correo del usuario");
 
-                entity.Property(e => e.CorreoConfirmado).HasComment("Indica si el correo ha sido confirmado");
+                entity.Property(e => e.EmailConfirmed).HasComment("Indica si el correo ha sido confirmado");
 
-                entity.Property(e => e.Direccion).HasComment("Indica dirección de usuario");
+                entity.Property(e => e.NormalizedEmail).HasComment("Indica dirección de usuario");
 
-                entity.Property(e => e.DosFactoresDisponibles)
+                entity.Property(e => e.PasswordHash)
                     .IsFixedLength()
                     .HasComment("Indica factores disponibles");
 
-                entity.Property(e => e.FechaAbierta).HasComment("Indica fecha abierta usuario");
+                entity.Property(e => e.ConcurrencyStamp).HasComment("Indica fecha abierta usuario");
 
-                entity.Property(e => e.FechaCierre).HasComment("Indica fecha cierre usuario");
+                entity.Property(e => e.SecurityStamp).HasComment("Indica fecha cierre usuario");
 
-                entity.Property(e => e.FechaNacimiento).HasComment("Indica fecha de nacimiento de usuario");
+                entity.Property(e => e.AccessFailedCount).HasComment("Indica fecha de nacimiento de usuario");
 
-                entity.Property(e => e.NombreNetUserId).HasComment("Indica el nombre del usuario");
+                entity.Property(e => e.LockoutEnabled).HasComment("Indica el nombre del usuario");
 
-                entity.Property(e => e.Nombres).HasComment("Indica nombre de la persona");
+                entity.Property(e => e.LockoutEnd).HasComment("Indica nombre de la persona");
 
-                entity.Property(e => e.ReclamarTelefono).HasComment("Indica el reclamo de telefono usuario");
+                entity.Property(e => e.PhoneNumberConfirmed).HasComment("Indica el reclamo de telefono usuario");
 
-                entity.Property(e => e.SelloDeSeguridad).HasComment("Indica el sello de seguridad del usuario");
+                entity.Property(e => e.TwoFactorEnabled).HasComment("Indica el sello de seguridad del usuario");
 
-                entity.Property(e => e.Telefono).HasComment("Indica telefono de usuario");
-
-                entity.HasMany(d => d.ASPNETUSERROLE_AspNetRoles)
-                    .WithMany(p => p.ASPNETUSER_ASPNETUSERs)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "ASPNETUSER_ASPNETUSERROLE",
-                        l => l.HasOne<ASPNETUSERROLE>().WithMany().HasForeignKey("ASPNETUSERROLE_AspNetRoleId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("ASPNETUSER_ASPNETUSERROLE_ASPNETUSERROLE_FK"),
-                        r => r.HasOne<ASPNETUSER>().WithMany().HasForeignKey("ASPNETUSER_ASPNETUSER_ID").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("ASPNETUSER_ASPNETUSERROLE_ASPNETUSER_FK"),
-                        j =>
-                        {
-                            j.HasKey("ASPNETUSER_ASPNETUSER_ID", "ASPNETUSERROLE_AspNetRoleId").HasName("ASPNETUSER_ASPNETUSERROLE_PK");
-
-                            j.ToTable("ASPNETUSER_ASPNETUSERROLE");
-
-                            j.IndexerProperty<decimal>("ASPNETUSER_ASPNETUSER_ID").HasColumnType("numeric(28, 0)").HasComment("Identificador unico de usuario");
-
-                            j.IndexerProperty<int>("ASPNETUSERROLE_AspNetRoleId").HasComment("Identificador unico de rol");
-                        });
             });
 
-            modelBuilder.Entity<ASPNETUSERCLAIM>(entity =>
+            modelBuilder.Entity<ASPNETUSERCLAIMS>(entity =>
             {
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasComment("Identificador unico de llave");
 
-                entity.Property(e => e.ASPNETUSER_ASPNETUSER_ID).HasComment("Identificador unico de usuario");
+                entity.Property(e => e.UserId).HasComment("Identificador unico de usuario");
 
-                entity.Property(e => e.AspNetUserId).HasComment("Identificador unico del usuario");
+                entity.Property(e => e.AspnetuserId).HasComment("Identificador unico del usuario");
 
                 entity.Property(e => e.ClaimType).HasComment("Indica el tipo de llave");
 
@@ -143,7 +124,7 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.HasOne(d => d.ASPNETUSER_ASPNETUSER)
                     .WithMany(p => p.ASPNETUSERCLAIMs)
-                    .HasForeignKey(d => d.ASPNETUSER_ASPNETUSER_ID)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("ASPNETUSERCLAIM_ASPNETUSER_FK");
             });
@@ -154,7 +135,7 @@ namespace CRUDInventoryQuick.Datos
                     .ValueGeneratedNever()
                     .HasComment("Identificador unico de ingresar");
 
-                entity.Property(e => e.ASPNETUSER_ASPNETUSER_ID).HasComment("Identificador unico de usuario");
+                entity.Property(e => e.UserId).HasComment("Identificador unico de usuario");
 
                 entity.Property(e => e.LoginProvider).HasComment("Indica ingreso");
 
@@ -162,21 +143,48 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.HasOne(d => d.ASPNETUSER_ASPNETUSER)
                     .WithMany(p => p.ASPNETUSERLOGINs)
-                    .HasForeignKey(d => d.ASPNETUSER_ASPNETUSER_ID)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("ASPNETUSERLOGIN_ASPNETUSER_FK");
             });
 
-            modelBuilder.Entity<ASPNETUSERROLE>(entity =>
+            modelBuilder.Entity<ASPNETUSERROLES>(entity =>
             {
-                entity.HasKey(e => e.AspNetRoleId)
+                entity.HasKey(e => e.Id)
+                    .HasName("Identificador");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasComment("Identificador unico de ingresar");
+
+                entity.Property(e => e.UserId).HasComment("Identificador unico de usuario");
+
+                entity.Property(e => e.RoleId).HasComment("Indentificar unico de Rol");
+
+                entity.HasOne(d => d.ASPNETUSER_ASPNETUSER)
+                    .WithMany(p => p.ASPNETUSERROLEs)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ASPNETUSERROLES_ASPNETUSERS_FK");
+
+                entity.HasOne(d => d.ASPNETROLES_ASPNETROLES)
+                   .WithMany(p => p.ASPNETUSERROLEs)
+                   .HasForeignKey(d => d.RoleId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("ASPNETUSERROLES_ASPNETROLES_FK");
+
+            });
+
+            modelBuilder.Entity<ASPNETROLES>(entity =>
+            {
+                entity.HasKey(e => e.Id)
                     .HasName("ASPNETUSERROLE_PK");
 
-                entity.Property(e => e.AspNetRoleId)
+                entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasComment("Identificador unico de Rol");
 
-                entity.Property(e => e.Nombre).HasComment("Indica el nombre del rol correspondiente");
+                entity.Property(e => e.Name).HasComment("Indica el nombre del rol correspondiente");
             });
 
             modelBuilder.Entity<CAJERO>(entity =>
@@ -361,7 +369,7 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.Property(e => e.PrecioVentaInicial).HasComment("Indica el precio venta incial ");
 
-                entity.HasOne(d => d.PRODUCTO_Producto)
+                entity.HasOne(d => d.Producto)
                     .WithMany(p => p.PRECIOs)
                     .HasForeignKey(d => d.PRODUCTO_ProductoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -384,13 +392,13 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.Property(e => e.SUBCATEGORIA_SubcategoriaId).HasComment("Identificador unico de la subcategoria");
 
-                entity.HasOne(d => d.MARCA_Marca)
+                entity.HasOne(d => d.Marca)
                     .WithMany(p => p.PRODUCTOs)
                     .HasForeignKey(d => d.MARCA_MarcaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("PRODUCTO_MARCA_FK");
 
-                entity.HasOne(d => d.SUBCATEGORIA_Subcategoria)
+                entity.HasOne(d => d.Subcategoria)
                     .WithMany(p => p.PRODUCTOs)
                     .HasForeignKey(d => d.SUBCATEGORIA_SubcategoriaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -443,7 +451,7 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.Property(e => e.Nombre).HasComment("Indica el nombre de la categoria");
 
-                entity.HasOne(d => d.CATEGORIA_Categoria)
+                entity.HasOne(d => d.Categoria)
                     .WithMany(p => p.SUBCATEGORIa)
                     .HasForeignKey(d => d.CATEGORIA_CategoriaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -578,6 +586,7 @@ namespace CRUDInventoryQuick.Datos
             });
 
             OnModelCreatingPartial(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

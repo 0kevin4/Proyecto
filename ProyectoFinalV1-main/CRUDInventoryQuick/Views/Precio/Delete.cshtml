@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Eliminar</h1>
 
-<h3>¿Estas seguro que deseas eliminar este precio?</h3>
+<h3>¿Estas seguro que deseas eliminar este precio?</h3><br />
 <div>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaIngreso)
@@ -42,16 +40,16 @@
             @Html.DisplayFor(model => model.PrecioVentaFinal)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PRODUCTO_Producto)
+            @Html.DisplayNameFor(model => model.Producto)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PRODUCTO_Producto.ProductoId)
+            @Html.DisplayFor(model => model.Producto.Nombre)
         </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="PrecioId" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver a la lista</a>
+        <input type="submit" value="Eliminar" class="btn btn-sm btn-danger" /> 
+        <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
     </form>
 </div>

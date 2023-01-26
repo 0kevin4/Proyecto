@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using CRUDInventoryQuick.Services;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using CRUDInventoryQuick.Repositorio;
@@ -9,9 +8,9 @@ using CRUDInventoryQuick.Contracts;
 
 var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
-var connectionString = "server=inventory-quick-db.mysql.database.azure.com; port=3306; database=inventory; user=Inventory_Quick; password=Elmejorproyectodelmundo@; Persist Security Info=False; Connect Timeout=300";
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 30));
 
 builder.Services.AddDbContext<ApplicationDbContext>(
             dbContextOptions => dbContextOptions
@@ -26,27 +25,28 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 builder.Services.AddScoped<IRepository<CATEGORIum>, CategoriaRepository>();
 builder.Services.AddScoped<IRepository<MARCA>, MarcaRepository>();
 builder.Services.AddScoped<IRepository<PRODUCTO>, ProductoRepository>();
-builder.Services.AddScoped<IRepository<ASPNETUSERROLE>, RolRepository>();
+builder.Services.AddScoped<IRepository<ASPNETROLES>, RolRepository>();
 builder.Services.AddScoped<IRepository<PRECIO>, PrecioRepository>();
+builder.Services.AddScoped<IRepository<SUBCATEGORIum>, SubcategoriaRepository>();
 
 
 
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-//Email Sender
-builder.Services.AddTransient<IEmailSender, EmailSender>();
-builder.Services.Configure<EmailOptions>(builder.Configuration);
+////Email Sender
+//builder.Services.AddTransient<IEmailSender, EmailSender>();
+//builder.Services.Configure<EmailOptions>(builder.Configuration);
 
-//Sms Sender
-builder.Services.AddTransient<ISmsSender, SmsSender>();
-builder.Services.Configure<SmsOptions>(builder.Configuration);
+////Sms Sender
+//builder.Services.AddTransient<ISmsSender, SmsSender>();
+//builder.Services.Configure<SmsOptions>(builder.Configuration);
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

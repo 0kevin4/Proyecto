@@ -18,8 +18,8 @@ namespace CRUDInventoryQuick.Models
         /// Identificador unico de usuario empleado
         /// </summary>
         [Key]
-        [Column(TypeName = "numeric(28, 0)")]
-        public decimal ASPNETUSER_ASPNETUSER_ID { get; set; }
+        [StringLength(225)]
+        public string ASPNETUSER_ASPNETUSER_ID { get; set; }
         /// <summary>
         /// Identificador unico de turno
         /// </summary>
@@ -27,7 +27,7 @@ namespace CRUDInventoryQuick.Models
 
         [ForeignKey("ASPNETUSER_ASPNETUSER_ID")]
         [InverseProperty("EMPLEADO")]
-        public virtual ASPNETUSER ASPNETUSER_ASPNETUSER { get; set; } = null!;
+        public virtual ASPNETUSERS ASPNETUSER_ASPNETUSER { get; set; } = null!;
         [ForeignKey("TURNO_TurnoId")]
         [InverseProperty("EMPLEADOs")]
         public virtual TURNO TURNO_Turno { get; set; } = null!;

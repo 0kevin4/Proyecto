@@ -44,8 +44,8 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Identificador unico de usuario
         /// </summary>
-        [Column(TypeName = "numeric(28, 0)")]
-        public decimal EMPLEADOS_ASPNETUSER_ASPNETUSER_ID { get; set; }
+        [StringLength(225)]
+        public string EMPLEADOS_ASPNETUSER_ASPNETUSER_ID { get; set; }
 
         [ForeignKey("EMPLEADOS_ASPNETUSER_ASPNETUSER_ID")]
         [InverseProperty("SUELDOs")]

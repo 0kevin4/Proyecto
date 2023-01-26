@@ -49,15 +49,15 @@ namespace CRUDInventoryQuick.Models
 
         [ForeignKey("MARCA_MarcaId")]
         [InverseProperty("PRODUCTOs")]
-        public virtual MARCA? MARCA_Marca { get; set; } = null;
+        public virtual MARCA? Marca{ get; set; } = null;
         [ForeignKey("SUBCATEGORIA_SubcategoriaId")]
         [InverseProperty("PRODUCTOs")]
-        public virtual SUBCATEGORIum? SUBCATEGORIA_Subcategoria { get; set; } = null;
+        public virtual SUBCATEGORIum? Subcategoria { get; set; } = null;
         [InverseProperty("PRODUCTO_Producto")]
         public virtual ICollection<DETALLEPEDIDO> DETALLEPEDIDOs { get; set; }
         [InverseProperty("PRODUCTO_Producto")]
         public virtual ICollection<IMAGENPRODUCTO> IMAGENPRODUCTOs { get; set; }
-        [InverseProperty("PRODUCTO_Producto")]
+        [InverseProperty("Producto")]
         public virtual ICollection<PRECIO> PRECIOs { get; set; }
         [InverseProperty("PRODUCTO_Producto")]
         public virtual ICollection<STOCK> STOCKs { get; set; }

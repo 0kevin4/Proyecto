@@ -29,7 +29,7 @@ namespace CRUDInventoryQuick.Models
         /// </summary>
         public bool Estado { get; set; }
 
-        [InverseProperty("MARCA_Marca")]
+        [InverseProperty("Marca")]
         public virtual ICollection<PRODUCTO> PRODUCTOs { get; set; }
     }
 }

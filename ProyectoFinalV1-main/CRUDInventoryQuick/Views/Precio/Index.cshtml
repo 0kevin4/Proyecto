@@ -8,35 +8,42 @@
 
 
 <p>
-    <a asp-action="Create"  class="btn btn-info"><i class="bi bi-bookmark-plus"></i>Agregar nuevo precio</a>
+    <a asp-action="Create"  class="btn btn-sm btn-info"><i class="bi bi-bookmark-plus"></i>Agregar Precio</a>
 </p>
-<table class="table">
-    <thead>
+<table id="Tablas" class="table table-hover table-bordered" style="width:100%">
+    <thead class="table-primary">
+
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaIngreso)
+            <th width="30">
+                Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PrecioCompra)
+                Fecha Ingreso
+            </th>
+            <th width="110">
+                Precio Compra
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Descuento)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioVentaInicial)
+            <th width="110">
+                Precio Inicial
+            </th>
+            <th width="110">
+               Precio Final
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PrecioVentaFinal)
+                @Html.DisplayNameFor(model => model.Producto)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PRODUCTO_Producto)
-            </th>
-            <th></th>
+            <th width="100"></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaIngreso)
             </td>
@@ -53,12 +60,12 @@
                 @Html.DisplayFor(modelItem => item.PrecioVentaFinal)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PRODUCTO_Producto.ProductoId)
+                @Html.DisplayFor(modelItem => item.Producto.Nombre)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PrecioId" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i>Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.PrecioId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i>Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.PrecioId"  class="btn btn-sm btn-danger"><i class="bi bi-trash"></i>Eliminar</a>
+            <td align="right" width="110">
+                <a asp-action="Edit" asp-route-id="@item.PrecioId" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> 
+                <a asp-action="Details" asp-route-id="@item.PrecioId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> 
+                <a asp-action="Delete" asp-route-id="@item.PrecioId"  class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
 }
