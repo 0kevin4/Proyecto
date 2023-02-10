@@ -4,6 +4,7 @@
     ViewData["Title"] = "Eliminar";
 }
 
+<<<<<<< HEAD
 <h1>Eliminar</h1>
 
 <h4>
@@ -12,26 +13,37 @@
 <div>
     
     <hr />
+=======
+
+
+<h3>¿Estas seguro de querer eliminarlo?</h3><br />
+<div>
+>>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ASPNETUSER_ASPNETUSER)
+        <dt class = "col-sm-1">
+            Usuario
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ASPNETUSER_ASPNETUSER.Id)
+        <dd class = "col-sm-11">
+            @Html.DisplayFor(model => model.ASPNETUSER_ASPNETUSER.UserName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ASPNETROLES_ASPNETROLES)
+        <dt class = "col-sm-1">
+            Rol
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ASPNETROLES_ASPNETROLES.Id)
+        <dd class = "col-sm-11">
+            @Html.DisplayFor(model => model.ASPNETROLES_ASPNETROLES.Name)
         </dd>
     </dl>
     
     <form asp-action="Eliminar">
         <input type="hidden" asp-for="Id" />
+<<<<<<< HEAD
         <input type="submit" value="Eliminar" class="btn btn-sm btn-danger" /> |
         <a asp-action="Index"
             class="btn btn-sm btn-primary">Volver a la lista
         </a>
+=======
+        <input type="submit" value="Eliminar" class="btn btn-sm btn-danger" />
+        <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
+>>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
     </form>
 </div>

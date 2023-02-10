@@ -4,10 +4,13 @@
     ViewData["Title"] = "Crear nuevo";
 }
 
+<<<<<<< HEAD
 <h1>Crear</h1>
+=======
+<h1>Agregar Nuevo</h1>
+>>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
 
-<h4>ASPNETUSERROLES</h4>
-<hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Crear">
@@ -16,24 +19,21 @@
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="RoleId" class="control-label"></label>
-                <select asp-for="RoleId" class ="form-control" asp-items="ViewBag.RoleId"></select>
-            </div>
+                <label asp-for="RolId" class="control-label"></label>
+                <select asp-for="RolId" class ="form-control" asp-items="ViewBag.RolId"></select>
+            </div><br />
             <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
-            </div>
+                <label asp-for="UsuarioId" class="control-label"></label>
+                <select asp-for="UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
+            </div><br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Agregar" class="btn btn-sm btn-success" />
+                <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

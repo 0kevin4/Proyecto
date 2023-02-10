@@ -1,6 +1,7 @@
 ﻿@model CRUDInventoryQuick.Models.ASPNETUSERROLES
 
 @{
+<<<<<<< HEAD
     ViewData["Title"] = "Detalles";
 }
 
@@ -9,22 +10,35 @@
 <div>
     
     
+=======
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detalles</h1><br />
+
+<div>
+>>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ASPNETUSER_ASPNETUSER)
+        <dt class="col-sm-1">
+            Usuario
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ASPNETUSER_ASPNETUSER.Id)
+        <dd class = "col-sm-11">
+            @Html.DisplayFor(model => model.ASPNETUSER_ASPNETUSER.UserName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ASPNETROLES_ASPNETROLES)
+        <dt class = "col-sm-1">
+            Rol
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ASPNETROLES_ASPNETROLES.Id)
+        <dd class = "col-sm-11">
+            @Html.DisplayFor(model => model.ASPNETROLES_ASPNETROLES.Name)
         </dd>
     </dl>
 </div>
 <div>
+<<<<<<< HEAD
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm btn-success">Editar</a> |
+=======
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm btn-success">Editar</a>
+>>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
     <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
 </div>
