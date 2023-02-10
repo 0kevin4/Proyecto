@@ -157,19 +157,19 @@ namespace CRUDInventoryQuick.Datos
                     .ValueGeneratedNever()
                     .HasComment("Identificador unico de ingresar");
 
-                entity.Property(e => e.UsuarioId).HasComment("Identificador unico de usuario");
+                entity.Property(e => e.UserId).HasComment("Identificador unico de usuario");
 
-                entity.Property(e => e.RolId).HasComment("Indentificar unico de Rol");
+                entity.Property(e => e.RoleId).HasComment("Indentificar unico de Rol");
 
                 entity.HasOne(d => d.ASPNETUSER_ASPNETUSER)
                     .WithMany(p => p.ASPNETUSERROLEs)
-                    .HasForeignKey(d => d.UsuarioId)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("ASPNETUSERROLES_ASPNETUSERS_FK");
 
                 entity.HasOne(d => d.ASPNETROLES_ASPNETROLES)
                    .WithMany(p => p.ASPNETUSERROLEs)
-                   .HasForeignKey(d => d.RolId)
+                   .HasForeignKey(d => d.RoleId)
                    .OnDelete(DeleteBehavior.ClientSetNull)
                    .HasConstraintName("ASPNETUSERROLES_ASPNETROLES_FK");
 

@@ -8,11 +8,9 @@
 <h1 style="color :black">Administrar Roles</h1><br />
 
 <p>
-<<<<<<< HEAD
+
     <a asp-action="Create" class="btn btn-sm btn-info"><i class="bi bi-bookmark-plus"></i>Crear nuevo</a>
-=======
-    <a asp-action="Create" class="btn btn-sm btn-info"><i class="bi bi-bookmark-plus"></i>Agregar Nuevo</a>
->>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
+
 </p>
 <table id="Tablas" class="table table-hover table-bordered" style="width:100%">
     <thead class="table-primary">
@@ -42,17 +40,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ASPNETROLES_ASPNETROLES.Name)
             </td>
-<<<<<<< HEAD
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a>
-                <a asp-action="Details" asp-route-id="@item.Id"class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
-=======
+
+      
+
             <td align="right" width="110">
                 <a asp-action="Edit" asp-route-id="@item.Id"  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> 
                 <a asp-action="Details" asp-route-id="@item.Id"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> 
                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
->>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
+
             </td>
         </tr>
 }

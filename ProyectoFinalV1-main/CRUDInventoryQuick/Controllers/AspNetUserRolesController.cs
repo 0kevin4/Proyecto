@@ -49,8 +49,8 @@ namespace CRUDInventoryQuick.Controllers
         // GET: AspNetUserRoles/Create
         public IActionResult Create()
         {
-            ViewData["RolId"] = new SelectList(_context.ASPNETROLEs, "Id", "Name");
-            ViewData["UsuarioId"] = new SelectList(_context.ASPNETUSERs, "Id", "UserName");
+            ViewData["RoleId"] = new SelectList(_context.ASPNETROLEs, "Id", "Name");
+            ViewData["UserId"] = new SelectList(_context.ASPNETUSERs, "Id", "UserName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace CRUDInventoryQuick.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RolId,UsuarioId")] ASPNETUSERROLES aSPNETUSERROLES)
+        public async Task<IActionResult> Create([Bind("Id,RoleId,UserId")] ASPNETUSERROLES aSPNETUSERROLES)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,8 @@ namespace CRUDInventoryQuick.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RolId"] = new SelectList(_context.ASPNETROLEs, "Id", "Id", aSPNETUSERROLES.RolId);
-            ViewData["UsuarioId"] = new SelectList(_context.ASPNETUSERs, "Id", "Id", aSPNETUSERROLES.UsuarioId);
+            ViewData["RoleId"] = new SelectList(_context.ASPNETROLEs, "Id", "Id", aSPNETUSERROLES.RoleId);
+            ViewData["UserId"] = new SelectList(_context.ASPNETUSERs, "Id", "Id", aSPNETUSERROLES.UserId);
             return View(aSPNETUSERROLES);
         }
 
@@ -85,8 +85,8 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
-            ViewData["RolId"] = new SelectList(_context.ASPNETROLEs, "Id", "Name", aSPNETUSERROLES.RolId);
-            ViewData["UsuarioId"] = new SelectList(_context.ASPNETUSERs, "Id", "UserName", aSPNETUSERROLES.UsuarioId);
+            ViewData["RoleId"] = new SelectList(_context.ASPNETROLEs, "Id", "Name", aSPNETUSERROLES.RoleId);
+            ViewData["UserId"] = new SelectList(_context.ASPNETUSERs, "Id", "UserName", aSPNETUSERROLES.UserId);
             return View(aSPNETUSERROLES);
         }
 
@@ -95,7 +95,7 @@ namespace CRUDInventoryQuick.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RolId,UsuarioId")] ASPNETUSERROLES aSPNETUSERROLES)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,RoleId,UserId")] ASPNETUSERROLES aSPNETUSERROLES)
         {
             if (id != aSPNETUSERROLES.Id)
             {
@@ -122,8 +122,8 @@ namespace CRUDInventoryQuick.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RolId"] = new SelectList(_context.ASPNETROLEs, "Id", "Id", aSPNETUSERROLES.RolId);
-            ViewData["UsuarioId"] = new SelectList(_context.ASPNETUSERs, "Id", "Id", aSPNETUSERROLES.UsuarioId);
+            ViewData["RoleId"] = new SelectList(_context.ASPNETROLEs, "Id", "Id", aSPNETUSERROLES.RoleId);
+            ViewData["UserId"] = new SelectList(_context.ASPNETUSERs, "Id", "Id", aSPNETUSERROLES.UserId);
             return View(aSPNETUSERROLES);
         }
 

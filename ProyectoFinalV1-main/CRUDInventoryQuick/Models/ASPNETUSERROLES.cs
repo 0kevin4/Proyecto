@@ -17,16 +17,16 @@ namespace CRUDInventoryQuick.Models
         /// Indica el nombre del rol correspondiente
         /// </summary>
         [Key]
-        public int RolId { get; set; }
+        public int RoleId { get; set; }
         [StringLength(225)]
         [Key]
-        public string UsuarioId { get; set; }
+        public string UserId { get; set; }
 
-        [ForeignKey("UsuarioId")]
+        [ForeignKey("UserId")]
         [InverseProperty("ASPNETUSERROLEs")]
         public virtual ASPNETUSERS? ASPNETUSER_ASPNETUSER { get; set; } = null!;
 
-        [ForeignKey("RolId")]
+        [ForeignKey("RoleId")]
         [InverseProperty("ASPNETUSERROLEs")]
         public virtual ASPNETROLES? ASPNETROLES_ASPNETROLES { get; set; } = null!;
     }

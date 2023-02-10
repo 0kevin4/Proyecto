@@ -4,52 +4,38 @@
     ViewData["Title"] = "Edit";
 }
 
-<<<<<<< HEAD
-<h1>Editar Roles De Usuario</h1>
+<h1>Edit</h1>
 
-<h4></h4>
+<h4>ASPNETUSERROLES</h4>
 <hr />
-=======
-<h1>Editar</h1><br />
-
->>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="RolId" class="control-label"></label>
-                <select asp-for="RolId" class="form-control" asp-items="ViewBag.RolId"></select>
-                <span asp-validation-for="RolId" class="text-danger"></span>
-            </div><br />
+                <label asp-for="RoleId" class="control-label"></label>
+                <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
             <div class="form-group">
-<<<<<<< HEAD
                 <label asp-for="UserId" class="control-label"></label>
                 <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
-           
-            <br>
-=======
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
-                <span asp-validation-for="UsuarioId" class="text-danger"></span>
-            </div><br />
->>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
-                <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<<<<<<< HEAD
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
-
-=======
->>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -3,12 +3,11 @@
 @{
     ViewData["Title"] = "Crear nuevo";
 }
-
-<<<<<<< HEAD
+ 
 <h1>Crear</h1>
-=======
+
 <h1>Agregar Nuevo</h1>
->>>>>>> 21d977931005a06622e675e0e2fdacaeb2e56d09
+
 
 <br />
 <div class="row">
@@ -21,12 +20,12 @@
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div><br />
             <div class="form-group">
-                <label asp-for="RolId" class="control-label"></label>
-                <select asp-for="RolId" class ="form-control" asp-items="ViewBag.RolId"></select>
+                <label asp-for="RoleId" class="control-label"></label>
+                <select asp-for="RoleId" class ="form-control" asp-items="ViewBag.RolId"></select>
             </div><br />
             <div class="form-group">
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <select asp-for="UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
             </div><br />
             <div class="form-group">
                 <input type="submit" value="Agregar" class="btn btn-sm btn-success" />
