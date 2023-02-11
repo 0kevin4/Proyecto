@@ -49,8 +49,8 @@ namespace CRUDInventoryQuick.Controllers
         // GET: AspNetUserRoles/Create
         public IActionResult Create()
         {
-            ViewData["RoleId"] = new SelectList(_context.ASPNETROLEs, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.ASPNETUSERs, "Id", "Id");
+            ViewData["RoleId"] = new SelectList(_context.ASPNETROLEs, "Id", "Name");
+            ViewData["UserId"] = new SelectList(_context.ASPNETUSERs, "Id", "UserName");
             return View();
         }
 
@@ -85,8 +85,8 @@ namespace CRUDInventoryQuick.Controllers
             {
                 return NotFound();
             }
-            ViewData["RoleId"] = new SelectList(_context.ASPNETROLEs, "Id", "Id", aSPNETUSERROLES.RoleId);
-            ViewData["UserId"] = new SelectList(_context.ASPNETUSERs, "Id", "Id", aSPNETUSERROLES.UserId);
+            ViewData["RoleId"] = new SelectList(_context.ASPNETROLEs, "Id", "Name", aSPNETUSERROLES.RoleId);
+            ViewData["UserId"] = new SelectList(_context.ASPNETUSERs, "Id", "UserName", aSPNETUSERROLES.UserId);
             return View(aSPNETUSERROLES);
         }
 
