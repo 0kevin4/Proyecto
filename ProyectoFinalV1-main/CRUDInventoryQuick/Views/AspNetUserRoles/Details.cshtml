@@ -3,20 +3,11 @@
 @{
 
     ViewData["Title"] = "Detalles";
-}
-
-<h1>Ver Detalles</h1>
-
-<div>
-    
-     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h1>Detalles</h1><br />
 
 <div>
-
     <dl class="row">
         <dt class="col-sm-1">
             Usuario
@@ -32,10 +23,8 @@
         </dd>
     </dl>
 </div>
+
 <div>
-
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm btn-success">Editar</a> |
-
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm btn-success">Editar</a>
 
     <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
