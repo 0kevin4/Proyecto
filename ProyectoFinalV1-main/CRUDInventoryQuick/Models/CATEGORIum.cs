@@ -26,6 +26,7 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Indica el nombre de la categoria
         /// </summary>
+        [Required(ErrorMessage ="El campo Nombre no puede estar vacio")]
         [StringLength(64)]
         public string Nombre { get; set; } = null!;
 
