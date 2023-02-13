@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace CRUDInventoryQuick.Models
 {
     [Table("ASPNETUSERLOGIN")]
-    public partial class ASPNETUSERLOGIN
+    public partial class ASPNETUSERLOGINS
     {
         /// <summary>
         /// Identificador unico de ingresar

@@ -144,9 +144,9 @@ namespace CRUDInventoryQuick.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
-                foreach (var error in result.Errors)
+                else 
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    ModelState.AddModelError(string.Empty, "Correo Electronico ya registrado");
                 }
             }
 
