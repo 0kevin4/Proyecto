@@ -28,7 +28,7 @@ namespace CRUDInventoryQuick.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [TempData]
-        public string StatusMessage { get; set; }
+        public string StatusMessageEmail { get; set; }
         public async Task<IActionResult> OnGetAsync(string userId, string code)
         {
             if (userId == null || code == null)
@@ -44,7 +44,7 @@ namespace CRUDInventoryQuick.Areas.Identity.Pages.Account
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Gracias por confirmar su correo electrónico, Ya puede Iniciar Sesion." : "Error al confirmar su correo electrónico";
+            StatusMessageEmail = result.Succeeded ? "Gracias por confirmar su correo electrónico, Ya puede Iniciar Sesion." : "Error al confirmar su correo electrónico";
             return Page();
         }
     }
