@@ -12,7 +12,7 @@ namespace CRUDInventoryQuick.Models
         public ASPNETUSERS()
         {
             ASPNETUSERCLAIMs = new HashSet<ASPNETUSERCLAIMS>();
-            ASPNETUSERLOGINs = new HashSet<ASPNETUSERLOGIN>();
+            ASPNETUSERLOGINs = new HashSet<ASPNETUSERLOGINS>();
             ASPNETUSERROLEs = new HashSet<ASPNETUSERROLES>();
         }
 
@@ -99,7 +99,7 @@ namespace CRUDInventoryQuick.Models
         [InverseProperty("ASPNETUSER_ASPNETUSER")]
         public virtual ICollection<ASPNETUSERCLAIMS> ASPNETUSERCLAIMs { get; set; }
         [InverseProperty("ASPNETUSER_ASPNETUSER")]
-        public virtual ICollection<ASPNETUSERLOGIN> ASPNETUSERLOGINs { get; set; }
+        public virtual ICollection<ASPNETUSERLOGINS> ASPNETUSERLOGINs { get; set; }
         [InverseProperty("ASPNETUSER_ASPNETUSER")]
         public virtual ICollection<ASPNETUSERROLES> ASPNETUSERROLEs { get; set; }
     }

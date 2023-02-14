@@ -2,6 +2,7 @@
 
 @{
 
+<<<<<<< HEAD
     ViewData["Title"] = "";
     
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,9 +13,14 @@
 
 <div>
     
+=======
+    ViewData["Title"] = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Detalle Acesso</h1><br />
+>>>>>>> 4f7388dff97154338a58dcec6ff36e40413a69bb
 
 <div>
-
     <dl class="row">
         <dt class="col-sm-1">
             Usuario
@@ -30,10 +36,8 @@
         </dd>
     </dl>
 </div>
+
 <div>
-
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm btn-success">Editar</a> |
-
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm btn-success">Editar</a>
 
     <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>

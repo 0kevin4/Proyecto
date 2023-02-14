@@ -67,8 +67,8 @@ namespace CRUDInventoryQuick.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage ="El nuevo correo no puede estar vacio")]
+            [EmailAddress(ErrorMessage ="El campo debe pertener a un correo")]
             [Display(Name = "New email")]
             public string NewEmail { get; set; }
         }
@@ -91,7 +91,7 @@ namespace CRUDInventoryQuick.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"No se pudo cargar el usuario con ID '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -103,7 +103,7 @@ namespace CRUDInventoryQuick.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"No se pudo cargar el usuario con el ID '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -125,14 +125,14 @@ namespace CRUDInventoryQuick.Areas.Identity.Pages.Account.Manage
                     protocol: Request.Scheme);
                 await _emailSender.SendEmailAsync(
                     Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                     "Confirme su correo electrónico",
+                    $"Por favor, confirme su cuenta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Click aqui</a>.");
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                StatusMessage = "Enlace de confirmación para cambiar el correo electrónico enviado. Por favor, compruebe su correo electrónico.";
                 return RedirectToPage();
             }
 
-            StatusMessage = "Your email is unchanged.";
+            StatusMessage = "Cambio Exitoso";
             return RedirectToPage();
         }
 

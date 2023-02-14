@@ -27,11 +27,13 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Indica el nombre del producto
         /// </summary>
+        [Required(ErrorMessage = "El campo Nombre no puede estar vacio")]
         [StringLength(64)]
         public string Nombre { get; set; } = null!;
         /// <summary>
         /// Indica las caracteristicas que posee el producto
         /// </summary>
+        [Required(ErrorMessage = "El campo Descripcion no puede estar vacio")]
         [StringLength(64)]
         public string Descripcion { get; set; } = null!;
         /// <summary>

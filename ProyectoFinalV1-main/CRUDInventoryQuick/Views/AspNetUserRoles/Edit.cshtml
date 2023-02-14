@@ -4,10 +4,16 @@
     ViewData["Title"] = "";
 }
 
+<<<<<<< HEAD
 <h1>Editar Roles De Usuario</h1>
 
 
 <hr />
+=======
+<h1>Editar Acceso</h1>
+<br />
+
+>>>>>>> 4f7388dff97154338a58dcec6ff36e40413a69bb
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -17,12 +23,12 @@
                 <label asp-for="RoleId" class="control-label"></label>
                 <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
                 <span asp-validation-for="RoleId" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
                 <label asp-for="UserId" class="control-label"></label>
                 <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
                 <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
                 <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
@@ -31,8 +37,11 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4f7388dff97154338a58dcec6ff36e40413a69bb
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

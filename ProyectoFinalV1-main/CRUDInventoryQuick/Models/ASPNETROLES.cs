@@ -22,6 +22,7 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Indica el nombre del rol correspondiente
         /// </summary>
+        [Required(ErrorMessage ="El campo Nombre no puede estar vacio")]
         [StringLength(100)]
         public string Name { get; set; } = null!;
 

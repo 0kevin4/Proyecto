@@ -21,7 +21,7 @@ namespace CRUDInventoryQuick.Datos
         public virtual DbSet<ADMINISTRADOR> ADMINISTRADORs { get; set; } = null!;
         public virtual DbSet<ASPNETUSERS> ASPNETUSERs { get; set; } = null!;
         public virtual DbSet<ASPNETUSERCLAIMS> ASPNETUSERCLAIMs { get; set; } = null!;
-        public virtual DbSet<ASPNETUSERLOGIN> ASPNETUSERLOGINs { get; set; } = null!;
+        public virtual DbSet<ASPNETUSERLOGINS> ASPNETUSERLOGINs { get; set; } = null!;
         public virtual DbSet<ASPNETROLES> ASPNETROLEs { get; set; } = null!;
         public virtual DbSet<ASPNETUSERROLES> ASPNETUSERROLEs { get; set; } = null!;
         public virtual DbSet<CAJERO> CAJEROs { get; set; } = null!;
@@ -129,7 +129,7 @@ namespace CRUDInventoryQuick.Datos
                     .HasConstraintName("ASPNETUSERCLAIM_ASPNETUSER_FK");
             });
 
-            modelBuilder.Entity<ASPNETUSERLOGIN>(entity =>
+            modelBuilder.Entity<ASPNETUSERLOGINS>(entity =>
             {
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
