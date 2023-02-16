@@ -5,8 +5,8 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<hr />
-<p>Tu ingreso esta protegido con autenticacion.Por favor ingresa tu codigo</p>
+<br />
+<p>Tu ingreso esta protegido con autenticacion. Por favor ingresa tu codigo</p>
 <div class="row">
     <div class="col-md-4">
         <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
@@ -14,9 +14,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
                 <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" />
-                <label asp-for="Input.TwoFactorCode" class="form-label"></label>
+                <label asp-for="Input.TwoFactorCode" class="form-label">Codigo de Verificacion</label>
                 <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
-            </div>
+            </div><br />
             <div>
                 <div class="checkbox">
                     <label asp-for="Input.RememberMachine" class="form-label">
@@ -24,15 +24,15 @@
                         @Html.DisplayNameFor(m => m.Input.RememberMachine)
                     </label>
                 </div>
-            </div>
+            </div><br />
             <div>
                 <button type="submit" class="w-100 btn btn-lg btn-primary">Ingresar</button>
             </div>
         </form>
     </div>
-</div>
+</div><br />
 <p>
-    ¿No tienes acceso a un servicio de autenticacion? Tu puedes
+    ¿No tienes acceso a un servicio de autenticacion?<br />
     <a id="recovery-code-login" asp-page="./LoginWithRecoveryCode" asp-route-returnUrl="@Model.ReturnUrl">Ingresar con un codigo de recuperacion</a>.
 </p>
 

@@ -141,6 +141,8 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.Property(e => e.ProviderKey).HasComment("Indica llave");
 
+                entity.Property(e => e.ProviderDisplayName).HasComment("Nombre");
+
                 entity.HasOne(d => d.ASPNETUSER_ASPNETUSER)
                     .WithMany(p => p.ASPNETUSERLOGINs)
                     .HasForeignKey(d => d.UserId)

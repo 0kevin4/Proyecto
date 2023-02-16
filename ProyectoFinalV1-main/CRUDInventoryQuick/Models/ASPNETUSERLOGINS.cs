@@ -30,6 +30,9 @@ namespace CRUDInventoryQuick.Models
         [StringLength(225)]
         public string UserId { get; set; }
 
+        [StringLength(64)]
+        public string ProviderDisplayName { get; set; } = null!;
+
         [ForeignKey("UserId")]
         [InverseProperty("ASPNETUSERLOGINs")]
         public virtual ASPNETUSERS ASPNETUSER_ASPNETUSER { get; set; } = null!;
