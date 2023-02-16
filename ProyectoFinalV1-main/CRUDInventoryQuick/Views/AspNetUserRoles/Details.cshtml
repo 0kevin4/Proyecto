@@ -5,20 +5,21 @@
     ViewData["Title"] = "Detalles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>Detalle Acesso</h1><br />
+<h1>Detalle Acesso</h1>
+<br />
 
 <div>
     <dl class="row">
         <dt class="col-sm-1">
             Usuario
         </dt>
-        <dd class = "col-sm-11">
+        <dd class="col-sm-11">
             @Html.DisplayFor(model => model.ASPNETUSER_ASPNETUSER.UserName)
         </dd>
-        <dt class = "col-sm-1">
+        <dt class="col-sm-1">
             Rol
         </dt>
-        <dd class = "col-sm-11">
+        <dd class="col-sm-11">
             @Html.DisplayFor(model => model.ASPNETROLES_ASPNETROLES.Name)
         </dd>
     </dl>
@@ -28,5 +29,4 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm btn-success">Editar</a>
 
     <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
-</div>
 </div>
