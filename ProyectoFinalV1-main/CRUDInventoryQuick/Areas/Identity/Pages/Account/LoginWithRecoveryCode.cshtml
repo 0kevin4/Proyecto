@@ -5,10 +5,10 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<hr />
+<br />
 <p>
     Tienes una solicitud para ingresar con este codigo de verificacion. Este ingreso no va a ser recordado desde que tu 
-    proveas una app de autenticacion o tengas desactivado el ingreso 2FA y ingresa de nuevo
+    proveas una app de autenticacion o tengas desactivado el ingreso de Autenticación de dos Factores y ingresa de nuevo
 
 </p>
 <div class="row">
@@ -17,10 +17,10 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
                 <input asp-for="Input.RecoveryCode" class="form-control" autocomplete="off" />
-                <label asp-for="Input.RecoveryCode" class="form-label"></label>
+                <label asp-for="Input.RecoveryCode" class="form-label">código de recuperación</label>
                 <span asp-validation-for="Input.RecoveryCode" class="text-danger"></span>
-            </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+            </div><br />
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Acceder</button>
         </form>
     </div>
 </div>
