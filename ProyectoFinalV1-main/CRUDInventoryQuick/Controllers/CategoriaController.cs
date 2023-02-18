@@ -9,9 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using CRUDInventoryQuick.Repositorio;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRUDInventoryQuick.Controllers
 {
+    [Authorize]
     public class CategoriaController : Controller
     {
         private readonly IRepository<CATEGORIum> _repository;

@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema inventory
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `inventory` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+CREATE SCHEMA IF NOT EXISTS `inventory` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
 USE `inventory` ;
 
 -- -----------------------------------------------------
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`aspnetroles` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`aspnetusers` (
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -65,13 +65,13 @@ CREATE TABLE IF NOT EXISTS `inventory`.`aspnetuserclaims` (
   `aspnetuserId` INT NOT NULL,
   `UserId` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id`),
-  INDEX `s_idx` (`UserId` ASC) VISIBLE,
+  INDEX `s_idx` (`UserId` ) ,
   CONSTRAINT `Claims_User`
     FOREIGN KEY (`UserId`)
     REFERENCES `inventory`.`aspnetusers` (`Id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -83,13 +83,13 @@ CREATE TABLE IF NOT EXISTS `inventory`.`aspnetuserlogins` (
   `providerkey` VARCHAR(45) NOT NULL,
   `UserId` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id`),
-  INDEX `aspnetuserlogin_aspnetuser_fk` (`UserId` ASC) VISIBLE,
+  INDEX `aspnetuserlogin_aspnetuser_fk` (`UserId` ) ,
   CONSTRAINT `aspnetuserlogin_aspnetuser_fk`
     FOREIGN KEY (`UserId`)
     REFERENCES `inventory`.`aspnetusers` (`Id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`aspnetuserroles` (
   `RoleId` INT NOT NULL,
   `Id` INT NOT NULL,
   PRIMARY KEY (`UserId`, `RoleId`, `Id`),
-  INDEX `aspnetuserroles_ibfk_2` (`RoleId` ASC) VISIBLE,
+  INDEX `aspnetuserroles_ibfk_2` (`RoleId` ) ,
   CONSTRAINT `aspnetuserroles_ibfk_1`
     FOREIGN KEY (`UserId`)
     REFERENCES `inventory`.`aspnetusers` (`Id`)
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`aspnetuserroles` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`categoria` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 28
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`ciudad` (
   PRIMARY KEY (`ciudadId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`pedido` (
   PRIMARY KEY (`pedidoId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`marca` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 102
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`subcategoria` (
   `estado` TINYINT(1) NOT NULL,
   `categoria_categoriaid` INT NOT NULL,
   PRIMARY KEY (`subcategoriaId`, `categoria_categoriaid`),
-  INDEX `subcategoria_categoria_fk` (`categoria_categoriaid` ASC) VISIBLE,
+  INDEX `subcategoria_categoria_fk` (`categoria_categoriaid` ) ,
   CONSTRAINT `subcategoria_categoria_fk`
     FOREIGN KEY (`categoria_categoriaid`)
     REFERENCES `inventory`.`categoria` (`categoriaId`)
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`subcategoria` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 57
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -201,8 +201,8 @@ CREATE TABLE IF NOT EXISTS `inventory`.`producto` (
   `subcategoria_subcategoriaid` INT NOT NULL,
   `marca_marcaid` INT NOT NULL,
   PRIMARY KEY (`productoId`, `subcategoria_subcategoriaid`, `marca_marcaid`),
-  INDEX `producto_marca_fk` (`marca_marcaid` ASC) VISIBLE,
-  INDEX `producto_subcategoria_fk` (`subcategoria_subcategoriaid` ASC) VISIBLE,
+  INDEX `producto_marca_fk` (`marca_marcaid` ) ,
+  INDEX `producto_subcategoria_fk` (`subcategoria_subcategoriaid` ) ,
   CONSTRAINT `producto_marca_fk`
     FOREIGN KEY (`marca_marcaid`)
     REFERENCES `inventory`.`marca` (`marcaId`)
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`producto` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 83
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -227,8 +227,8 @@ CREATE TABLE IF NOT EXISTS `inventory`.`detallepedido` (
   `producto_productoid` INT NOT NULL,
   `pedido_pedidoid` INT NOT NULL,
   PRIMARY KEY (`detallepedidoId`, `producto_productoid`, `pedido_pedidoid`),
-  INDEX `detallepedido_pedido_fk` (`pedido_pedidoid` ASC) VISIBLE,
-  INDEX `detallepedido_prducto_fk` (`producto_productoid` ASC) VISIBLE,
+  INDEX `detallepedido_pedido_fk` (`pedido_pedidoid` ) ,
+  INDEX `detallepedido_prducto_fk` (`producto_productoid` ) ,
   CONSTRAINT `detallepedido_pedido_fk`
     FOREIGN KEY (`pedido_pedidoid`)
     REFERENCES `inventory`.`pedido` (`pedidoId`),
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`detallepedido` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`imagenproducto` (
   `estado` TINYINT(1) NOT NULL,
   `producto_productoid` INT NOT NULL,
   PRIMARY KEY (`imagenproductoId`, `producto_productoid`),
-  INDEX `IMAGENPRODUCTO_PRODUCTO_FK` (`producto_productoid` ASC) VISIBLE,
+  INDEX `IMAGENPRODUCTO_PRODUCTO_FK` (`producto_productoid` ) ,
   CONSTRAINT `IMAGENPRODUCTO_PRODUCTO_FK`
     FOREIGN KEY (`producto_productoid`)
     REFERENCES `inventory`.`producto` (`productoId`)
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`imagenproducto` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -272,13 +272,13 @@ CREATE TABLE IF NOT EXISTS `inventory`.`lugar` (
   `correo` VARCHAR(45) NOT NULL,
   `ciudad_ciudadid` INT NOT NULL,
   PRIMARY KEY (`lugarId`, `ciudad_ciudadid`),
-  INDEX `lugar_ciudad_fk` (`ciudad_ciudadid` ASC) VISIBLE,
+  INDEX `lugar_ciudad_fk` (`ciudad_ciudadid` ) ,
   CONSTRAINT `lugar_ciudad_fk`
     FOREIGN KEY (`ciudad_ciudadid`)
     REFERENCES `inventory`.`ciudad` (`ciudadId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -296,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`precio` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 87
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -311,8 +311,8 @@ CREATE TABLE IF NOT EXISTS `inventory`.`stock` (
   `producto_productoid` INT NOT NULL,
   `lugar_lugarId` INT NOT NULL,
   PRIMARY KEY (`stockId`),
-  INDEX `stock_lugar_fk` (`lugar_lugarId` ASC) VISIBLE,
-  INDEX `stock_producto_fk` (`producto_productoid` ASC) VISIBLE,
+  INDEX `stock_lugar_fk` (`lugar_lugarId` ) ,
+  INDEX `stock_producto_fk` (`producto_productoid` ) ,
   CONSTRAINT `stock_lugar_fk`
     FOREIGN KEY (`lugar_lugarId`)
     REFERENCES `inventory`.`lugar` (`lugarId`)
@@ -325,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`stock` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -341,14 +341,14 @@ CREATE TABLE IF NOT EXISTS `inventory`.`sueldo` (
   `estado` INT NOT NULL,
   `empleado_aspnetuser_aspnetuser_id` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`sueldoId`),
-  INDEX `sueldo_aspnetuser_fk` (`empleado_aspnetuser_aspnetuser_id` ASC) VISIBLE,
+  INDEX `sueldo_aspnetuser_fk` (`empleado_aspnetuser_aspnetuser_id` ) ,
   CONSTRAINT `sueldo_aspnetuser_fk`
     FOREIGN KEY (`empleado_aspnetuser_aspnetuser_id`)
     REFERENCES `inventory`.`aspnetusers` (`Id`)
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -360,13 +360,13 @@ CREATE TABLE IF NOT EXISTS `inventory`.`tiposdepago` (
   `estado` TINYINT(1) NOT NULL,
   `pedido_pedidoid` INT NOT NULL,
   PRIMARY KEY (`tiposdepagoId`, `pedido_pedidoid`),
-  INDEX `tiposdepago_pedido_fk` (`pedido_pedidoid` ASC) VISIBLE,
+  INDEX `tiposdepago_pedido_fk` (`pedido_pedidoid` ) ,
   CONSTRAINT `tiposdepago_pedido_fk`
     FOREIGN KEY (`pedido_pedidoid`)
     REFERENCES `inventory`.`pedido` (`pedidoId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -378,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`tiposdetransaccion` (
   PRIMARY KEY (`tipotransaccionId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -392,8 +392,8 @@ CREATE TABLE IF NOT EXISTS `inventory`.`transaccion` (
   `producto_productoid` INT NOT NULL,
   `tiposdetransaccion_tipotransaccionid` INT NOT NULL,
   PRIMARY KEY (`transaccionId`, `producto_productoid`, `tiposdetransaccion_tipotransaccionid`),
-  INDEX `transaccion_producto_fk` (`producto_productoid` ASC) VISIBLE,
-  INDEX `transaccion_tiposdetransacción_fk` (`tiposdetransaccion_tipotransaccionid` ASC) VISIBLE,
+  INDEX `transaccion_producto_fk` (`producto_productoid` ) ,
+  INDEX `transaccion_tiposdetransacción_fk` (`tiposdetransaccion_tipotransaccionid` ) ,
   CONSTRAINT `transaccion_producto_fk`
     FOREIGN KEY (`producto_productoid`)
     REFERENCES `inventory`.`producto` (`productoId`),
@@ -402,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `inventory`.`transaccion` (
     REFERENCES `inventory`.`tiposdetransaccion` (`tipotransaccionId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -415,13 +415,13 @@ CREATE TABLE IF NOT EXISTS `inventory`.`turno` (
   `estado` TINYINT(1) NOT NULL,
   `aspnetuserid` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`turnoId`),
-  INDEX `turno_aspnetuser_fk` (`aspnetuserid` ASC) VISIBLE,
+  INDEX `turno_aspnetuser_fk` (`aspnetuserid` ) ,
   CONSTRAINT `turno_aspnetuser_fk`
     FOREIGN KEY (`aspnetuserid`)
     REFERENCES `inventory`.`aspnetusers` (`Id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -433,14 +433,14 @@ CREATE TABLE IF NOT EXISTS `inventory`.`unidadmedida` (
   `estado` TINYINT(1) NOT NULL,
   `producto_productoid` INT NOT NULL,
   PRIMARY KEY (`unidadmedidaId`, `producto_productoid`),
-  INDEX `unidadmedida_producto_fk` (`producto_productoid` ASC) VISIBLE,
+  INDEX `unidadmedida_producto_fk` (`producto_productoid` ) ,
   CONSTRAINT `unidadmedida_producto_fk`
     FOREIGN KEY (`producto_productoid`)
     REFERENCES `inventory`.`producto` (`productoId`)
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

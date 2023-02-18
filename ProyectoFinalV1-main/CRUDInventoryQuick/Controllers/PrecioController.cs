@@ -9,9 +9,11 @@ using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using CRUDInventoryQuick.Contracts;
 using SendGrid.Helpers.Mail;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRUDInventoryQuick.Controllers
 {
+    [Authorize]
     public class PrecioController : Controller
     {
         private readonly IRepository<PRECIO>_repository;
