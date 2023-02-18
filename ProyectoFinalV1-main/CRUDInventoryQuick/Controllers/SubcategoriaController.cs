@@ -11,9 +11,11 @@ using CRUDInventoryQuick.Contracts;
 using NuGet.Protocol.Core.Types;
 using SendGrid.Helpers.Mail;
 using CRUDInventoryQuick.Repositorio;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRUDInventoryQuick.Controllers
 {
+    [Authorize]
     public class SubcategoriaController : Controller
     {
         private readonly IRepository<SUBCATEGORIum> _Subcategoriarepository;

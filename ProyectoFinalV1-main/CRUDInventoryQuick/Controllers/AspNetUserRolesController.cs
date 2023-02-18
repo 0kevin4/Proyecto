@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRUDInventoryQuick.Controllers
 {
+    [Authorize]
     public class AspNetUserRolesController : Controller
     {
         private readonly ApplicationDbContext _context;

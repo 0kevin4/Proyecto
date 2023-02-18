@@ -9,9 +9,11 @@ using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using NuGet.Protocol.Core.Types;
 using CRUDInventoryQuick.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRUDInventoryQuick.Controllers
 {
+    [Authorize]
     public class ProductoController : Controller
     {
         private readonly IRepository<PRODUCTO> _Productorepository;

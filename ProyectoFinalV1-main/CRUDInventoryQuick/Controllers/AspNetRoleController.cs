@@ -10,10 +10,11 @@ using CRUDInventoryQuick.Models;
 using Microsoft.AspNetCore.Identity;
 using CRUDInventoryQuick.Contracts;
 using NuGet.Protocol.Core.Types;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRUDInventoryQuick.Controllers
 {
+    [Authorize]
     public class AspNetRoleController : Controller
     {
         private readonly IRepository<ASPNETROLES> _Rolrepository;
