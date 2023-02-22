@@ -5,6 +5,7 @@ using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using CRUDInventoryQuick.Repositorio;
 using CRUDInventoryQuick.Contracts;
+using CRUDInventoryQuick.Traduccion;
 
 var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(
                 .EnableDetailedErrors()
         );
 
+//Repository
+
 builder.Services.AddScoped<IRepository<CATEGORIum>, CategoriaRepository>();
 builder.Services.AddScoped<IRepository<MARCA>, MarcaRepository>();
 builder.Services.AddScoped<IRepository<PRODUCTO>, ProductoRepository>();
@@ -32,13 +35,17 @@ builder.Services.AddScoped<IRepository<SUBCATEGORIum>, SubcategoriaRepository>()
 
 
 
+                
+
 
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    //Traduccion Validaciones
+    .AddErrorDescriber<TraduccionValidaciones>();
 
 ////Email Sender
 //builder.Services.AddTransient<IEmailSender, EmailSender>();
