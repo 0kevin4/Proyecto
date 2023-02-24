@@ -110,7 +110,10 @@ namespace CRUDInventoryQuick.Areas.Identity.Pages.Account.Manage
             var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
             if (!changePasswordResult.Succeeded)
             {
-                 ModelState.AddModelError(string.Empty,"Contraseña Incorrecta");
+                foreach (var error in changePasswordResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
                 return Page();
             }
 
