@@ -39,6 +39,13 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Indica si el producto esta activo
         /// </summary>
+
+        public int Cantidad { get; set; }
+
+        public int stockMinimo { get; set; }
+
+        public int stockMaximo { get; set; }
+
         public bool Estado { get; set; }
         /// <summary>
         /// Identificador unico de la subcategoria
@@ -67,5 +74,30 @@ namespace CRUDInventoryQuick.Models
         public virtual ICollection<TRANSACCION> TRANSACCIONs { get; set; }
         [InverseProperty("PRODUCTO_Producto")]
         public virtual ICollection<UNIDADMEDIDum> UNIDADMEDIDa { get; set; }
+
+
+        public void stockMax(int cantidadA)
+        {
+            this.Cantidad += cantidadA;
+        }
+
+        public void stockMim(int cantidadE)
+        {
+
+            if (this.Cantidad < cantidadE)
+            {
+                this.Cantidad -= cantidadE;
+            }
+        }
+
+        public bool InferiorStockMin()
+        {
+            return this.Cantidad < this.stockMinimo;
+        }
+
+        public bool SuperiorStockMax()
+        {
+            return this.Cantidad > this.stockMaximo;
+        }
     }
 }

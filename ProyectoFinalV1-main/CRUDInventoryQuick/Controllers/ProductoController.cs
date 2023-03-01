@@ -10,6 +10,7 @@ using CRUDInventoryQuick.Models;
 using NuGet.Protocol.Core.Types;
 using CRUDInventoryQuick.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using SendGrid.Helpers.Mail;
 
 namespace CRUDInventoryQuick.Controllers
 {
@@ -19,13 +20,15 @@ namespace CRUDInventoryQuick.Controllers
         private readonly IRepository<PRODUCTO> _Productorepository;
         private readonly IRepository<SUBCATEGORIum> _subcategoriaRepository;
         private readonly IRepository<MARCA> _MarcaRepository;
+        private readonly ApplicationDbContext _context;
         private List<SelectListItem> _Subcategoria;
         private List<SelectListItem> _Marca;
-        public ProductoController(IRepository<PRODUCTO> Productorepository, IRepository<SUBCATEGORIum> subcategoriaRepository, IRepository<MARCA> MarcaRepository)
+        public ProductoController(IRepository<PRODUCTO> Productorepository, IRepository<SUBCATEGORIum> subcategoriaRepository, IRepository<MARCA> MarcaRepository, ApplicationDbContext context)
         {
             _Productorepository = Productorepository;
             _subcategoriaRepository = subcategoriaRepository;
             _MarcaRepository = MarcaRepository;
+            _context = context;
         }
 
         //GET: Producto
@@ -89,7 +92,7 @@ namespace CRUDInventoryQuick.Controllers
         //For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductoId,Nombre,Descripcion,Estado,SUBCATEGORIA_SubcategoriaId,MARCA_MarcaId")] PRODUCTO pRODUCTO)
+        public async Task<IActionResult> Create([Bind("ProductoId,Nombre,Descripcion,Cantidad,stockMaximo,stockMinimo ,Estado,SUBCATEGORIA_SubcategoriaId,MARCA_MarcaId")] PRODUCTO pRODUCTO)
         {
             if (ModelState.IsValid)
             {
@@ -167,7 +170,7 @@ namespace CRUDInventoryQuick.Controllers
         //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductoId,Nombre,Descripcion,Estado,SUBCATEGORIA_SubcategoriaId,MARCA_MarcaId")] PRODUCTO pRODUCTO)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductoId,Nombre,Descripcion,Cantidad,stockMaximo,stockMinimo ,Estado,SUBCATEGORIA_SubcategoriaId,MARCA_MarcaId")] PRODUCTO pRODUCTO)
         {
 
             if (id != pRODUCTO.ProductoId)
@@ -254,5 +257,57 @@ namespace CRUDInventoryQuick.Controllers
         //{
         //    return (_Productorepository.GetAll().Any(e => e.ProductoId == id)).GetValueOrDefault();
         //}
+
+        ///Agregar Cantidad stock
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AgregarCantidad(int id, int cantidadA)
+        {
+            var producto = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
+            if (producto != null)
+            {
+                producto.stockMax(cantidadA);
+
+                if (producto.SuperiorStockMax())
+                {
+                    TempData["ErrorAñadir"] = $"El stock actual del {producto.Nombre}({producto.Cantidad}) supera el stock maximo permitido ({producto.stockMax})";
+
+                    return RedirectToAction("Index", new { id = id });
+                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", new { id = id });
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        ////Eliminar cantidad stock
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EliminarCantidad(int id, int cantidadE)
+        {
+            var producto = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
+            if (producto != null)
+            {
+                producto.stockMim(cantidadE);
+
+                if (producto.InferiorStockMin())
+                {
+                    TempData["ErrorEliminar"] = $"El stock actual del {producto.Nombre}({producto.Cantidad}) supera el stock Minimo permitido ({producto.stockMim})";
+
+                    return RedirectToAction("Index", new { id = id });
+                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", new { id = id });
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
     }
 }
