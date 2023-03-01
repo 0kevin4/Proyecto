@@ -392,6 +392,13 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.Property(e => e.Nombre).HasComment("Indica el nombre del producto");
 
+                entity.Property(e => e.Cantidad).HasComment("Indica la cantidad del producto");
+
+                entity.Property(e => e.stockMinimo).HasComment("Indica el stock Minimo");
+
+                entity.Property(e => e.stockMaximo).HasComment("Indica el stock Maximo");
+
+
                 entity.Property(e => e.SUBCATEGORIA_SubcategoriaId).HasComment("Identificador unico de la subcategoria");
 
                 entity.HasOne(d => d.Marca)
