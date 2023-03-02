@@ -81,7 +81,7 @@
                 <a asp-action="Delete" asp-route-id="@item.ProductoId" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
             </td>
 
-                <form asp-action="AgregarCantidad" asp-route-id="@item.ProductoId" method="post">
+               @* <form asp-action="AgregarCantidad" asp-route-id="@item.ProductoId" method="post">
                     <b><label for="cantidadA">Agregar cantidad:</label></b>&nbsp;
                     <input type="number" name="cantidadA" id="cantidadA" value="" />&nbsp;
                     <input type="submit" value="Agregar" />
@@ -102,7 +102,7 @@
                 {
                     <div class="alert alert-danger">@TempData["ErrorEliminar"]</div>
                 }
-                
+                *@
         </tr>
 }
     </tbody>
