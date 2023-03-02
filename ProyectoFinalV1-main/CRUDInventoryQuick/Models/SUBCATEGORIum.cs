@@ -32,7 +32,7 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Identificador unico de la categoria
         /// </summary>
-        public int CATEGORIA_CategoriaId { get; set; }
+        public int? CATEGORIA_CategoriaId { get; set; }
 
         [ForeignKey("CATEGORIA_CategoriaId")]
         [InverseProperty("SUBCATEGORIa")]
