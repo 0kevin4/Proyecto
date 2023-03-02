@@ -46,3 +46,6 @@ a.nav-link:hover {
 a.navbar-brand:hover{
     color: #ff0000 !important;
 }
+button type="submit"{
+    color: aquamarine;
+}
