@@ -50,11 +50,11 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Identificador unico de la subcategoria
         /// </summary>
-        public int SUBCATEGORIA_SubcategoriaId { get; set; }
+        public int? SUBCATEGORIA_SubcategoriaId { get; set; }
         /// <summary>
         /// Identificador unico de la marca
         /// </summary>
-        public int MARCA_MarcaId { get; set; }
+        public int? MARCA_MarcaId { get; set; }
 
         [ForeignKey("MARCA_MarcaId")]
         [InverseProperty("PRODUCTOs")]

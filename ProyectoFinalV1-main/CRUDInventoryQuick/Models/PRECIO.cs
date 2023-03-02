@@ -49,7 +49,7 @@ namespace CRUDInventoryQuick.Models
         /// <summary>
         /// Identificador unico del producto
         /// </summary>
-        public int PRODUCTO_ProductoId { get; set; }
+        public int? PRODUCTO_ProductoId { get; set; }
 
         [ForeignKey("PRODUCTO_ProductoId")]
         [InverseProperty("PRECIOs")]
