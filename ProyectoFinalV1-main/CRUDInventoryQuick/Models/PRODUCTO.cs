@@ -19,41 +19,31 @@ namespace CRUDInventoryQuick.Models
             UNIDADMEDIDa = new HashSet<UNIDADMEDIDum>();
         }
 
-        /// <summary>
-        /// Identificador unico del producto
-        /// </summary>
+
         [Key]
         public int ProductoId { get; set; }
-        /// <summary>
-        /// Indica el nombre del producto
-        /// </summary>
+
         [Required(ErrorMessage = "El campo Nombre no puede estar vacio")]
         [StringLength(64)]
         public string Nombre { get; set; } = null!;
-        /// <summary>
-        /// Indica las caracteristicas que posee el producto
-        /// </summary>
+
         [Required(ErrorMessage = "El campo Descripcion no puede estar vacio")]
         [StringLength(64)]
         public string Descripcion { get; set; } = null!;
-        /// <summary>
-        /// Indica si el producto esta activo
-        /// </summary>
 
+        [Required(ErrorMessage = "El campo Cantidad no puede estar vacio")]
         public int Cantidad { get; set; }
 
+        [Required(ErrorMessage = "El campo stockMinimo no puede estar vacio")]
         public int stockMinimo { get; set; }
 
+        [Required(ErrorMessage = "El campo stockMaximo no puede estar vacio")]
         public int stockMaximo { get; set; }
 
         public bool Estado { get; set; }
-        /// <summary>
-        /// Identificador unico de la subcategoria
-        /// </summary>
+
         public int? SUBCATEGORIA_SubcategoriaId { get; set; }
-        /// <summary>
-        /// Identificador unico de la marca
-        /// </summary>
+
         public int? MARCA_MarcaId { get; set; }
 
         [ForeignKey("MARCA_MarcaId")]
@@ -79,7 +69,7 @@ namespace CRUDInventoryQuick.Models
         public void stockMax(int cantidadA)
         {
             this.Cantidad += cantidadA;
-        }
+        }  
 
         public void stockMim(int cantidadE)
         {

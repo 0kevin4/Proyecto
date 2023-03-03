@@ -270,7 +270,7 @@ namespace CRUDInventoryQuick.Controllers
 
                 if (producto.SuperiorStockMax())
                 {
-                    TempData["ErrorAñadir"] = $"El stock actual del {producto.Nombre}({producto.Cantidad}) supera el stock maximo permitido ({producto.stockMax})";
+                    TempData["ErrorAñadir"] = $"El stock actual del {producto.Nombre}({producto.Cantidad}) supera el stock maximo permitido ({producto.stockMaximo})";
 
                     return RedirectToAction("Index", new { id = id });
                 }
@@ -288,14 +288,14 @@ namespace CRUDInventoryQuick.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarCantidad(int id, int cantidadE)
         {
-            var producto = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
-            if (producto != null)
+            var productoE = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
+            if (productoE != null)
             {
-                producto.stockMim(cantidadE);
+                productoE.stockMim(cantidadE);
 
-                if (producto.InferiorStockMin())
+                if (productoE.InferiorStockMin())
                 {
-                    TempData["ErrorEliminar"] = $"El stock actual del {producto.Nombre}({producto.Cantidad}) supera el stock Minimo permitido ({producto.stockMim})";
+                    TempData["ErrorEliminar"] = $"El stock actual del {productoE.Nombre}({productoE.Cantidad}) supera el stock Minimo permitido ({productoE.stockMinimo})";
 
                     return RedirectToAction("Index", new { id = id });
                 }

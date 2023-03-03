@@ -31,10 +31,10 @@
                 @Html.DisplayNameFor(model => model.Subcategoria)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cantidad)
+                @Html.DisplayNameFor(model => model.stockMaximo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.stockMaximo)
+                @Html.DisplayNameFor(model => model.Cantidad)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.stockMinimo)
@@ -64,10 +64,10 @@
                 @Html.DisplayFor(modelItem => item.Subcategoria.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cantidad)
+                @Html.DisplayFor(modelItem => item.stockMaximo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.stockMaximo)
+                @Html.DisplayFor(modelItem => item.Cantidad)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.stockMinimo)
@@ -79,30 +79,27 @@
                 <a asp-action="Edit" asp-route-id="@item.ProductoId"  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> 
                 <a asp-action="Details" asp-route-id="@item.ProductoId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> 
                 <a asp-action="Delete" asp-route-id="@item.ProductoId" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+
+                    <form asp-action="AgregarCantidad" asp-route-id="@item.ProductoId" method="post">
+                        <input type="number" name="cantidadA" id="cantidadA" value="" placeholder="Agregar Cantidad"/>&nbsp;
+                        <input type="submit" value="Agregar" />
+                        @Html.AntiForgeryToken()
+                    </form>
+                    @if (TempData["ErrorAñadir"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["ErrorAñadir"]</div>
+                    }
+                    <form asp-action="EliminarCantidad" asp-route-id="@item.ProductoId" method="post">
+                        <input type="number" name="cantidadE" id="cantidadE" value="" placeholder="Agregar Cantidad"  />&nbsp;
+                        <input type="submit" value="Eliminar" />&nbsp;<p></p>
+                        @Html.AntiForgeryToken()
+                    </form>
+                    @if (TempData["ErrorEliminar"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["ErrorEliminar"]</div>
+                    }
             </td>
 
-               @* <form asp-action="AgregarCantidad" asp-route-id="@item.ProductoId" method="post">
-                    <b><label for="cantidadA">Agregar cantidad:</label></b>&nbsp;
-                    <input type="number" name="cantidadA" id="cantidadA" value="" />&nbsp;
-                    <input type="submit" value="Agregar" />
-                    @Html.AntiForgeryToken()
-                </form>
-                @if (TempData["ErrorAñadir"] != null)
-                {
-                    <div class="alert alert-danger">@TempData["ErrorAñadir"]</div>
-                }
-                <p></p>
-                <form asp-action="EliminarCantidad" asp-route-id="@item.ProductoId" method="post">
-                    <b><label for="cantidadE">Eliminar cantidad:</label></b>&nbsp;
-                    <input type="number" name="cantidadE" id="cantidadE" value="" />&nbsp;
-                    <input type="submit" value="Eliminar" />&nbsp;<p></p>
-                    @Html.AntiForgeryToken()
-                </form>
-                @if (TempData["ErrorEliminar"] != null)
-                {
-                    <div class="alert alert-danger">@TempData["ErrorEliminar"]</div>
-                }
-                *@
         </tr>
 }
     </tbody>
