@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CRUDInventoryQuick.Models
 {
@@ -66,28 +67,34 @@ namespace CRUDInventoryQuick.Models
         public virtual ICollection<UNIDADMEDIDum> UNIDADMEDIDa { get; set; }
 
 
+        //Agregacion de cantidad
         public void stockMax(int cantidadA)
         {
-            this.Cantidad += cantidadA;
+            Cantidad += cantidadA;
         }  
 
+        //Eliminacion de cantidad
         public void stockMim(int cantidadE)
         {
-
-            if (this.Cantidad < cantidadE)
-            {
-                this.Cantidad -= cantidadE;
-            }
+            Cantidad -= cantidadE;  
         }
 
+        //validacion Inferior que cantidad
         public bool InferiorStockMin()
         {
-            return this.Cantidad < this.stockMinimo;
+            return Cantidad < stockMinimo;
         }
 
+        //Validacion Inferior a 0
+        public bool InferiorCero()
+        {
+            return Cantidad < 0;
+        }
+
+        //validacion Superior que cantidad
         public bool SuperiorStockMax()
         {
-            return this.Cantidad > this.stockMaximo;
+            return Cantidad > stockMaximo;
         }
     }
 }
