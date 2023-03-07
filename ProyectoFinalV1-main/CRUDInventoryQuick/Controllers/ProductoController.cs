@@ -270,12 +270,12 @@ namespace CRUDInventoryQuick.Controllers
 
                 if (producto.SuperiorStockMax())
                 {
-                    TempData["ErrorAñadir"] = $"El stock actual del {producto.Nombre}({producto.Cantidad}) supera el stock maximo permitido ({producto.stockMaximo})";
+                    TempData[$"Error{id}"] = $"El stock actual del {producto.Nombre}({producto.Cantidad}) supera el stock maximo permitido ({producto.stockMaximo})";
 
-                    return RedirectToAction("Index", new { id = id });
+                    return RedirectToAction("Index");
                 }
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", new { id = id });
+                return RedirectToAction("Index");
             }
             else
             {
@@ -288,19 +288,24 @@ namespace CRUDInventoryQuick.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarCantidad(int id, int cantidadE)
         {
-            var productoE = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
-            if (productoE != null)
+            var producto = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
+            if (producto != null)
             {
-                productoE.stockMim(cantidadE);
+                producto.stockMim(cantidadE);
 
-                if (productoE.InferiorStockMin())
+                if (producto.InferiorStockMin())
                 {
-                    TempData["ErrorEliminar"] = $"El stock actual del {productoE.Nombre}({productoE.Cantidad}) supera el stock Minimo permitido ({productoE.stockMinimo})";
+                    TempData[$"Error{id}"] = $"El stock actual del {producto.Nombre} es Inferior al stock minimo permitido";
 
-                    return RedirectToAction("Index", new { id = id });
+                    if (producto.InferiorCero())
+                    {
+                        TempData[$"Error{id}"] = $"El stock actual del {producto.Nombre} no puede ser Inferior a 0";
+                        return RedirectToAction("Index");
+                    }
+
                 }
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", new { id = id });
+                return RedirectToAction("Index");
             }
             else
             {
