@@ -90,25 +90,30 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
-            <td align="right" width="110">
+            <td align="right" width="300">
                 <a asp-action="Edit" asp-route-id="@item.ProductoId"  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> 
                 <a asp-action="Details" asp-route-id="@item.ProductoId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> 
                 <a asp-action="Delete" asp-route-id="@item.ProductoId" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
                 <p></p>
                     <form asp-action="AgregarCantidad" asp-route-id="@item.ProductoId" method="post">
-                        <input type="number" name="cantidadA" id="cantidadA" value="" placeholder="Agregar Cantidad"/>&nbsp;
-                        <input type="submit" value="Agregar" />
+                        <div class="col-xs-12 col-md-3 input-group">
+                            <input type="number" name="cantidadA" id="cantidadA" value="" placeholder="Agregar Cantidad" style="width : 120px; heigth : 1px" class="form-control" required/>&nbsp;
+                            <input type="submit" value="+" class="btn btn-sm btn-success" />
+                         </div>
+                        
                         @Html.AntiForgeryToken()
-                    </form>
+                    </form><br>
 @*                    @if (errorAdd)
                     {
                         <div class="alert alert-danger">@TempData[errorAumentarProductoCantidad]</div>
                     }*@
                     <form asp-action="EliminarCantidad" asp-route-id="@item.ProductoId" method="post">
-                        <input type="number" name="cantidadE" id="cantidadE" value="" placeholder="Eliminar Cantidad"  />&nbsp;
-                        <input type="submit" value="Eliminar" />&nbsp;<p></p>
+                        <div class="col-xs-12 col-md-3 input-group ">
+                            <input type="number" name="cantidadE" id="cantidadE" value="" placeholder="Eliminar Cantidad" style="width : 120px; heigth : 1px" class="form-control" required/>&nbsp;
+                            <input type="submit" value="-" class="btn btn-sm btn-danger" />
+                        </div>
                         @Html.AntiForgeryToken()
-                    </form>
+                    </form><br>
                     @if (error)
                     {
                         <div class="alert alert-danger">@TempData[errorT]</div>
