@@ -9,10 +9,10 @@
 <br />
 
 <p>
-    <a asp-action="Create"  class="btn btn-sm btn-info"><i class="bi bi-bookmark-plus"></i>Agregar Categoria</a>
+    <a asp-action="Create" class="btn btn-sm btn-success"><i class="bi bi-bookmark-plus"></i>Agregar Categoria</a>
 </p>
 <table id="Tablas" class="table table-hover table-bordered" style="width:100%">
-    <thead class="table-primary">
+    <thead class="table-success">
 
         <tr>
             <th width="30">
@@ -43,8 +43,10 @@
                 <a asp-action="Edit" asp-route-id="@item.CategoriaId"  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> 
                 <a asp-action="Details" asp-route-id="@item.CategoriaId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> 
                 <a asp-action="Delete" asp-route-id="@item.CategoriaId" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                  
             </td>
         </tr>
+           
 }
     </tbody>
 </table>
