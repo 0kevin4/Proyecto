@@ -9,7 +9,7 @@
 <br />
 
 <p>
-    <a asp-action="Create" class="btn btn-sm btn-success"><i class="bi bi-bookmark-plus"></i>Agregar nueva Subcategoria</a>
+    <a asp-action="Create" class="btn btn-sm btn-success"><i class="bi bi-bookmark-plus"></i>Agregar Subcategoria</a>
 </p>
 <table id="Tablas" class="table table-hover table-bordered" style="width:100%">
     <thead class="table-success">
@@ -40,7 +40,14 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+                    @if (item.Categoria == null)
+                    {
+                        <text>Sin Categoria</text>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+                    }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Estado)

@@ -1,0 +1,67 @@
+﻿@model CRUDInventoryQuick.Models.TRANSACCION
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Agregar Transaccion</h1>
+<br/>
+
+@*Alerta menor que 0*@
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["Mensaje"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label>Producto</label>
+                <select asp-for="IdProducto" class="form-control" asp-items="ViewBag.Producto"></select>
+            </div><br />
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly/>
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <label>Tipo de Transaccion</label>
+                <select asp-for="TipoTransaccion" class="form-control" asp-items="ViewBag.Opciones"></select>
+            </div><br />
+            <div class="form-group">
+                <input asp-for="Cantidad" class="form-control" placeholder="Cantidad*"/>
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <input asp-for="Descripcion" class="form-control" placeholder="Descripcion" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <input asp-for="Usuario" class="form-control" placeholder="Usuario*" value="@User.Identity.Name" readonly />
+                <span asp-validation-for="Usuario" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-sm btn-success" />
+                <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

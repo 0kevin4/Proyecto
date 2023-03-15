@@ -34,18 +34,15 @@
                 <select asp-for="MARCA_MarcaId" class ="form-control" asp-items="ViewBag.Marca"></select>
             </div><br />
             <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
+                <input asp-for="Cantidad" class="form-control" placeholder="Cantidad*"/>
                 <span asp-validation-for="Cantidad" class="text-danger"></span>
             </div><br />
             <div class="form-group">
-                <label asp-for="stockMaximo" class="control-label"></label>
-                <input asp-for="stockMaximo" class="form-control" />
+                <input asp-for="stockMaximo" class="form-control" placeholder="StockMaximo*"/>
                 <span asp-validation-for="stockMaximo" class="text-danger"></span>
             </div><br />
             <div class="form-group">
-                <label asp-for="stockMinimo" class="control-label"></label>
-                <input asp-for="stockMinimo" class="form-control" />
+                <input asp-for="stockMinimo" class="form-control" placeholder="StockMinimo*"/>
                 <span asp-validation-for="stockMinimo" class="text-danger"></span>
             </div><br />
             <div class="form-group form-check">

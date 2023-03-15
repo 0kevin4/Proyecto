@@ -49,3 +49,25 @@ a.navbar-brand:hover{
 button type="submit"{
     color: aquamarine;
 }
+
+
+button.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.75rem 1.25rem;
+    background: transparent;
+    border: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    opacity: 0.5;
+    cursor: pointer;
+}
+button.close:hover 
+{
+    opacity: 1;
+}
+
+

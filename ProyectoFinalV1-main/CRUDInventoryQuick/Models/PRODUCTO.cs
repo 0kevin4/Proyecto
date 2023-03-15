@@ -12,12 +12,8 @@ namespace CRUDInventoryQuick.Models
     {
         public PRODUCTO()
         {
-            DETALLEPEDIDOs = new HashSet<DETALLEPEDIDO>();
-            IMAGENPRODUCTOs = new HashSet<IMAGENPRODUCTO>();
             PRECIOs = new HashSet<PRECIO>();
-            STOCKs = new HashSet<STOCK>();
             TRANSACCIONs = new HashSet<TRANSACCION>();
-            UNIDADMEDIDa = new HashSet<UNIDADMEDIDum>();
         }
 
 
@@ -53,48 +49,41 @@ namespace CRUDInventoryQuick.Models
         [ForeignKey("SUBCATEGORIA_SubcategoriaId")]
         [InverseProperty("PRODUCTOs")]
         public virtual SUBCATEGORIum? Subcategoria { get; set; } = null;
-        [InverseProperty("PRODUCTO_Producto")]
-        public virtual ICollection<DETALLEPEDIDO> DETALLEPEDIDOs { get; set; }
-        [InverseProperty("PRODUCTO_Producto")]
-        public virtual ICollection<IMAGENPRODUCTO> IMAGENPRODUCTOs { get; set; }
         [InverseProperty("Producto")]
         public virtual ICollection<PRECIO> PRECIOs { get; set; }
-        [InverseProperty("PRODUCTO_Producto")]
-        public virtual ICollection<STOCK> STOCKs { get; set; }
-        [InverseProperty("PRODUCTO_Producto")]
+
+        [InverseProperty("Producto")]
         public virtual ICollection<TRANSACCION> TRANSACCIONs { get; set; }
-        [InverseProperty("PRODUCTO_Producto")]
-        public virtual ICollection<UNIDADMEDIDum> UNIDADMEDIDa { get; set; }
 
 
-        //Agregacion de cantidad
-        public void stockMax(int cantidadA)
-        {
-            Cantidad += cantidadA;
-        }  
+        ////Agregacion de cantidad
+        //public void stockMax(int cantidadA)
+        //{
+        //    Cantidad += cantidadA;
+        //}  
 
-        //Eliminacion de cantidad
-        public void stockMim(int cantidadE)
-        {
-            Cantidad -= cantidadE;  
-        }
+        ////Eliminacion de cantidad
+        //public void stockMim(int cantidadE)
+        //{
+        //    Cantidad -= cantidadE;  
+        //}
 
-        //validacion Inferior que cantidad
-        public bool InferiorStockMin()
-        {
-            return Cantidad < stockMinimo;
-        }
+        ////validacion Inferior que cantidad
+        //public bool InferiorStockMin()
+        //{
+        //    return Cantidad < stockMinimo;
+        //}
 
-        //Validacion Inferior a 0
-        public bool InferiorCero()
-        {
-            return Cantidad < 0;
-        }
+        ////Validacion Inferior a 0
+        //public bool InferiorCero()
+        //{
+        //    return Cantidad < 0;
+        //}
 
-        //validacion Superior que cantidad
-        public bool SuperiorStockMax()
-        {
-            return Cantidad > stockMaximo;
-        }
+        ////validacion Superior que cantidad
+        //public bool SuperiorStockMax()
+        //{
+        //    return Cantidad > stockMaximo;
+        //}
     }
 }

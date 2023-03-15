@@ -20,7 +20,6 @@ namespace CRUDInventoryQuick.Controllers
         private readonly IRepository<PRODUCTO> _Productorepository;
         private readonly IRepository<SUBCATEGORIum> _subcategoriaRepository;
         private readonly IRepository<MARCA> _MarcaRepository;
-        private readonly ApplicationDbContext _context;
         private List<SelectListItem> _Subcategoria;
         private List<SelectListItem> _Marca;
         public ProductoController(IRepository<PRODUCTO> Productorepository, IRepository<SUBCATEGORIum> subcategoriaRepository, IRepository<MARCA> MarcaRepository, ApplicationDbContext context)
@@ -28,7 +27,6 @@ namespace CRUDInventoryQuick.Controllers
             _Productorepository = Productorepository;
             _subcategoriaRepository = subcategoriaRepository;
             _MarcaRepository = MarcaRepository;
-            _context = context;
         }
 
         //GET: Producto
@@ -258,61 +256,61 @@ namespace CRUDInventoryQuick.Controllers
         //    return (_Productorepository.GetAll().Any(e => e.ProductoId == id)).GetValueOrDefault();
         //}
 
-        ///Agregar Cantidad stock
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AgregarCantidad(int id, int cantidadA)
-        {
-            var producto = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
-            if (producto != null)
-            {
-                producto.stockMax(cantidadA);
+        /////Agregar Cantidad stock
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AgregarCantidad(int id, int cantidadA)
+        //{
+        //    var producto = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
+        //    if (producto != null)
+        //    {
+        //        producto.stockMax(cantidadA);
 
-                if (producto.SuperiorStockMax())
-                {
-                    TempData[$"Error{id}"] = $"El stock actual del {producto.Nombre}({producto.Cantidad}) supera el stock maximo permitido ({producto.stockMaximo})";
+        //        if (producto.SuperiorStockMax())
+        //        {
+        //            TempData[$"Error{id}"] = $"El stock actual del {producto.Nombre}({producto.Cantidad}) supera el stock maximo permitido ({producto.stockMaximo})";
 
-                    return RedirectToAction("Index");
-                }
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        //            return RedirectToAction("Index");
+        //        }
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
+        //}
 
-        ////Eliminar cantidad stock
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EliminarCantidad(int id, int cantidadE)
-        {
-            var producto = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
-            if (producto != null)
-            {
-                producto.stockMim(cantidadE);
+        //////Eliminar cantidad stock
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> EliminarCantidad(int id, int cantidadE)
+        //{
+        //    var producto = await _context.PRODUCTOs.FirstOrDefaultAsync(x => x.ProductoId == id);
+        //    if (producto != null)
+        //    {
+        //        producto.stockMim(cantidadE);
 
-                if (producto.InferiorStockMin())
-                {
-                    TempData[$"Error{id}"] = $"El stock actual del {producto.Nombre} es Inferior al stock minimo permitido";
+        //        if (producto.InferiorStockMin())
+        //        {
+        //            TempData[$"Error{id}"] = $"El stock actual del {producto.Nombre} es Inferior al stock minimo permitido";
 
-                    if (producto.InferiorCero())
-                    {
-                        TempData[$"Error{id}"] = $"El stock actual del {producto.Nombre} no puede ser Inferior a 0";
-                        return RedirectToAction("Index");
-                    }
+        //            if (producto.InferiorCero())
+        //            {
+        //                TempData[$"Error{id}"] = $"El stock actual del {producto.Nombre} no puede ser Inferior a 0";
+        //                return RedirectToAction("Index");
+        //            }
 
-                }
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return NotFound();
-            }
+        //        }
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        return NotFound();
+        //    }
 
-        }
+        //}
 
     }
 }
