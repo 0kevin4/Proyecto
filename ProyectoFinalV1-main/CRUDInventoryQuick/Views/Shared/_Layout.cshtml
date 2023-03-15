@@ -62,21 +62,16 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Marca" asp-action="Index">Marca</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Transaccion" asp-action="Index">Transaccion</a>
+                            </li>
                             @* <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="AspNetUserRoles" asp-action="Index">Administracion Roles</a>
                             </li> *@
 
 
                        }
-                        
-                        
-                        @if (User.IsInRole("Administrador "))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="Index">Admin Roles</a>
-                            </li>
-
-                        }
 
                     </ul>
                     <partial name="_LoginPartial" />
@@ -112,12 +107,25 @@
 
 @*Data Picker Initialization*@
 
-    @*<script>
+   @* <script>
         $(function () {
-            $("#datepicker").datepicker();
+            // Inicializar datapicker
+            $('#fecha').datepicker({
+                format: 'yyyy-mm-dd', // Formato de fecha
+                autoclose: true // Cerrar automáticamente al seleccionar una fecha
+            });
+
+            // Establecer la fecha actual
+            var today = new Date();
+            var fechaActual = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            $('#fecha').val(fechaActual);
         });
     </script>*@
 
+
+@*Boton cerrar mensaje*@
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
 
 

@@ -81,6 +81,7 @@ namespace CRUDInventoryQuick.Controllers
         {
             if (ModelState.IsValid)
             {
+                pRECIO.FechaIngreso = DateTime.Now;
                 await _repository.Add(pRECIO);
                 await _repository.Save();
                 return RedirectToAction(nameof(Index));

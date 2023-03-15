@@ -27,7 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Marca)
             </th>
-            <th>
+            <th width="150">
                 @Html.DisplayNameFor(model => model.Subcategoria)
             </th>
             <th>
@@ -47,20 +47,6 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-@*            var errorAdd = false;*@
-            var error = false;
-            var errorT= $"Error{item.ProductoId}";
-@*            var errorAumentarProductoCantidad = $"Error{item.ProductoId}";
-            if (TempData.ContainsKey(errorAumentarProductoCantidad))
-            {
-                errorAdd = true;
-            }*@
-
-            if (TempData.ContainsKey(errorT))
-            {
-                error = true;
-            }
-
         <tr>
 
             <td>
@@ -73,10 +59,24 @@
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Marca.Nombre)
+                    @if (item.Marca == null)
+                    {
+                        <text>Sin Marca</text>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Marca.Nombre)
+                    }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Subcategoria.Nombre)
+                    @if (item.Subcategoria == null)
+                    {
+                        <text>Sin Subcategoria</text>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Subcategoria.Nombre)
+                    }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.stockMaximo)
@@ -90,34 +90,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
-            <td align="right" width="300">
+            <td align="right" width="110">
                 <a asp-action="Edit" asp-route-id="@item.ProductoId"  class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> 
                 <a asp-action="Details" asp-route-id="@item.ProductoId"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> 
                 <a asp-action="Delete" asp-route-id="@item.ProductoId" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
-                <p></p>
-                    <form asp-action="AgregarCantidad" asp-route-id="@item.ProductoId" method="post">
-                        <div class="col-xs-12 col-md-3 input-group">
-                            <input type="number" name="cantidadA" id="cantidadA" value="" placeholder="Agregar Cantidad" style="width : 120px; heigth : 1px" class="form-control" required/>&nbsp;
-                            <input type="submit" value="+" class="btn btn-sm btn-success" />
-                         </div>
-                        
-                        @Html.AntiForgeryToken()
-                    </form><br>
-@*                    @if (errorAdd)
-                    {
-                        <div class="alert alert-danger">@TempData[errorAumentarProductoCantidad]</div>
-                    }*@
-                    <form asp-action="EliminarCantidad" asp-route-id="@item.ProductoId" method="post">
-                        <div class="col-xs-12 col-md-3 input-group ">
-                            <input type="number" name="cantidadE" id="cantidadE" value="" placeholder="Eliminar Cantidad" style="width : 120px; heigth : 1px" class="form-control" required/>&nbsp;
-                            <input type="submit" value="-" class="btn btn-sm btn-danger" />
-                        </div>
-                        @Html.AntiForgeryToken()
-                    </form><br>
-                    @if (error)
-                    {
-                        <div class="alert alert-danger">@TempData[errorT]</div>
-                    }
             </td>
         </tr>
 }

@@ -61,7 +61,14 @@
                 @Html.DisplayFor(modelItem => item.PrecioVentaFinal)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                    @if (item.Producto == null)
+                    {
+                        <text>Sin Producto</text>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                    }
             </td>
             <td align="right" width="110">
                 <a asp-action="Edit" asp-route-id="@item.PrecioId" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> 

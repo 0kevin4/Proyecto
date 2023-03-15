@@ -1,0 +1,85 @@
+﻿@model IEnumerable<CRUDInventoryQuick.Models.TRANSACCION>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h2 align="center" style="color :black; text-shadow: black 0.1em 0.1em 0.2em;">Transacciones</h2>
+<br />
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-success"><i class="bi bi-bookmark-plus"></i>Agregar Transaccion</a>
+</p>
+<table id ="Tablas" class="table table-hover table-bordered" style="width:100%">
+    <thead class="table-success">
+        <tr>
+            <th width="30">
+               Id
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoTransaccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoTransaccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                    @if (item.Producto == null)
+                    {
+                        <text>Sin Producto</text>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                    }
+            </td>
+            <td>
+                 @if (item.Descripcion == null)
+                 {
+                    <text>Sin Descripcion</text>
+                 }
+                 else 
+                 {
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                 }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+            <td align="right" width="110">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a> 
+                <a asp-action="Details" asp-route-id="@item.Id"  class="btn btn-sm btn-success"><i class="bi bi-bar-chart"></i></a> 
+                <a asp-action="Delete" asp-route-id="@item.Id"  class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

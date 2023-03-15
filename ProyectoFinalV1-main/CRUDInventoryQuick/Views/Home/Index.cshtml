@@ -5,5 +5,47 @@
 
 <div class="text-center">
     <h1 style="color :black" ; class="display-4">Bienvenido al Control de Inventario Dulce Pooh</h1>
-</div>
+</div><br />
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="col-12">
+        <div class="d-flex">
+                @if (ViewBag.ProductosBajoStock != null && ViewBag.ProductosBajoStock.Count > 0)
+                {
+                    <div class="alert alert-warning flex-fill mx-2">
+                        <p>Los siguientes productos tienen un stock mínimo:</p>
+                            <ul>
+                                @foreach (var producto in ViewBag.ProductosBajoStock)
+                                {
+                                    <li>@producto.Nombre</li>
+                                }
+                            </ul>
+                    </div>
+                }
+
+            
+                @if (ViewBag.ProductosMaximoStock != null && ViewBag.ProductosMaximoStock.Count > 0)
+                {
+                    <div class="alert alert-warning flex-fill mx-2">
+                        <p>Los siguientes productos tienen un stock Maximo:</p>
+                            <ul>
+                                @foreach (var producto in ViewBag.ProductosMaximoStock)
+                                {
+                                    <li>@producto.Nombre</li>
+                                }
+                            </ul>
+                    </div>
+                }
+            
+        </div>     
+    </div>
+    
+
+    <div>
+        <h4>Producto más vendido:</h4>
+        <h4>@ViewBag.ProductoMasVendido</h4>
+    </div>
+
+}
 

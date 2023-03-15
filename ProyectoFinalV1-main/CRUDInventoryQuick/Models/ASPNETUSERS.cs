@@ -88,15 +88,7 @@ namespace CRUDInventoryQuick.Models
         /// </summary>
         public bool TwoFactorEnabled { get; set; } 
 
-        [InverseProperty("ASPNETUSER_ASPNETUSER")]
-        public virtual ADMINISTRADOR ADMINISTRADOR { get; set; } = null!;
-        [InverseProperty("ASPNETUSER_ASPNETUSER")]
-        public virtual CAJERO CAJERO { get; set; } = null!;
-        [InverseProperty("ASPNETUSER_ASPNETUSER")]
-        public virtual CLIENTE CLIENTE { get; set; } = null!;
-        [InverseProperty("ASPNETUSER_ASPNETUSER")]
-        public virtual EMPLEADO EMPLEADO { get; set; } = null!;
-        [InverseProperty("ASPNETUSER_ASPNETUSER")]
+       
         public virtual ICollection<ASPNETUSERCLAIMS> ASPNETUSERCLAIMs { get; set; }
         [InverseProperty("ASPNETUSER_ASPNETUSER")]
         public virtual ICollection<ASPNETUSERLOGINS> ASPNETUSERLOGINs { get; set; }

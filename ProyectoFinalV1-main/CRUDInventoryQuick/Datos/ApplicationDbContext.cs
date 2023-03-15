@@ -18,32 +18,18 @@ namespace CRUDInventoryQuick.Datos
         {
         }
 
-        public virtual DbSet<ADMINISTRADOR> ADMINISTRADORs { get; set; } = null!;
         public virtual DbSet<ASPNETUSERS> ASPNETUSERs { get; set; } = null!;
         public virtual DbSet<ASPNETUSERCLAIMS> ASPNETUSERCLAIMs { get; set; } = null!;
         public virtual DbSet<ASPNETUSERLOGINS> ASPNETUSERLOGINs { get; set; } = null!;
         public virtual DbSet<ASPNETROLES> ASPNETROLEs { get; set; } = null!;
         public virtual DbSet<ASPNETUSERROLES> ASPNETUSERROLEs { get; set; } = null!;
-        public virtual DbSet<CAJERO> CAJEROs { get; set; } = null!;
         public virtual DbSet<CATEGORIum> CATEGORIAs { get; set; } = null!;
-        public virtual DbSet<CIUDAD> CIUDADs { get; set; } = null!;
-        public virtual DbSet<CLIENTE> CLIENTEs { get; set; } = null!;
-        public virtual DbSet<DETALLEPEDIDO> DETALLEPEDIDOs { get; set; } = null!;
-        public virtual DbSet<EMPLEADO> EMPLEADOs { get; set; } = null!;
-        public virtual DbSet<IMAGENPRODUCTO> IMAGENPRODUCTOs { get; set; } = null!;
-        public virtual DbSet<LUGAR> LUGARs { get; set; } = null!;
         public virtual DbSet<MARCA> MARCAs { get; set; } = null!;
-        public virtual DbSet<PEDIDO> PEDIDOs { get; set; } = null!;
         public virtual DbSet<PRECIO> PRECIOs { get; set; } = null!;
         public virtual DbSet<PRODUCTO> PRODUCTOs { get; set; } = null!;
-        public virtual DbSet<STOCK> STOCKs { get; set; } = null!;
-        public virtual DbSet<SUBCATEGORIum> SUBCATEGORIAs { get; set; } = null!;
-        public virtual DbSet<SUELDO> SUELDOs { get; set; } = null!;
-        public virtual DbSet<TIPOSDEPAGO> TIPOSDEPAGOs { get; set; } = null!;
-        public virtual DbSet<TIPOSDETRANSACCIÓN> TIPOSDETRANSACCIÓNs { get; set; } = null!;
+        public virtual DbSet<SUBCATEGORIum> SUBCATEGORIAs { get; set; } = null!; 
         public virtual DbSet<TRANSACCION> TRANSACCIONs { get; set; } = null!;
-        public virtual DbSet<TURNO> TURNOs { get; set; } = null!;
-        public virtual DbSet<UNIDADMEDIDum> UNIDADMEDIDAs { get; set; } = null!;
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -56,20 +42,7 @@ namespace CRUDInventoryQuick.Datos
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ADMINISTRADOR>(entity =>
-            {
-                entity.HasKey(e => e.ASPNETUSER_ASPNETUSER_ID)
-                    .HasName("ADMINISTRADOR_PK");
-
-                entity.Property(e => e.ASPNETUSER_ASPNETUSER_ID).HasComment("Identificador Unico de cada Usuario");
-
-                entity.HasOne(d => d.ASPNETUSER_ASPNETUSER)
-                    .WithOne(p => p.ADMINISTRADOR)
-                    .HasForeignKey<ADMINISTRADOR>(d => d.ASPNETUSER_ASPNETUSER_ID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ADMINISTRADOR_ASPNETUSER_FK");
-            });
-
+            
             modelBuilder.Entity<ASPNETUSERS>(entity =>
             {
                 entity.Property(e => e.Id)
@@ -189,20 +162,6 @@ namespace CRUDInventoryQuick.Datos
                 entity.Property(e => e.Name).HasComment("Indica el nombre del rol correspondiente");
             });
 
-            modelBuilder.Entity<CAJERO>(entity =>
-            {
-                entity.HasKey(e => e.ASPNETUSER_ASPNETUSER_ID)
-                    .HasName("CAJEROS_PK");
-
-                entity.Property(e => e.ASPNETUSER_ASPNETUSER_ID).HasComment("Identificador unico de usuario cajero");
-
-                entity.HasOne(d => d.ASPNETUSER_ASPNETUSER)
-                    .WithOne(p => p.CAJERO)
-                    .HasForeignKey<CAJERO>(d => d.ASPNETUSER_ASPNETUSER_ID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("CAJEROS_ASPNETUSER_FK");
-            });
-
             modelBuilder.Entity<CATEGORIum>(entity =>
             {
                 entity.HasKey(e => e.CategoriaId)
@@ -216,119 +175,7 @@ namespace CRUDInventoryQuick.Datos
 
                 entity.Property(e => e.Nombre).HasComment("Indica el nombre de la categoria");
             });
-
-            modelBuilder.Entity<CIUDAD>(entity =>
-            {
-                entity.Property(e => e.CiudadId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico de ciudad");
-
-                entity.Property(e => e.Nombre).HasComment("Indica el nombre de la ciudad en donde se encuentra el local");
-            });
-
-            modelBuilder.Entity<CLIENTE>(entity =>
-            {
-                entity.HasKey(e => e.ASPNETUSER_ASPNETUSER_ID)
-                    .HasName("CLIENTES_PK");
-
-                entity.Property(e => e.ASPNETUSER_ASPNETUSER_ID).HasComment("Identificador unico de usuario clientes");
-
-                entity.HasOne(d => d.ASPNETUSER_ASPNETUSER)
-                    .WithOne(p => p.CLIENTE)
-                    .HasForeignKey<CLIENTE>(d => d.ASPNETUSER_ASPNETUSER_ID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("CLIENTES_ASPNETUSER_FK");
-            });
-
-            modelBuilder.Entity<DETALLEPEDIDO>(entity =>
-            {
-                entity.Property(e => e.DetallePedidoId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico de detalle pedido");
-
-                entity.Property(e => e.Cantidad).HasComment("Indica la cantidad a cumplir en el pedido");
-
-                entity.Property(e => e.PEDIDO_PedidoId).HasComment("Identificador unico del pedido");
-
-                entity.Property(e => e.PRODUCTO_ProductoId).HasComment("Identificador unico del producto");
-
-                entity.Property(e => e.PrecioUnitario).HasComment("Indica el costo unitario del pedido");
-
-                entity.HasOne(d => d.PEDIDO_Pedido)
-                    .WithMany(p => p.DETALLEPEDIDOs)
-                    .HasForeignKey(d => d.PEDIDO_PedidoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("DETALLEPEDIDO_PEDIDO_FK");
-
-                entity.HasOne(d => d.PRODUCTO_Producto)
-                    .WithMany(p => p.DETALLEPEDIDOs)
-                    .HasForeignKey(d => d.PRODUCTO_ProductoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("DETALLEPEDIDO_PRODUCTO_FK");
-            });
-
-            modelBuilder.Entity<EMPLEADO>(entity =>
-            {
-                entity.HasKey(e => e.ASPNETUSER_ASPNETUSER_ID)
-                    .HasName("EMPLEADOS_PK");
-
-                entity.Property(e => e.ASPNETUSER_ASPNETUSER_ID).HasComment("Identificador unico de usuario empleado");
-
-                entity.Property(e => e.TURNO_TurnoId).HasComment("Identificador unico de turno");
-
-                entity.HasOne(d => d.ASPNETUSER_ASPNETUSER)
-                    .WithOne(p => p.EMPLEADO)
-                    .HasForeignKey<EMPLEADO>(d => d.ASPNETUSER_ASPNETUSER_ID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("EMPLEADOS_ASPNETUSER_FK");
-
-                entity.HasOne(d => d.TURNO_Turno)
-                    .WithMany(p => p.EMPLEADOs)
-                    .HasForeignKey(d => d.TURNO_TurnoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("EMPLEADOS_TURNO_FK");
-            });
-
-            modelBuilder.Entity<IMAGENPRODUCTO>(entity =>
-            {
-                entity.Property(e => e.ImagenProductoId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico de la imagen producto ");
-
-                entity.Property(e => e.Estado).HasComment("Indica si la imagen se encuentra activa");
-
-                entity.Property(e => e.Foto).HasComment("Indica como es el producto");
-
-                entity.Property(e => e.PRODUCTO_ProductoId).HasComment("Identificador unico del producto");
-
-                entity.HasOne(d => d.PRODUCTO_Producto)
-                    .WithMany(p => p.IMAGENPRODUCTOs)
-                    .HasForeignKey(d => d.PRODUCTO_ProductoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("IMAGENPRODUCTO_PRODUCTO_FK");
-            });
-
-            modelBuilder.Entity<LUGAR>(entity =>
-            {
-                entity.Property(e => e.LugarId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico del lugar ");
-
-                entity.Property(e => e.CIUDAD_CiudadId).HasComment("Identificador unico de ciudad");
-
-                entity.Property(e => e.Correo).HasComment("Indica metodo de comunicacion con el lugar");
-
-                entity.Property(e => e.Direccion).HasComment("Indica ubicacion del lugar");
-
-                entity.Property(e => e.FechaIngreso).HasComment("Indica la fecha ingreso del lugar");
-
-                entity.HasOne(d => d.CIUDAD_Ciudad)
-                    .WithMany(p => p.LUGARs)
-                    .HasForeignKey(d => d.CIUDAD_CiudadId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("LUGAR_CIUDAD_FK");
-            });
-
+            
             modelBuilder.Entity<MARCA>(entity =>
             {
                 entity.Property(e => e.MarcaId)
@@ -338,19 +185,6 @@ namespace CRUDInventoryQuick.Datos
                 entity.Property(e => e.Estado).HasComment("Indica si la marca esta activa");
 
                 entity.Property(e => e.Nombre).HasComment("Indica el nombre de la marca");
-            });
-
-            modelBuilder.Entity<PEDIDO>(entity =>
-            {
-                entity.Property(e => e.PedidoId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico de pedido");
-
-                entity.Property(e => e.Estado).HasComment("Indica si el pedido esta activo");
-
-                entity.Property(e => e.Fecha).HasComment("Indica la fecha en la que se realizo el pedido");
-
-                entity.Property(e => e.Nombre).HasComment("Indica el nombre del pedido");
             });
 
             modelBuilder.Entity<PRECIO>(entity =>
@@ -414,37 +248,6 @@ namespace CRUDInventoryQuick.Datos
                     .HasConstraintName("PRODUCTO_SUBCATEGORIA_FK");
             });
 
-            modelBuilder.Entity<STOCK>(entity =>
-            {
-                entity.Property(e => e.StockId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico del stock");
-
-                entity.Property(e => e.CantidadStockAlarma).HasComment("Indica la cantidad alarma a tener en el stock");
-
-                entity.Property(e => e.CantidadStockIdeal).HasComment("Indica la cantidad ideal a tener en el stock");
-
-                entity.Property(e => e.CantidadStockReal).HasComment("Indica la cantidad real que se posee");
-
-                entity.Property(e => e.FechaIngresoStock).HasComment("Indica la fecha ingreso del stock");
-
-                entity.Property(e => e.LUGAR_LugarId).HasComment("Identificador unico del lugar");
-
-                entity.Property(e => e.PRODUCTO_ProductoId).HasComment("Identificador unico del producto");
-
-                entity.HasOne(d => d.LUGAR_Lugar)
-                    .WithMany(p => p.STOCKs)
-                    .HasForeignKey(d => d.LUGAR_LugarId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("STOCK_LUGAR_FK");
-
-                entity.HasOne(d => d.PRODUCTO_Producto)
-                    .WithMany(p => p.STOCKs)
-                    .HasForeignKey(d => d.PRODUCTO_ProductoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("STOCK_PRODUCTO_FK");
-            });
-
             modelBuilder.Entity<SUBCATEGORIum>(entity =>
             {
                 entity.HasKey(e => e.SubcategoriaId)
@@ -467,131 +270,28 @@ namespace CRUDInventoryQuick.Datos
                     .HasConstraintName("SUBCATEGORIA_CATEGORIA_FK");
             });
 
-            modelBuilder.Entity<SUELDO>(entity =>
-            {
-                entity.Property(e => e.SueldoId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico de sueldo");
-
-                entity.Property(e => e.EMPLEADOS_ASPNETUSER_ASPNETUSER_ID).HasComment("Identificador unico de usuario");
-
-                entity.Property(e => e.Estado).HasComment("Indica si el sueldo esta activo");
-
-                entity.Property(e => e.FechaContrato).HasComment("Indica la fecha de la contratacion");
-
-                entity.Property(e => e.FechaFinalizacion).HasComment("Indica la fecha finalizacion del contrato");
-
-                entity.Property(e => e.ObjetoContrato).HasComment("Indica el tipo contrato");
-
-                entity.Property(e => e.SalarioTotal).HasComment("Indica el salario total del empleado");
-
-                entity.Property(e => e.SueldoMensual).HasComment("Indica las ganancias mensuales del empleado");
-
-                entity.HasOne(d => d.EMPLEADOS_ASPNETUSER_ASPNETUSER)
-                    .WithMany(p => p.SUELDOs)
-                    .HasForeignKey(d => d.EMPLEADOS_ASPNETUSER_ASPNETUSER_ID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("SUELDO_EMPLEADOS_FK");
-            });
-
-            modelBuilder.Entity<TIPOSDEPAGO>(entity =>
-            {
-                entity.Property(e => e.TiposdePagoId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico de tipos de pago");
-
-                entity.Property(e => e.Estado).HasComment("Indica si la categoria esta activa ");
-
-                entity.Property(e => e.Nombre).HasComment("Nombre del tipo de pago correspondiente");
-
-                entity.Property(e => e.PEDIDO_PedidoId).HasComment("Identificador unico de pedido");
-
-                entity.HasOne(d => d.PEDIDO_Pedido)
-                    .WithMany(p => p.TIPOSDEPAGOs)
-                    .HasForeignKey(d => d.PEDIDO_PedidoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("TIPOSDEPAGO_PEDIDO_FK");
-            });
-
-            modelBuilder.Entity<TIPOSDETRANSACCIÓN>(entity =>
-            {
-                entity.HasKey(e => e.TipoTransaccionId)
-                    .HasName("TIPOSDETRANSACCIÓN_PK");
-
-                entity.Property(e => e.TipoTransaccionId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico de tipos transaccion");
-
-                entity.Property(e => e.Descripcion).HasComment("Descripcion correspondiente al tipo de transaccion");
-            });
-
             modelBuilder.Entity<TRANSACCION>(entity =>
             {
-                entity.HasKey(e => e.TransacciónId)
+                entity.HasKey(e => e.Id)
                     .HasName("TRANSACCION_PK");
 
-                entity.Property(e => e.TransacciónId)
+                entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasComment("Identificador unico de la transaccion");
 
-                entity.Property(e => e.CantidadProducto).HasComment("Cantidad correspondiente al producto");
+                entity.Property(e => e.IdProducto).HasComment("Llave foranea Transaccion_Producto");
 
-                entity.Property(e => e.FechaTransaccion).HasComment("Fecha correspondiente al producto");
+                entity.Property(e => e.Fecha).HasComment("Fecha Correspondiente a la entrada o salida");
 
-                entity.Property(e => e.OtrosDetalles).HasComment("Otros detalles correspondiente a la transaccion");
+                entity.Property(e => e.TipoTransaccion).HasComment("Tipo de transaccion");
 
-                entity.Property(e => e.PRODUCTO_ProductoId).HasComment("Identificador unico de producto");
+                entity.Property(e => e.Cantidad).HasComment("Cantidad de entrada o salida del producto");
 
-                entity.Property(e => e.TIPOSDETRANSACCIÓN_TipoTransaccionId).HasComment("Identificador unico correspondiente a tipos de transaccion");
-
-                entity.HasOne(d => d.PRODUCTO_Producto)
+                entity.HasOne(d => d.Producto)
                     .WithMany(p => p.TRANSACCIONs)
-                    .HasForeignKey(d => d.PRODUCTO_ProductoId)
+                    .HasForeignKey(d => d.IdProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("TRANSACCION_PRODUCTO_FK");
-
-                entity.HasOne(d => d.TIPOSDETRANSACCIÓN_TipoTransaccion)
-                    .WithMany(p => p.TRANSACCIONs)
-                    .HasForeignKey(d => d.TIPOSDETRANSACCIÓN_TipoTransaccionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("TRANSACCION_TIPOSDETRANSACCIÓN_FK");
-            });
-
-            modelBuilder.Entity<TURNO>(entity =>
-            {
-                entity.Property(e => e.TurnoId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico del turno ");
-
-                entity.Property(e => e.AspNetUserId).HasComment("Identificador unico del usuario");
-
-                entity.Property(e => e.Estado).HasComment("Estado actual del turno");
-
-                entity.Property(e => e.FechaTurno).HasComment("Fecha correspondiente a turno");
-
-                entity.Property(e => e.HoraIngreso).HasComment("Hora correspondiente al ingreso");
-            });
-
-            modelBuilder.Entity<UNIDADMEDIDum>(entity =>
-            {
-                entity.HasKey(e => e.UnidadMedidaId)
-                    .HasName("UNIDADMEDIDA_PK");
-
-                entity.Property(e => e.UnidadMedidaId)
-                    .ValueGeneratedNever()
-                    .HasComment("Identificador unico de cada medida");
-
-                entity.Property(e => e.Estado).HasComment("Estado actual de la medida");
-
-                entity.Property(e => e.Nombre).HasComment("Nombre de la medida");
-
-                entity.Property(e => e.PRODUCTO_ProductoId).HasComment("Identificador unico del producto");
-
-                entity.HasOne(d => d.PRODUCTO_Producto)
-                    .WithMany(p => p.UNIDADMEDIDa)
-                    .HasForeignKey(d => d.PRODUCTO_ProductoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("UNIDADMEDIDA_PRODUCTO_FK");
             });
 
             OnModelCreatingPartial(modelBuilder);
