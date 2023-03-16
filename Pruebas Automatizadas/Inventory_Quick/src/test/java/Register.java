@@ -11,45 +11,47 @@ public class Register {
     WebDriver chromeDriver;
 
     @Test
-    public void Register(){
+    public void register(){
 
         System.setProperty("webdriver.chrome.driver","C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();
         chromeDriver.get("http://20.119.35.194:8080/\n");
         System.out.println(chromeDriver.getTitle());
-        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement txtReg = chromeDriver.findElement(By.id("registrarse"));
-        highLighterMethod(chromeDriver,txtReg);
-        txtReg.click();
 
-        //Imput Correo
+        //Button Nav Register
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement txtCorreo = chromeDriver.findElement(By.id("Input_Email"));
-        highLighterMethod(chromeDriver,txtCorreo);
-        txtCorreo.sendKeys("juan.lancheros662@misena.edu.co");
+        WebElement Register = chromeDriver.findElement(By.id("registrarse"));
+        highLighterMethod(chromeDriver,Register);
+        Register.click();
 
-        //Imput Contraseña
+        //Input Email
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement txtContra = chromeDriver.findElement(By.xpath("//*[@id=\"Input_Password\"]"));
-        highLighterMethod(chromeDriver,txtContra);
-        txtContra.sendKeys("Juan9810@");
+        WebElement Email = chromeDriver.findElement(By.id("Input_Email"));
+        highLighterMethod(chromeDriver,Email);
+        Email.sendKeys("juan.lancheros662@misena.edu.co");
 
-        //Imput Confirmar COntraseña
+        //Input Password
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement txtContraConf = chromeDriver.findElement(By.id("Input_ConfirmPassword"));
-        highLighterMethod(chromeDriver,txtContraConf);
-        txtContraConf.sendKeys("Juan9810@");
+        WebElement Password = chromeDriver.findElement(By.xpath("//*[@id=\"Input_Password\"]"));
+        highLighterMethod(chromeDriver,Password);
+        Password.sendKeys("Juan9810@");
 
-        //Imput Registrarse
+        //Input Confirm Password
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement btnAceptar = chromeDriver.findElement(By.id("registerSubmit"));
-        highLighterMethod(chromeDriver,btnAceptar);
-        btnAceptar.click();
+        WebElement ConfirmP = chromeDriver.findElement(By.id("Input_ConfirmPassword"));
+        highLighterMethod(chromeDriver,ConfirmP);
+        ConfirmP.sendKeys("Juan9810@");
 
-        //Confirmar Correo
-        WebElement btnRegistrar = chromeDriver.findElement(By.id("confirm-link"));
-        highLighterMethod(chromeDriver,btnRegistrar);
-        btnRegistrar.click();
+        //Input Register
+        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
+        WebElement Accept = chromeDriver.findElement(By.id("registerSubmit"));
+        highLighterMethod(chromeDriver,Accept);
+        Accept.click();
+
+        //button Confirm Email
+        WebElement ConfirmE = chromeDriver.findElement(By.id("confirm-link"));
+        highLighterMethod(chromeDriver,ConfirmE);
+        ConfirmE.click();
 
     }
 

@@ -11,37 +11,36 @@ public class Logout {
     WebDriver chromeDriver;
 
     @Test
-    public void Logout(){
+    public void logout(){
 
         System.setProperty("webdriver.chrome.driver","C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();
         chromeDriver.get("http://20.119.35.194:8080/\n");
         System.out.println(chromeDriver.getTitle());
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        //Boton Acceder
-        WebElement txtReg = chromeDriver.findElement(By.id("Acceder"));
-        highLighterMethod(chromeDriver,txtReg);
-        txtReg.click();
+        //button Nav Login
+        WebElement NLogin = chromeDriver.findElement(By.id("Acceder"));
+        highLighterMethod(chromeDriver,NLogin);
+        NLogin.click();
 
-        //imput email
+        //input email
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement txtCorreo = chromeDriver.findElement(By.id("Input_Email"));
-        highLighterMethod(chromeDriver,txtCorreo);
-        txtCorreo.sendKeys("juan.lancheros662@misena.edu.co");
+        WebElement Email = chromeDriver.findElement(By.id("Input_Email"));
+        highLighterMethod(chromeDriver,Email);
+        Email.sendKeys("kevin.moreno249@misena.edu.co");
 
-        //imput contraseña
+        //input Password
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement txtContra = chromeDriver.findElement(By.id("Input_Password"));
-        highLighterMethod(chromeDriver,txtContra);
-        txtContra.sendKeys("Juan9810@");
+        WebElement Password = chromeDriver.findElement(By.id("Input_Password"));
+        highLighterMethod(chromeDriver,Password);
+        Password.sendKeys("Kevin2304@");
 
-        //boton registrar
-        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement btnIngresar = chromeDriver.findElement(By.id("login-submit"));
-        highLighterMethod(chromeDriver,btnIngresar);
-        btnIngresar.click();
+        //button Login        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
+        WebElement Login = chromeDriver.findElement(By.id("login-submit"));
+        highLighterMethod(chromeDriver,Login);
+        Login.click();
 
-        //Boton cerrar sesion
+        //button Logout
         WebElement logout = chromeDriver.findElement(By.id("logout"));
         highLighterMethod(chromeDriver,logout);
         logout.click();
