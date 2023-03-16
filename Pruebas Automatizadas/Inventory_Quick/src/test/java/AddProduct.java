@@ -11,7 +11,7 @@ public class AddProduct {
     WebDriver chromeDriver;
 
     @Test
-    public void login() throws InterruptedException {
+    public void Product() throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver","C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();
@@ -41,7 +41,7 @@ public class AddProduct {
         highLighterMethod(chromeDriver,ButtonLogin);
         ButtonLogin.click();
 
-        //////////////////////////////ADD PRODUCT/////////////////////////////////////7
+        //////////////////////////////ADD PRODUCT/////////////////////////////////////
 
         //Button Nav Product
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
