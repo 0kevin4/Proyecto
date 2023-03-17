@@ -7,30 +7,28 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class AddMarca {
-
+public class EditMarca {
     WebDriver chromeDriver;
 
     @Test
-    public void Marca() throws InterruptedException {
+
+    public void Editmarca(){
 
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();
         chromeDriver.get("http://20.119.35.194:8080/\n");
         System.out.println(chromeDriver.getTitle());
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        //Button Nav Login
+
         WebElement txtAcc = chromeDriver.findElement(By.id("Acceder"));
         highLighterMethod(chromeDriver, txtAcc);
         txtAcc.click();
 
-        //input email
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement Email = chromeDriver.findElement(By.id("Input_Email"));
         highLighterMethod(chromeDriver, Email);
         Email.sendKeys("kevin.moreno249@misena.edu.co");
 
-        //input Password
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement Password = chromeDriver.findElement(By.id("Input_Password"));
         highLighterMethod(chromeDriver, Password);
@@ -42,42 +40,25 @@ public class AddMarca {
         highLighterMethod(chromeDriver, ButtonLogin);
         ButtonLogin.click();
 
-        //////////////////////////////ADD MARCA/////////////////////////////////////
-
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement Marca = chromeDriver.findElement(By.xpath("/html/body/header/nav/div/div/ul[1]/li[5]/a"));
         highLighterMethod(chromeDriver, Marca);
         Marca.click();
 
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement AddMarca = chromeDriver.findElement(By.xpath("/html/body/div/main/p/a"));
-        highLighterMethod(chromeDriver, AddMarca);
-        AddMarca.click();
+        WebElement EditMarca = chromeDriver.findElement(By.xpath("//*[@id=\"Tablas\"]/tbody/tr[1]/td[4]/a[1]"));
+        highLighterMethod(chromeDriver, EditMarca);
+        EditMarca.click();
 
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement Name = chromeDriver.findElement(By.id("Nombre"));
         highLighterMethod(chromeDriver, Name);
-        Name.sendKeys("Postobon");
-
-        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement Status = chromeDriver.findElement(By.id("Estado"));
-        highLighterMethod(chromeDriver, Status);
-        Status.click();
-
-        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement Guardar = chromeDriver.findElement(By.xpath("/html/body/div/main/div/div/form/div[3]/input"));
-        highLighterMethod(chromeDriver, Guardar);
-        Guardar.click();
-
+        Name.sendKeys("Channel");
 
     }
 
-    public void highLighterMethod(WebDriver driver, WebElement element) {
+    public void highLighterMethod (WebDriver driver, WebElement element){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');", element);
     }
-
-
 }
-
-
