@@ -1,3 +1,5 @@
+package Category;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -7,81 +9,86 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class AddMarca {
-
+public class EditCategory {
     WebDriver chromeDriver;
 
     @Test
-    public void Marca() throws InterruptedException {
+    public void EditCategory() throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();
         chromeDriver.get("http://20.119.35.194:8080/\n");
         System.out.println(chromeDriver.getTitle());
+        chromeDriver.manage().window().maximize();
+
+        //Button Nav Login.Login
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        //Button Nav Login
         WebElement txtAcc = chromeDriver.findElement(By.id("Acceder"));
         highLighterMethod(chromeDriver, txtAcc);
         txtAcc.click();
+        Thread.sleep(1500);
 
         //input email
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement Email = chromeDriver.findElement(By.id("Input_Email"));
         highLighterMethod(chromeDriver, Email);
         Email.sendKeys("kevin.moreno249@misena.edu.co");
+        Thread.sleep(1500);
 
         //input Password
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement Password = chromeDriver.findElement(By.id("Input_Password"));
         highLighterMethod(chromeDriver, Password);
         Password.sendKeys("Kevin2304@");
+        Thread.sleep(1500);
 
-        //Button Login
+        //Button Login.Login
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement ButtonLogin = chromeDriver.findElement(By.id("login-submit"));
         highLighterMethod(chromeDriver, ButtonLogin);
         ButtonLogin.click();
+        Thread.sleep(1500);
+        //////////////////////////////EDIT CATEGORY/////////////////////////////////////
 
-        //////////////////////////////ADD PRODUCT/////////////////////////////////////
-
+        //Button Nav Category
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement Marca = chromeDriver.findElement(By.xpath("/html/body/header/nav/div/div/ul[1]/li[5]/a"));
-        highLighterMethod(chromeDriver,Marca);
-        Marca.click();
+        WebElement Category = chromeDriver.findElement(By.xpath("/html/body/header/nav/div/div/ul[1]/li[1]/a"));
+        highLighterMethod(chromeDriver,Category);
+        Category.click();
+        Thread.sleep(1500);
 
+        //Button Edit Category
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement AddMarca = chromeDriver.findElement(By.xpath("/html/body/div/main/p/a"));
-        highLighterMethod(chromeDriver,AddMarca);
-        AddMarca.click();
+        WebElement EditCategory = chromeDriver.findElement(By.xpath("//*[@id=\"Tablas\"]/tbody/tr[1]/td[4]/a[1]"));
+        highLighterMethod(chromeDriver,EditCategory);
+        EditCategory.click();
+        Thread.sleep(1500);
 
+        //input Name
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
         WebElement Name = chromeDriver.findElement(By.id("Nombre"));
         highLighterMethod(chromeDriver,Name);
-        Name.sendKeys("Postobon");
+        Name.clear();
+        Name.sendKeys("Cajas");
+        Thread.sleep(1500);
 
+        //Button Save
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement Status = chromeDriver.findElement(By.id("Estado"));
-        highLighterMethod(chromeDriver,Status);
-        Status.click();
+        WebElement Add = chromeDriver.findElement(By.xpath("/html/body/div/main/div/div/form/div[3]/input"));
+        highLighterMethod(chromeDriver,Add);
+        Add.click();
+        Thread.sleep(1500);
 
-        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement Guardar = chromeDriver.findElement(By.xpath("/html/body/div/main/div/div/form/div[3]/input"));
-        highLighterMethod(chromeDriver,Guardar);
-        Guardar.click();
-
-
-
-
+        //button Logout.Logout
+        WebElement logout = chromeDriver.findElement(By.id("logout"));
+        highLighterMethod(chromeDriver,logout);
+        logout.click();
 
     }
-
-        public void highLighterMethod (WebDriver driver, WebElement element){
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');", element);
-        }
-
-
-
+    public void highLighterMethod (WebDriver driver, WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');", element);
+    }
 
 }
 
