@@ -52,13 +52,19 @@ public class DeletePrice {
         highLighterMethod(chromeDriver,preci);
         preci.click();
 
-
+        //pagina
+        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
+        WebElement pag = chromeDriver.findElement(By.xpath("//*[@id=\"Tablas_paginate\"]/ul/li[8]/a"));
+        highLighterMethod(chromeDriver,pag);
+        MovingWindow(chromeDriver);
+        Thread.sleep(1500);
+        pag.click();
 
 
 
         //Button Delete
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS) ;
-        WebElement Button = chromeDriver.findElement(By.xpath("//*[@id=\"Tablas\"]/tbody/tr[10]/td[8]/a[3]"));
+        WebElement Button = chromeDriver.findElement(By.xpath("//*[@id=\"Tablas\"]/tbody/tr[5]/td[8]/a[3]"));
         highLighterMethod(chromeDriver,Button);
         MovingWindow(chromeDriver);
         Thread.sleep(1500);
