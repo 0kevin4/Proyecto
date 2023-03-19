@@ -1,5 +1,7 @@
 package Subcategory;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.theories.Theories;
 import org.openqa.selenium.By;
@@ -12,6 +14,9 @@ import java.util.concurrent.TimeUnit;
 
 public class EditSubcategory {
     WebDriver chromeDriver;
+
+    @Before
+    public void abrirDriver() {  }
 
     @Test
     public void EditCategory() throws InterruptedException {
@@ -102,8 +107,15 @@ public class EditSubcategory {
         WebElement logout = chromeDriver.findElement(By.id("logout"));
         highLighterMethod(chromeDriver,logout);
         logout.click();
+        Thread.sleep(1500);
 
     }
+    @After
+    public void cerrarDriver() {
+
+        chromeDriver.quit();
+    }
+
     public void highLighterMethod (WebDriver driver, WebElement element){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');", element);

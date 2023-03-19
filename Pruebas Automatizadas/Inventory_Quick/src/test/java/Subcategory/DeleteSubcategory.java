@@ -1,5 +1,7 @@
 package Subcategory;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,6 +14,9 @@ import java.util.concurrent.TimeUnit;
 public class DeleteSubcategory {
 
     WebDriver chromeDriver;
+
+    @Before
+    public void abrirDriver() {  }
 
     @Test
     public void DeleteCategory() throws InterruptedException {
@@ -87,7 +92,14 @@ public class DeleteSubcategory {
         WebElement logout = chromeDriver.findElement(By.id("logout"));
         highLighterMethod(chromeDriver,logout);
         logout.click();
+        Thread.sleep(1500);
     }
+    @After
+    public void cerrarDriver() {
+
+        chromeDriver.quit();
+    }
+
 
     public void MovingWindow(WebDriver chromeDriver){
         JavascriptExecutor jse = (JavascriptExecutor)chromeDriver;

@@ -1,5 +1,7 @@
 package Register;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,6 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Register {
     WebDriver chromeDriver;
+
+    @Before
+    public void abrirDriver() {  }
 
     @Test
     public void register() throws InterruptedException {
@@ -60,7 +65,14 @@ public class Register {
         WebElement ConfirmE = chromeDriver.findElement(By.id("confirm-link"));
         highLighterMethod(chromeDriver,ConfirmE);
         ConfirmE.click();
+        Thread.sleep(1500);
 
+    }
+
+    @After
+    public void cerrarDriver() {
+
+        chromeDriver.quit();
     }
 
     public void highLighterMethod(WebDriver driver, WebElement element){

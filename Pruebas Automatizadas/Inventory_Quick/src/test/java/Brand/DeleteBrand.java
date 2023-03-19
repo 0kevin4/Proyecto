@@ -1,5 +1,7 @@
 package Brand;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,6 +14,9 @@ import java.util.concurrent.TimeUnit;
 public class DeleteBrand {
 
     WebDriver chromeDriver;
+
+    @Before
+    public void abrirDriver() {  }
 
     @Test
     public void EditBrand() throws InterruptedException {
@@ -71,9 +76,15 @@ public class DeleteBrand {
         WebElement Delete = chromeDriver.findElement(By.xpath("/html/body/div/main/div/form/input[2]"));
         highLighterMethod(chromeDriver, Delete);
         Delete.click();
+        Thread.sleep(1500);
 
     }
 
+    @After
+    public void cerrarDriver() {
+
+        chromeDriver.quit();
+    }
     public void highLighterMethod (WebDriver driver, WebElement element){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');", element);
