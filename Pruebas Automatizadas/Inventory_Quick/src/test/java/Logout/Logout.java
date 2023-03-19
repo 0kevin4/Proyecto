@@ -1,5 +1,7 @@
 package Logout;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,6 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Logout {
     WebDriver chromeDriver;
+
+    @Before
+    public void abrirDriver() {  }
 
     @Test
     public void logout() throws InterruptedException {
@@ -53,8 +58,15 @@ public class Logout {
         WebElement logout = chromeDriver.findElement(By.id("logout"));
         highLighterMethod(chromeDriver,logout);
         logout.click();
+        Thread.sleep(1500);
 
 
+    }
+
+    @After
+    public void cerrarDriver() {
+
+        chromeDriver.quit();
     }
 
     public void highLighterMethod(WebDriver driver, WebElement element){

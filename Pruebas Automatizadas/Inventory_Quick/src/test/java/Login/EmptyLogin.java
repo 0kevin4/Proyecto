@@ -1,5 +1,7 @@
 package Login;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,6 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 public class EmptyLogin {
     WebDriver chromeDriver;
+
+    @Before
+    public void abrirDriver() {  }
 
     @Test
     public void login() throws InterruptedException {
@@ -50,6 +55,11 @@ public class EmptyLogin {
         Thread.sleep(1500);
 
 
+    }
+    @After
+    public void cerrarDriver() {
+
+        chromeDriver.quit();
     }
 
     public void highLighterMethod(WebDriver driver, WebElement element){
