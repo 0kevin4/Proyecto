@@ -1,4 +1,4 @@
-package Subcategory;
+package Transaction;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,14 +11,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class AddSubcategory {
+public class DeleteTransaction {
+
+
     WebDriver chromeDriver;
 
     @Before
     public void abrirDriver() {  }
 
     @Test
-    public void Subcategory() throws InterruptedException {
+    public void Transaction() throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();
@@ -54,50 +56,37 @@ public class AddSubcategory {
         ButtonLogin.click();
         Thread.sleep(1500);
 
-        //////////////////////////////ADD SUBCATEGORY/////////////////////////////////////
+        //////////////////////////////EDIT Transaction/////////////////////////////////////
 
-        //Button Nav Subcategory
+        //Button Nav Transaction
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement ButtonSubcategory = chromeDriver.findElement(By.xpath("/html/body/header/nav/div/div/ul[1]/li[4]/a"));
-        highLighterMethod(chromeDriver, ButtonSubcategory);
-        ButtonSubcategory.click();
+        WebElement Transaction = chromeDriver.findElement(By.xpath("/html/body/header/nav/div/div/ul[1]/li[6]/a"));
+        highLighterMethod(chromeDriver, Transaction);
+        Transaction.click();
         Thread.sleep(1500);
 
-        //Button Add Subcategory
+        //Button Delete Transaction
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement ButtonAddSubcategory = chromeDriver.findElement(By.xpath("/html/body/div/main/p/a"));
-        highLighterMethod(chromeDriver, ButtonAddSubcategory);
-        ButtonAddSubcategory.click();
+        WebElement DeleteTransaction = chromeDriver.findElement(By.xpath("//*[@id=\"Tablas\"]/tbody/tr[1]/td[8]/a[3]"));
+        highLighterMethod(chromeDriver, DeleteTransaction);
+        DeleteTransaction.click();
         Thread.sleep(1500);
 
-        //Input Name Subcategory
+        //Button Save Delete Transaction
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement inputName = chromeDriver.findElement(By.id("Nombre"));
-        highLighterMethod(chromeDriver, inputName);
-        inputName.sendKeys("harold");
+        WebElement SaveDelete = chromeDriver.findElement(By.xpath("/html/body/div/main/div/form/input[2]"));
+        highLighterMethod(chromeDriver, SaveDelete);
+        SaveDelete.click();
         Thread.sleep(1500);
 
-        //Input Category
-        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement Category = chromeDriver.findElement(By.id("CATEGORIA_CategoriaId"));
-        highLighterMethod(chromeDriver, Category);
-        Category.click();
-        WebElement option = chromeDriver.findElement(By.xpath("//*[@id=\"CATEGORIA_CategoriaId\"]/option[1]"));
-        option.click();
-        Thread.sleep(1500);
-
-        //Button Save
-        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement ButtonAdd = chromeDriver.findElement(By.xpath("/html/body/div/main/div/div/form/div[4]/input"));
-        highLighterMethod(chromeDriver, ButtonAdd);
-        ButtonAdd.click();
-        Thread.sleep(1500);
 
         //button Logout.Logout
         WebElement logout = chromeDriver.findElement(By.id("logout"));
         highLighterMethod(chromeDriver,logout);
         logout.click();
         Thread.sleep(1500);
+        
+
     }
 
     @After
@@ -105,6 +94,7 @@ public class AddSubcategory {
 
         chromeDriver.quit();
     }
+
 
     public void highLighterMethod(WebDriver driver, WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;

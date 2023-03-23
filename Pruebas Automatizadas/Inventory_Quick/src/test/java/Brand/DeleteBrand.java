@@ -78,6 +78,12 @@ public class DeleteBrand {
         Delete.click();
         Thread.sleep(1500);
 
+        //button Logout.Logout
+        WebElement logout = chromeDriver.findElement(By.id("logout"));
+        highLighterMethod(chromeDriver,logout);
+        logout.click();
+        Thread.sleep(1500);
+
     }
 
     @After

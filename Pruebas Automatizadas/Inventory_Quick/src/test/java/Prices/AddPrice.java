@@ -18,7 +18,7 @@ public class AddPrice {
     public void abrirDriver() {  }
 
     @Test
-    public void preci() throws InterruptedException {
+    public void Addprice() throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver","C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();
@@ -121,8 +121,6 @@ public class AddPrice {
         highLighterMethod(chromeDriver,logout);
         logout.click();
         Thread.sleep(1500);
-
-
 
     }
     @After
