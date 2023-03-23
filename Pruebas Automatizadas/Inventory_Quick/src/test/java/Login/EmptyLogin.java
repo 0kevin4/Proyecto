@@ -18,7 +18,7 @@ public class EmptyLogin {
     public void abrirDriver() {  }
 
     @Test
-    public void login() throws InterruptedException {
+    public void Emptylogin() throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();

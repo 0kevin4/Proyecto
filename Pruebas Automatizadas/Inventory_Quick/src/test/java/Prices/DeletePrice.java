@@ -18,7 +18,7 @@ public class DeletePrice {
     public void abrirDriver() {  }
 
     @Test
-    public void Edit() throws InterruptedException {
+    public void Delete() throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();

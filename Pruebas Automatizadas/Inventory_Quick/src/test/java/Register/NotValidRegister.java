@@ -19,7 +19,7 @@ public class NotValidRegister {
     public void abrirDriver() {  }
 
     @Test
-    public void register() throws InterruptedException {
+    public void Notregister() throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver","C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();

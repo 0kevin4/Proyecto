@@ -1,5 +1,6 @@
-package Subcategory;
+package Transaction;
 
+import org.checkerframework.checker.units.qual.C;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,14 +12,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class AddSubcategory {
+public class AddTransaction {
+
     WebDriver chromeDriver;
 
     @Before
     public void abrirDriver() {  }
 
     @Test
-    public void Subcategory() throws InterruptedException {
+    public void Transaction() throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         chromeDriver = new ChromeDriver();
@@ -54,42 +56,54 @@ public class AddSubcategory {
         ButtonLogin.click();
         Thread.sleep(1500);
 
-        //////////////////////////////ADD SUBCATEGORY/////////////////////////////////////
+        //////////////////////////////ADD Transaction/////////////////////////////////////
 
-        //Button Nav Subcategory
+        //Button Nav Transaction
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement ButtonSubcategory = chromeDriver.findElement(By.xpath("/html/body/header/nav/div/div/ul[1]/li[4]/a"));
-        highLighterMethod(chromeDriver, ButtonSubcategory);
-        ButtonSubcategory.click();
+        WebElement Transaction = chromeDriver.findElement(By.xpath("/html/body/header/nav/div/div/ul[1]/li[6]/a"));
+        highLighterMethod(chromeDriver, Transaction);
+        Transaction.click();
         Thread.sleep(1500);
 
-        //Button Add Subcategory
+        //Button Add Transaction
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement ButtonAddSubcategory = chromeDriver.findElement(By.xpath("/html/body/div/main/p/a"));
-        highLighterMethod(chromeDriver, ButtonAddSubcategory);
-        ButtonAddSubcategory.click();
+        WebElement AddTransaction = chromeDriver.findElement(By.xpath("/html/body/div/main/p/a"));
+        highLighterMethod(chromeDriver, AddTransaction);
+        AddTransaction.click();
         Thread.sleep(1500);
 
-        //Input Name Subcategory
+        //Input Product
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement inputName = chromeDriver.findElement(By.id("Nombre"));
-        highLighterMethod(chromeDriver, inputName);
-        inputName.sendKeys("harold");
+        WebElement Product = chromeDriver.findElement(By.id("IdProducto"));
+        highLighterMethod(chromeDriver, Product);
+        Product.click();
+        Thread.sleep(1500);
+        WebElement Option = chromeDriver.findElement(By.xpath("//*[@id=\"IdProducto\"]/option[1]"));
+        Option.click();
         Thread.sleep(1500);
 
-        //Input Category
+        //Input TypeTransaction
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement Category = chromeDriver.findElement(By.id("CATEGORIA_CategoriaId"));
-        highLighterMethod(chromeDriver, Category);
-        Category.click();
-        WebElement option = chromeDriver.findElement(By.xpath("//*[@id=\"CATEGORIA_CategoriaId\"]/option[1]"));
+        WebElement TypeTransaction = chromeDriver.findElement(By.id("TipoTransaccion"));
+        highLighterMethod(chromeDriver, TypeTransaction);
+        TypeTransaction.click();
+        WebElement option = chromeDriver.findElement(By.xpath("//*[@id=\"TipoTransaccion\"]/option[1]"));
         option.click();
+        Thread.sleep(1500);
+
+        //Input Quantity
+        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement Quantity = chromeDriver.findElement(By.id("Cantidad"));
+        highLighterMethod(chromeDriver, Quantity);
+        Quantity.sendKeys("50");
         Thread.sleep(1500);
 
         //Button Save
         chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebElement ButtonAdd = chromeDriver.findElement(By.xpath("/html/body/div/main/div/div/form/div[4]/input"));
+        WebElement ButtonAdd = chromeDriver.findElement(By.xpath("/html/body/div/main/div/div/form/div[7]/input"));
         highLighterMethod(chromeDriver, ButtonAdd);
+        MovingWindow(chromeDriver);
+        Thread.sleep(1500);
         ButtonAdd.click();
         Thread.sleep(1500);
 
@@ -105,6 +119,12 @@ public class AddSubcategory {
 
         chromeDriver.quit();
     }
+
+    public void MovingWindow(WebDriver chromeDriver){
+        JavascriptExecutor jse = (JavascriptExecutor)chromeDriver;
+        jse.executeScript("scroll(0, 250)");
+    }
+
 
     public void highLighterMethod(WebDriver driver, WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
