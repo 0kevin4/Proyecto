@@ -1,13 +1,16 @@
 ﻿using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace CRUDInventoryQuick.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
 
