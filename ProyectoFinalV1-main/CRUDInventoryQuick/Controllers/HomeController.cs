@@ -32,13 +32,15 @@ namespace CRUDInventoryQuick.Controllers
                                                          .Sum(t => t.Cantidad)
                                     })
                                     .OrderByDescending(p => p.TotalVendido)
-                                    .Take(1)
+                                    .Take(10)
+                                    .Select(p => p.Producto.Nombre)
                                     .ToList();
 
-            ViewBag.ProductoMasVendido = product.FirstOrDefault()?.Producto?.Nombre;
+                
+            ViewBag.ProductosMasVendido = product;
 
-    //////////////////////Stock Minimo////////////////////////
-   
+            //////////////////////Stock Minimo////////////////////////
+
             //Notificacion Stock Minimo
             var productos = _context.PRODUCTOs.ToList();
 

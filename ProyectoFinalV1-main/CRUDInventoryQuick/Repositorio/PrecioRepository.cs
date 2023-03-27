@@ -2,6 +2,7 @@
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using Twilio.TwiML.Voice;
 using Task = System.Threading.Tasks.Task;
 
@@ -54,6 +55,11 @@ namespace CRUDInventoryQuick.Repositorio
         {
             _context.SaveChangesAsync();
             return Task.CompletedTask;
+        }
+
+        public Task<PRECIO> GetSingle(Expression<Func<PRECIO, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         //Cambios git (eliminar)

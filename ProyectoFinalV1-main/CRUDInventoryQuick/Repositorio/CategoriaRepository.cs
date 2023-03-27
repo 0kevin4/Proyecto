@@ -1,6 +1,8 @@
 ﻿using CRUDInventoryQuick.Contracts;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using Twilio.TwiML.Voice;
 using Task = System.Threading.Tasks.Task;
 
@@ -54,6 +56,9 @@ namespace CRUDInventoryQuick.Repositorio
             return Task.CompletedTask;
         }
 
-
+        public async Task<CATEGORIum> GetSingle(Expression<Func<CATEGORIum, bool>> predicate)
+        {
+            return await _context.CATEGORIAs.SingleOrDefaultAsync(predicate);
+        }
     }
 }

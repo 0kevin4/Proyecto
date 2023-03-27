@@ -8,6 +8,18 @@
 <h1>Agregar Marca</h1>
 <br />
 
+@*Alerta repetido*@
+
+@if (TempData["Igual"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Igual"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -27,8 +39,8 @@
                 </label>
             </div><br />
             <div class="form-group">
-                <input type="submit" value="Agregar" class="btn btn-sm btn-success" />
-                <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
+                <input id="Crear" type="submit" value="Agregar" class="btn btn-sm btn-success" />
+                <a id="VolverLista"  asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
             </div>
         </form>
     </div>

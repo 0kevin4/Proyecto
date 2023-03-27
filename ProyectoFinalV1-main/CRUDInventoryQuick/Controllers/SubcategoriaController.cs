@@ -81,6 +81,13 @@ namespace CRUDInventoryQuick.Controllers
         {
             if (ModelState.IsValid)
             {
+                var productoExiste = await _Subcategoriarepository.GetSingle(p => p.Nombre == sUBCATEGORIum.Nombre);
+                if (productoExiste != null)
+                {
+                    TempData["Igual"] = "El Nombre de la subategoria  " + sUBCATEGORIum.Nombre + " ya se encuentra registrado";
+                    return RedirectToAction(nameof(Create));
+                }
+
                 await _Subcategoriarepository.Add(sUBCATEGORIum);
                 await _Subcategoriarepository.Save();
                 return RedirectToAction(nameof(Index));

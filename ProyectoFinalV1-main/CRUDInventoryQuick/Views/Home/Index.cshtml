@@ -10,42 +10,51 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div class="col-12">
-        <div class="d-flex">
+        <div class="flex">
+            <div class="row">
                 @if (ViewBag.ProductosBajoStock != null && ViewBag.ProductosBajoStock.Count > 0)
                 {
-                    <div class="alert alert-warning flex-fill mx-2">
+                    <div id="Bajo" class="alert alert-success flex-fill ms-2 col-5">
                         <p>Los siguientes productos tienen un stock mínimo:</p>
-                            <ul>
-                                @foreach (var producto in ViewBag.ProductosBajoStock)
-                                {
-                                    <li>@producto.Nombre</li>
-                                }
-                            </ul>
+                        <ul>
+                            @foreach (var producto in ViewBag.ProductosBajoStock)
+                            {
+                                <li>@producto.Nombre</li>
+                            }
+                        </ul>
                     </div>
                 }
 
-            
+
                 @if (ViewBag.ProductosMaximoStock != null && ViewBag.ProductosMaximoStock.Count > 0)
                 {
-                    <div class="alert alert-warning flex-fill mx-2">
+                    <div id="Alto" class="alert alert-success flex-fill ms-2 col-5">
                         <p>Los siguientes productos tienen un stock Maximo:</p>
-                            <ul>
-                                @foreach (var producto in ViewBag.ProductosMaximoStock)
-                                {
-                                    <li>@producto.Nombre</li>
-                                }
-                            </ul>
+                        <ul>
+                            @foreach (var producto in ViewBag.ProductosMaximoStock)
+                            {
+                                <li>@producto.Nombre</li>
+                            }
+                        </ul>
                     </div>
-                }
-            
-        </div>     
-    </div>
-    
 
-    <div>
-        <h4>Producto más vendido:</h4>
-        <h4>@ViewBag.ProductoMasVendido</h4>
+                    <br />
+                }
+
+            </div>
+        </div>
+           
     </div>
+
+    <p>
+        <h4>Productos más vendidos:</h4>
+        <ul>
+            @foreach (var producto in ViewBag.ProductosMasVendido)
+            {
+                <li><h5>@producto</h5></li>
+            }
+        </ul>
+    </p>
 
 }
 

@@ -24,7 +24,7 @@
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
-                            Recordarme?
+                            Recordarme ?
                         </label>
                     </div>
                 </div><br />
@@ -32,8 +32,8 @@
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Ingresar</button>
                 </div><br />
                 <div class="form-group" align="center">
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-sm btn-success">Registrarse como Nuevo</a>
-                        <a id="forgot-password" asp-page="./ForgotPassword" class="btn btn-sm btn-success">Perdio su contraseña!!</a>
+                        <a id="register-new" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-sm btn-success">Registrarse como Nuevo</a>
+                        @*<a id="forgot-password" asp-page="./ForgotPassword" class="btn btn-sm btn-success">Perdio su contraseña!!</a>*@
 @*                    <p>
                         <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="btn btn-sm btn-success">Reenviar correo de confirmacion</a>
                     </p>*@

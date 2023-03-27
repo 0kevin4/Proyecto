@@ -16,7 +16,7 @@ html {
 
 body {
     margin-bottom: 30px;
-    font-family: "Times New Roman";
+    font-family: "Garamond";
 }
 
 h1 {
@@ -40,14 +40,57 @@ input.form-check-input{
 }
 
 a.nav-link:hover {
-    color: #1e0fdb  !important;
+    color: #034159 !important;
 }
 
-a.navbar-brand:hover{
-    color: #ff0000 !important;
+a.navbar-brand:hover {
+    color: #034159 !important;
+}
+
+#logout:hover {
+    color: #034159 !important;
+}
+
+#Crear {
+    background-color: #038C3E;
+}
+
+#Editar {
+    background-color: #02735E;
+    border: none;
+}
+
+#Detalles {
+    background-color: #038C3E;
+    border: none;
+}
+
+#Borrar {
+    background-color: #034159;
+    border: none;
+}
+
+#VolverLista {
+    background-color: #025951;
 }
 
 
+#update-profile-button {
+    background-color: #02735E;
+    border: none;
+}
+
+
+
+/*#Bajo {
+    float: left;
+    padding-right: 100px;
+}
+
+
+#Alto {
+    float: right;
+}*/
 button.close {
     position: absolute;
     top: 0;
@@ -58,7 +101,7 @@ button.close {
     font-size: 2rem;
     font-weight: 700;
     line-height: 1;
-    color: #000;
+    color: #034159;
     opacity: 0.5;
     cursor: pointer;
 }
@@ -67,13 +110,46 @@ button.close:hover
     opacity: 1;
 }
 
+/*Boton Iniciar sesion*/
+
+#login-submit {
+    background-color: #038C3E;
+    border: none;
+}
+
+/*boton registrarse*/
+
+#registerSubmit {
+    background-color: #038C3E;
+    border: none;
+}
+
+/*boton Registrarse center iniciar sesion*/
+
+#forgot-password {
+    background-color: #02735E;
+    border: none;
+}
+
+/*boton Registrarse en iniciar sesion*/
+
+#register-new {
+    background-color: #02735E;
+    border: none;
+}
+
+/*boton iniciar sesion center registrarse*/
+
+#page-login {
+    background-color: #02735E;
+    border: none;
+}
 
 /*login*/
-
 #content {
-    background: #f9f9f9;
+    background: #E4F2E7;
     background: -moz-linear-gradient(top, rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);
-    background:  #DCDDDF ;
+    background: #0CF25D;
     background: -o-linear-gradient(top, rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
     background: -ms-linear-gradient(top, rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
     background: linear-gradient(top, rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
@@ -128,12 +204,12 @@ button.close:hover
 
     #content:after,
     #content:before {
-        background: #DCDDDF;
-        background: #DCDDDF;
-        background: #DCDDDF;
-        background: #DCDDDF;
-        background: #DCDDDF;
-        background: #DCDDDF;
+        background: #0CF25D;
+        background: #0CF25D;
+        background: #0CF25D;
+        background: #0CF25D;
+        background: #0CF25D;
+        background: #0CF25D;
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#f9f9f9',GradientType=0 );
         border: 1px solid #c4c6ca;
         content: "";

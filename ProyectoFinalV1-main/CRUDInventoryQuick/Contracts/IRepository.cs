@@ -1,4 +1,5 @@
 ﻿using CRUDInventoryQuick.Models;
+using System.Linq.Expressions;
 
 namespace CRUDInventoryQuick.Contracts
 {
@@ -10,5 +11,6 @@ namespace CRUDInventoryQuick.Contracts
         Task Delete(T t);
         Task<int> Update(T t);
         Task Save();
+        Task<T> GetSingle(Expression<Func<T, bool>> predicate);
     }
 }
