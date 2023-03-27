@@ -23,7 +23,12 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirmar Contraseña*" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div><br>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registrarse</button>
+            <div>
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registrarse</button>
+            </div><br />
+            <div align="center">
+                <a id="page-login" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-sm btn-success">Iniciar Sesion</a>
+            </div>
         </form>
     </div>
    @* <div class="col-md-6 col-md-offset-2">

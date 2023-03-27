@@ -11,7 +11,7 @@
 
     @if (TempData["Mensaje"] != null)
     {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             @TempData["Mensaje"]
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -55,8 +55,8 @@
                 <span asp-validation-for="Usuario" class="text-danger"></span>
             </div><br />
             <div class="form-group">
-                <input type="submit" value="Agregar" class="btn btn-sm btn-success" />
-                <a asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
+                <input id="Crear" type="submit" value="Agregar" class="btn btn-sm btn-success" />
+                <a id="VolverLista" asp-action="Index" class="btn btn-sm btn-primary">Volver a la lista</a>
             </div>
         </form>
     </div>

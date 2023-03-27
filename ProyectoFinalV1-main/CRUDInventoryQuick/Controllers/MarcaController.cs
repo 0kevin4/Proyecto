@@ -63,6 +63,13 @@ namespace CRUDInventoryQuick.Controllers
         {
             if (ModelState.IsValid)
             {
+                var productoExiste = await _repository.GetSingle(p => p.Nombre == mARCA.Nombre);
+                if (productoExiste != null)
+                {
+                    TempData["Igual"] = "El Nombre de la marca  " + mARCA.Nombre + " ya se encuentra registrado";
+                    return RedirectToAction(nameof(Create));
+                }
+
                 await _repository.Add(mARCA);
                 await _repository.Save();
                 return RedirectToAction(nameof(Index));

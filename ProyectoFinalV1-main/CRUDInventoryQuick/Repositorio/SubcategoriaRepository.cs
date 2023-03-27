@@ -2,6 +2,7 @@
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace CRUDInventoryQuick.Repositorio
 {
@@ -56,6 +57,11 @@ namespace CRUDInventoryQuick.Repositorio
                 _context.SaveChangesAsync();
                 return Task.CompletedTask;
             }
+
+        public async Task<SUBCATEGORIum> GetSingle(Expression<Func<SUBCATEGORIum, bool>> predicate)
+        {
+            return await _context.SUBCATEGORIAs.SingleOrDefaultAsync(predicate);
         }
+    }
     
 }

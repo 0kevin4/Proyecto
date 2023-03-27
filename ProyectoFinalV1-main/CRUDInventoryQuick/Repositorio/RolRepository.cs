@@ -1,6 +1,7 @@
 ﻿using CRUDInventoryQuick.Contracts;
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
+using System.Linq.Expressions;
 
 namespace CRUDInventoryQuick.Repositorio
 {
@@ -53,5 +54,9 @@ namespace CRUDInventoryQuick.Repositorio
             return Task.CompletedTask;
         }
 
+        public Task<ASPNETROLES> GetSingle(Expression<Func<ASPNETROLES, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

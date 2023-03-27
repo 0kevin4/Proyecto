@@ -2,6 +2,7 @@
 using CRUDInventoryQuick.Datos;
 using CRUDInventoryQuick.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace CRUDInventoryQuick.Repositorio
 {
@@ -52,6 +53,9 @@ namespace CRUDInventoryQuick.Repositorio
             return Task.CompletedTask;
         }
 
-       
+        public Task<TRANSACCION> GetSingle(Expression<Func<TRANSACCION, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
