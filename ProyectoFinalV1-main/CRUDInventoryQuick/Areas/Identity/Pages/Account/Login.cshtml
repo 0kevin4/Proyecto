@@ -20,14 +20,14 @@
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Contraseña*"/>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div><br />
-                <div>
+                @*<div>
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
                             Recordarme ?
                         </label>
                     </div>
-                </div><br />
+                </div><br />*@
                 <div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Ingresar</button>
                 </div><br />
