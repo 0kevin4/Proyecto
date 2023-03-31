@@ -208,7 +208,7 @@ namespace CRUDInventoryQuick.Datos
                 entity.HasOne(d => d.Producto)
                     .WithMany(p => p.PRECIOs)
                     .HasForeignKey(d => d.PRODUCTO_ProductoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.ClientCascade)
                     .HasConstraintName("PRECIO_PRODUCTO_FK");
             });
 
@@ -290,7 +290,7 @@ namespace CRUDInventoryQuick.Datos
                 entity.HasOne(d => d.Producto)
                     .WithMany(p => p.TRANSACCIONs)
                     .HasForeignKey(d => d.IdProducto)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.ClientCascade)
                     .HasConstraintName("TRANSACCION_PRODUCTO_FK");
             });
 
