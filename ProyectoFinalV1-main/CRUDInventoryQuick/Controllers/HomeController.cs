@@ -31,6 +31,7 @@ namespace CRUDInventoryQuick.Controllers
                                                          .Where(t => t.TipoTransaccion == "Salida")
                                                          .Sum(t => t.Cantidad)
                                     })
+                                    .Where(p => p.TotalVendido > 0)
                                     .OrderByDescending(p => p.TotalVendido)
                                     .Take(10)
                                     .Select(p => p.Producto.Nombre)

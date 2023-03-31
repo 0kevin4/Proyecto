@@ -47,13 +47,16 @@
     </div>
 
     <p>
-        <h4>Productos más vendidos:</h4>
-        <ul>
-            @foreach (var producto in ViewBag.ProductosMasVendido)
-            {
-                <li><h5>@producto</h5></li>
-            }
-        </ul>
+        @if (ViewBag.ProductosMasVendido != null && ViewBag.ProductosMasVendido.Count > 0)
+        {
+            <h4>Productos más vendidos:</h4>
+            <ul>
+                @foreach (var producto in ViewBag.ProductosMasVendido)
+                {
+                    <li><h5>@producto</h5></li>
+                }
+            </ul>
+        }
     </p>
 
 }
